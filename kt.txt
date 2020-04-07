@@ -1,0 +1,141 @@
+%person(ana, 23, w).
+female(ana).
+female(sara).
+female(masa).
+male(aca).
+male(peca).
+male(neca).
+
+patient(X) :- male(X).
+patient(X) :- female(X).
+
+age(ana, 33).
+age(aca,46).
+age(sara,22).
+age(peca,65).
+age(masa,50).
+age(neca,70).
+
+baby(X):-age(X,Y), Y=<2.
+child(X) :- age(X,Y), Y>2, Y=<12.
+adolescent(X) :- age(X,Y), Y>=13, Y=<19.
+younger_adult(X) :- age(X,Y), Y>=20, Y<40.
+older_adult(X) :- age(X,Y), Y>=40, Y<60.
+old(X) :- age(X,Y), Y>=60.
+
+alcoholic(sara).
+alcoholic(peca).
+
+%Complete blood count (cbc)
+cbc(_, negative).
+
+liver_panel(_, negative).
+
+lipase(_, negative).
+
+%Computed tomography (ct) 
+ct(_, negative). 
+
+%Endoscopic retrograde cholangiopancreatography (ercp)
+ercp(_, negative). 
+
+ultrasound(_, negative).
+
+%Magnetic resonance imaging (mri)
+mri(_,negative).
+
+barium_swallow(_, negative).
+
+x_ray(_, negative).
+
+%Upper Endoscopy (edg)
+%endoscopy(_, negative).
+
+urinalysis(_, negative).
+endoscopy(_,negative).
+h_pylori_test(_,negative).
+c19_9(_, negative).
+cea(_,negative).
+mr_cholangiopancreatography(_,negative).
+
+anti_hepatitis_A(_, negative).
+anti_hepatitis_B(_, negative).
+anti_hepatitis_C(_, negative).
+alt(_, negative).
+ast(_, negative).
+alp(_, negative).
+unconjugated_bilirubin(_, negative).
+albumin(_, negative).
+
+%SYMPTOMS
+
+symptoms(hiatal_hernia, [sharp_abdominal_pain, sharp_chest_pain, nausea, vomiting, difficulty_in_swallowing, heartburn, vomiting_blood]).
+symptoms(gallstone, [sharp_abdominal_pain, upper_abdominal_pain, nausea, vomiting, back_pain, burning_abdominal_pain, sharp_chest_pain]).
+
+symptoms(gastritis, [sharp_abdominal_pain,vomiting, vomiting_blood,burning_abdominal_pain,upper_abdominal_pain,diarrhea]).
+symptoms(pancreatic_cancer, [sharp_abdominal_pain, jaundice, stomach_bloating, nausea, fatigue]).
+
+symptoms(hepatitis_A, [fatigue, nausea, sharp_abdominal_pain, joint_aches, itching, jaundice, loss_of_appetite, dark_colored_urine, light_colored_stools]).
+symptoms(hepatitis_B, [fatigue, nausea, sharp_abdominal_pain, joint_aches, itching, jaundice, loss_of_appetite, dark_colored_urine, light_colored_stools]).
+symptoms(hepatitis_C, [fatigue, nausea, sharp_abdominal_pain, joint_aches, itching, jaundice, loss_of_appetite, dark_colored_urine, light_colored_stools]).
+symptoms(cirrhosis, [fatigue, nausea, abdominal_discomfort, abdominal_swelling, weakness, itching, jaundice, loss_of_appetite, loss_of_weight]).
+
+personal_symptoms(ana, [sharp_abdominal_pain, sharp_chest_pain, nausea, heartburn,upper_abdominal_pain]).
+personal_symptoms(anaa, [nausea, itching, joint_aches]).
+personal_symptoms(aca, [nausea, itching, weakness]).
+personal_symptoms(sara, [jaundice, stomach_bloating, nausea]).
+personal_symptoms(peca, [vomiting_blood, upper_abdominal_pain]).
+
+cbc(ana,high_wbc).
+ct(ana, hiatal_hernia).
+
+anti_hepatitis_A(anaa, positive).
+anti_hepatitis_B(anaa, negative).
+anti_hepatitis_C(anaa, negative).
+alt(aca, high).
+ast(aca, high).
+alp(aca, normal).
+unconjugated_bilirubin(aca, high).
+albumin(aca, low).
+
+cbc(sara,anemia).
+urinalysis(sara, 8-ohdg).
+h_pylori_test(peca, positive).
+
+test( hiatal_hernia, [barium_swallow, x_ray, endoscopy, ct]).
+test( gallstone, [cbc, liver_panel, lipase, ultrasound, mri, ct, ercp]).
+
+test(gastritis, [cbc, urinalysis, endoscopy,h_pylori_test]). 
+test(pancreatic_cancer,[x_ray, c19_9, cea, mri, ct, mr_cholangiopancreatography]).
+
+test(hepatitis_A, [anti_hepatitis_A]).
+test(hepatitis_B, [anti_hepatitis_B]).
+test(hepatitis_C, [anti_hepatitis_C]).
+test(cirrhosis, [alt, ast, alp, unconjugated_bilirubin, albumin]).
+
+
+diagnosis(X,  gallstone):- (cbc(X, high_wbc); liver_panel(X, high_bilirubin); liver_panel(X, high_ALP); lipase(X, high_pancreatic_enzymes)), 
+			  	   (mri(X, gallstone); ct(X, gallstone); ercp(X, gallstone); ultrasound(X, gallstone)).
+
+diagnosis(X, hiatal_hernia):- barium_swallow(X, hiatal_hernia); x_ray(X, hiatal_hernia); 
+				      endoscopy(X, hiatal_hernia); ct(X, hiatal_hernia).
+
+diagnosis(X, gastritis):- cbc(X, anemia),
+			        (urinalysis(X, 8-ohdg); endoscopy(X, inflamation));
+                          h_pylori_test(X, positive).
+
+diagnosis(X, pancreatic_cancer):- (c19_9(X, high_level); cea(X, high_level)),
+                                  x_ray(X, pancreatic_cancer);
+                                  (mr_cholangiopancreatography(X, pancreatitic_cancer); mri(X, pancreatitic_cancer); ct(X, pancreatitic_cancer)).
+
+diagnosis(X, hepatitis_A) :- anti_hepatitis_A(X, positive).
+diagnosis(X, hepatitis_B) :- anti_hepatitis_B(X, positive).
+diagnosis(X, hepatitis_C) :- anti_hepatitis_C(X, positive).
+diagnosis(X, cirrhosis) :- alt(X, high), ast(X, high), alp(X, normal), unconjugated_bilirubin(X, high), albumin(X, low).
+
+contains(S,[]).
+contains(S,[H|T]) :- member(H,S), contains(S,T).
+
+possible_diseases(Name,D) :- personal_symptoms(Name, L),  symptoms(D,L1), contains(L1,L). 
+
+additional_tests(Name,T) :-  possible_diseases(Name,D), test(D,T).
