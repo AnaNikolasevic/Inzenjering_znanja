@@ -8,8 +8,8 @@ diagnosis(X, hiatal_hernia):- barium_swallow(X, hiatal_hernia); x_ray(X, hiatal_
 				      endoscopy(X, hiatal_hernia); ct(X, hiatal_hernia).
 
 diagnosis(X, gastritis):- cbc(X, anemia),
-			        (urinalysis(X, 8-ohdg); endoscopy(X, inflamation));
-                          h_pylori_test(X, positive).
+			             (urinalysis(X, 8-ohdg); endoscopy(X, inflamation));
+                         (c13(X, h_pylori); c14(X, h_pylori); blood_test(X, h_pylori); stool_test(X, h_pylori)).
 
 diagnosis(X, pancreatic_cancer):- (c19_9(X, high_level); cea(X, high_level)),
                                   x_ray(X, pancreatic_cancer);

@@ -28,8 +28,10 @@ barium_swallow(_, n/a).
 x_ray(_, n/a).
 endoscopy(_, n/a).
 urinalysis(_, n/a).
-endoscopy(_,n/a).
-h_pylori_test(_,n/a).
+c13(_,n/a).
+c14(_,n/a).
+stool_test(_,n/a).
+blood_test(_,n/a).
 c19_9(_, n/a).
 cea(_,n/a).
 mr_cholangiopancreatography(_,n/a).
@@ -49,7 +51,7 @@ albumin(_, n/a).
 test( hiatal_hernia, [barium_swallow, x_ray, endoscopy, ct]).
 test( gallstone, [cbc, liver_panel, lipase, ultrasound, mri, ct, ercp]).
 
-test(gastritis, [cbc, urinalysis, endoscopy,h_pylori_test]). 
+test(gastritis, [cbc, urinalysis, endoscopy, c13, c14, stool_test, blood_test]). 
 test(pancreatic_cancer,[x_ray, c19_9, cea, mri, ct, mr_cholangiopancreatography]).
 
 test(hepatitis_A, [anti_hepatitis_A]).
@@ -77,9 +79,9 @@ unconjugated_bilirubin(aca, high).
 albumin(aca, low).
 liver_biopsy(isi, cirrhosis).
 
-cbc(sara,anemia).
-urinalysis(sara, 8-ohdg).
-h_pylori_test(peca, positive).
+c19_9(sara, high_level).
+x_ray(sara, pancreatic_cancer).
+c13(peca, h_pylori).
 
 %--------------------------------------------------------------------------------------------
 % RULES 

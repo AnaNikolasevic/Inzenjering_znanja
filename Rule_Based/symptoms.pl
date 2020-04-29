@@ -4,8 +4,8 @@
 symptoms(hiatal_hernia, [sharp_abdominal_pain, sharp_chest_pain, nausea, vomiting, difficulty_in_swallowing, heartburn, vomiting_blood]).
 symptoms(gallstone, [sharp_abdominal_pain, upper_abdominal_pain, nausea, vomiting, back_pain, burning_abdominal_pain, sharp_chest_pain]).
 
-symptoms(gastritis, [sharp_abdominal_pain,vomiting, vomiting_blood,burning_abdominal_pain,upper_abdominal_pain,diarrhea]).
-symptoms(pancreatic_cancer, [sharp_abdominal_pain, jaundice, stomach_bloating, nausea, fatigue]).
+symptoms(gastritis, [sharp_abdominal_pain,vomiting, nausea, vomiting_blood,burning_abdominal_pain,upper_abdominal_pain,diarrhea, sharp_chest_pain, fever, headache, heartburn, regurgitation]).
+symptoms(pancreatic_cancer, [sharp_abdominal_pain, jaundice, stomach_bloating, nausea, fatigue, diarrhea, arm_swelling, elbow_swelling, vomiting_blood]).
 
 symptoms(hepatitis_A, [fatigue, nausea, sharp_abdominal_pain, joint_aches, itching, jaundice, loss_of_appetite, dark_colored_urine, light_colored_stools]).
 symptoms(hepatitis_B, [fatigue, nausea, sharp_abdominal_pain, joint_aches, itching, jaundice, loss_of_appetite, dark_colored_urine, light_colored_stools]).
