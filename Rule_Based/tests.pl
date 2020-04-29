@@ -1,45 +1,50 @@
+% ABBREVIATIONS FOR TESTS
+%-------------------------
 
-%Complete blood count (cbc)
-cbc(_, negative).
+% Emergency and overdose drug testing (eaodt)
+% Antinuclear antibodies (ana)
+% Anti-smooth muscle antibodies (asma) and anti-actin antibodies 
+% Antibodies to liver and kidney microsomes (anti_lkm1)
+% Complete blood count (cbc)
+% Liver biopsy
+% Computed tomography (ct) 
+% Endoscopic retrograde cholangiopancreatography (ercp)
+% Magnetic resonance imaging (mri)
+% Upper Endoscopy (edg)
 
-liver_panel(_, negative).
+%-------------------------------------------------------------------------------------------------------------------------------------------
+% LIST OF TESTS
+%--------------
 
-lipase(_, negative).
+cbc(_, n/a).
+eaodt(_, n/a).
+liver_panel(_, n/a).
+lipase(_, n/a).
+ct(_, n/a). 
+ercp(_, n/a). 
+ultrasound(_, n/a).
+mri(_,n/a).
+barium_swallow(_, n/a).
+x_ray(_, n/a).
+endoscopy(_, n/a).
+urinalysis(_, n/a).
+endoscopy(_,n/a).
+h_pylori_test(_,n/a).
+c19_9(_, n/a).
+cea(_,n/a).
+mr_cholangiopancreatography(_,n/a).
+anti_hepatitis_A(_, n/a).
+anti_hepatitis_B(_, n/a).
+anti_hepatitis_C(_, n/a).
+alt(_, n/a).
+ast(_, n/a).
+alp(_, n/a).
+bilirubin(_, n/a).
+albumin(_, n/a).
 
-%Computed tomography (ct) 
-ct(_, negative). 
-
-%Endoscopic retrograde cholangiopancreatography (ercp)
-ercp(_, negative). 
-
-ultrasound(_, negative).
-
-%Magnetic resonance imaging (mri)
-mri(_,negative).
-
-barium_swallow(_, negative).
-
-x_ray(_, negative).
-
-%Upper Endoscopy (edg)
-%endoscopy(_, negative).
-
-urinalysis(_, negative).
-endoscopy(_,negative).
-h_pylori_test(_,negative).
-c19_9(_, negative).
-cea(_,negative).
-mr_cholangiopancreatography(_,negative).
-
-anti_hepatitis_A(_, negative).
-anti_hepatitis_B(_, negative).
-anti_hepatitis_C(_, negative).
-alt(_, negative).
-ast(_, negative).
-alp(_, negative).
-unconjugated_bilirubin(_, negative).
-albumin(_, negative).
-
+%--------------------------------------------------------------------------------------------------------------------------------------
+% TESTS FOR A PARTICULAR DISEASE
+%--------------------------------
 
 test( hiatal_hernia, [barium_swallow, x_ray, endoscopy, ct]).
 test( gallstone, [cbc, liver_panel, lipase, ultrasound, mri, ct, ercp]).
@@ -50,28 +55,40 @@ test(pancreatic_cancer,[x_ray, c19_9, cea, mri, ct, mr_cholangiopancreatography]
 test(hepatitis_A, [anti_hepatitis_A]).
 test(hepatitis_B, [anti_hepatitis_B]).
 test(hepatitis_C, [anti_hepatitis_C]).
-test(cirrhosis, [alt, ast, alp, unconjugated_bilirubin, albumin]).
+test(cirrhosis, [alt, ast, alp, bilirubin, albumin, cbc, liver_biopsy]).
+test(drug_induced_hepatitis, [alt, ast, alp, bilirubin, eaodt]).
+test(inherited_hepatitis, [iron_tests, alpha_1_antirypsin, ceruloplasmin, copper_tests]).
+test(autoimmune_hepatitis, [ana, asma, anti_lkm1]).
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------
+% RESULTS OF TESTS
+%-----------------
 
 cbc(ana,high_wbc).
 ct(ana, hiatal_hernia).
 
-anti_hepatitis_A(anaa, positive).
+anti_hepatitis_A(anaa, negative).
 anti_hepatitis_B(anaa, negative).
-anti_hepatitis_C(anaa, negative).
+anti_hepatitis_C(anaa, positive).
 alt(aca, high).
 ast(aca, high).
 alp(aca, normal).
 unconjugated_bilirubin(aca, high).
 albumin(aca, low).
+liver_biopsy(isi, cirrhosis).
 
 cbc(sara,anemia).
 urinalysis(sara, 8-ohdg).
 h_pylori_test(peca, positive).
 
+%--------------------------------------------------------------------------------------------
+% RULES 
+%-------
 
 contains(S,[]).
 contains(S,[H|T]) :- member(H,S), contains(S,T).
 
-possible_diseases(Name,D) :- personal_symptoms(Name, L),  symptoms(D,L1), contains(L1,L). 
+possible_diseases(Name,D) :- personal_symptoms(Name, L),  symptoms(D,L1), contains(L1,L);
+                             personal_anamnesis(Name, A),  anamnesis(D,A1), contains(A1,A). 
 
 additional_tests(Name,T) :-  possible_diseases(Name,D), test(D,T).
