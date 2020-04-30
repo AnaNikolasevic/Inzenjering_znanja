@@ -25,6 +25,7 @@ personal_anamnesis(anaa, [hiv_positive]).
 personal_anamnesis(sara, [abusing_alchohol, nt0ba]).
 personal_anamnesis(peca, [abusing_alchohol, sterss]).
 personal_anamnesis(isi, [hepatitis_A]).
+personal_anamnesis(una, active_smoking).
 
 %-------------------------------------------------------------------------------------------------------------------------------------------
 % PERSONAL INFORMATIONS
@@ -33,6 +34,8 @@ personal_anamnesis(isi, [hepatitis_A]).
 female(ana).
 female(sara).
 female(masa).
+female(una).
+female(tijana).
 male(aca).
 male(peca).
 male(neca).
@@ -46,6 +49,8 @@ age(sara,22).
 age(peca,65).
 age(masa,50).
 age(neca,70).
+age(una, 25).
+age(tijana, 60).
 
 %baby(X):- age(X,Y), Y<=2.
 %child(X):- age(X,Y), Y>2, Y<=12.
