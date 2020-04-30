@@ -15,6 +15,9 @@ diagnosis(X, pancreatic_cancer):- (c19_9(X, high_level); cea(X, high_level)),
                                   x_ray(X, pancreatic_cancer);
                                   (mr_cholangiopancreatography(X, pancreatitic_cancer); mri(X, pancreatitic_cancer); ct(X, pancreatitic_cancer)).
 
+diagnosis(X, ulcerative_colitis):-blood_test(X, pANCA), (cbc(X, anemia); cbc(X, infection)). 
+diagnosis(X, crohn_disease):- (blood_test(X, ASCA); cBir1(X, positive)), (cbc(X, anemia); cbc(X, infection)) .
+
 diagnosis(X, hepatitis_A) :- anti_hepatitis_A(X, positive).
 diagnosis(X, hepatitis_B) :- anti_hepatitis_B(X, positive).
 diagnosis(X, hepatitis_C) :- anti_hepatitis_C(X, positive).

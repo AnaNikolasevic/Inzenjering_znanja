@@ -11,6 +11,9 @@
 % Endoscopic retrograde cholangiopancreatography (ercp)
 % Magnetic resonance imaging (mri)
 % Upper Endoscopy (edg)
+% Perinuclear anti-neutrophil antibodies (pANCA) 
+% Anti-Saccharomyces Cerevisiae antibody (ASCA)
+% Anti-flagellin antibody (cBir1) 
 
 %-------------------------------------------------------------------------------------------------------------------------------------------
 % LIST OF TESTS
@@ -43,6 +46,8 @@ ast(_, n/a).
 alp(_, n/a).
 bilirubin(_, n/a).
 albumin(_, n/a).
+cBir1(_,n/a).
+
 
 %--------------------------------------------------------------------------------------------------------------------------------------
 % TESTS FOR A PARTICULAR DISEASE
@@ -53,6 +58,8 @@ test( gallstone, [cbc, liver_panel, lipase, ultrasound, mri, ct, ercp]).
 
 test(gastritis, [cbc, urinalysis, endoscopy, c13, c14, stool_test, blood_test]). 
 test(pancreatic_cancer,[x_ray, c19_9, cea, mri, ct, mr_cholangiopancreatography]).
+test(ulcerative_colitis, [blood_test, cbc]).
+test(crohn_disease, [blood_test, cBir1, cbc]).
 
 test(hepatitis_A, [anti_hepatitis_A]).
 test(hepatitis_B, [anti_hepatitis_B]).
@@ -82,6 +89,11 @@ liver_biopsy(isi, cirrhosis).
 c19_9(sara, high_level).
 x_ray(sara, pancreatic_cancer).
 c13(peca, h_pylori).
+blood_test(una, pANCA).
+cbc(una, anemia).
+cBir1(tijana, positive).
+cbc(tijana, infection).
+
 
 %--------------------------------------------------------------------------------------------
 % RULES 

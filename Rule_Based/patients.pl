@@ -14,6 +14,8 @@ anamnesis(inherited_hepatitis, [family_history_of_liver_disease]).
 anamnesis(cirrhosis, [autoimmune_hepatitis, hepatitis_A, hepatitis_B, hepatitis_C, abusing_alchohol, inherited_hepatitis, drug_abuse]).
 anamnesis(gastritis, [genetic_predisposition_gastritis, active_smoking, nsaid_abuse, stress, abusing_alchohol]).
 anamnesis(pancreatic_cancer, [active_smoking, abusing_alchohol,nt0ba, BMI_over_35, family_history_of_pancreatic_cancer]).
+anamnesis(ulceraive_colitis, [active_smoking, nsaid_abuse]).
+anamnesis(crohn_disease, [active_smoking, nsaid_abuse, family_history_of_crohn_disease]).
 
 %-------------------------------------------------------------------------------------------------------------------------------------------
 % PERSONAL ANAMNESIS
