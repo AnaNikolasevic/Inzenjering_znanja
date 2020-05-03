@@ -1,6 +1,7 @@
 % ABBREVIATIONS FOR TESTS
 %-------------------------
 
+
 % Emergency and overdose drug testing (eaodt)
 % Antinuclear antibodies (ana)
 % Anti-smooth muscle antibodies (asma) and anti-actin antibodies 
@@ -10,16 +11,20 @@
 % Computed tomography (ct) 
 % Endoscopic retrograde cholangiopancreatography (ercp)
 % Magnetic resonance imaging (mri)
-% Upper Endoscopy (edg)
 
 %-------------------------------------------------------------------------------------------------------------------------------------------
 % LIST OF TESTS
 %--------------
 
+bravo_wireless(_, n/a).
+ambulatory_pH_probe(_, n/a).
+esophageal_impedance_pH(_, n/a).
+esophageal_manometry(_, n/a).
+her2(_, n/a).
+biopsy(_, n/a).
 cbc(_, n/a).
 eaodt(_, n/a).
-liver_panel(_, n/a).
-lipase(_, n/a).
+pancreatic_enzymes(_, n/a).
 ct(_, n/a). 
 ercp(_, n/a). 
 ultrasound(_, n/a).
@@ -28,7 +33,6 @@ barium_swallow(_, n/a).
 x_ray(_, n/a).
 endoscopy(_, n/a).
 urinalysis(_, n/a).
-endoscopy(_,n/a).
 h_pylori_test(_,n/a).
 c19_9(_, n/a).
 cea(_,n/a).
@@ -42,14 +46,18 @@ alp(_, n/a).
 bilirubin(_, n/a).
 albumin(_, n/a).
 
+
 %--------------------------------------------------------------------------------------------------------------------------------------
 % TESTS FOR A PARTICULAR DISEASE
 %--------------------------------
 
 test( hiatal_hernia, [barium_swallow, x_ray, endoscopy, ct]).
-test( gallstone, [cbc, liver_panel, lipase, ultrasound, mri, ct, ercp]).
+test( gallstone, [cbc, bilirubin, alp, lipase, pancreatic_enzymes, mri, ct, ercp]).
+test( gerb, [endoscopy, x_ray, esophageal_manometry, ambulatory_pH_probe, esophageal_impedance_pH, bravo_wireless]).
+test( esophageal_cancer, [barium_swallow, x_ray,  endoscopy, biopsy, ct, mri, ultrasound, cbc, her2]).
+test( stomach_cancer, [barium_swallow,  endoscopy, biopsy, ct, mri, ultrasound, cbc, her2]).
 
-test(gastritis, [cbc, urinalysis, endoscopy,h_pylori_test]). 
+test(gastritis, [cbc, urinalysis, endoscopy, h_pylori_test]). 
 test(pancreatic_cancer,[x_ray, c19_9, cea, mri, ct, mr_cholangiopancreatography]).
 
 test(hepatitis_A, [anti_hepatitis_A]).
@@ -80,6 +88,20 @@ liver_biopsy(isi, cirrhosis).
 cbc(sara,anemia).
 urinalysis(sara, 8-ohdg).
 h_pylori_test(peca, positive).
+
+
+
+cbc(mina, anemia).
+biopsy(mima, esophageal_cancer ).
+esophageal_manometry(masa, gerb).
+bilirubin(neca, high).
+alp(neca, high).
+barium_swallow(marti, hiatal_hernia).
+endoscopy(ljilja, stomach_cancer).
+cbc(ljilja, anemia).
+
+
+
 
 %--------------------------------------------------------------------------------------------
 % RULES 

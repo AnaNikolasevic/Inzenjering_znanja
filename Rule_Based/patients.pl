@@ -8,6 +8,16 @@ anamnesis(drug_induced_hepatitis, [abusing_alchohol, aspirin_abuse, steroids_abu
 anamnesis(inherited_hepatitis, [family_history_of_liver_disease]). 
 anamnesis(cirrhosis, [autoimmune_hepatitis, hepatitis_A, hepatitis_B, hepatitis_C, abusing_alchohol, inherited_hepatitis, drug_abuse]).
 
+anamnesis(esophageal_cancer, [abusing_alchohol, gerb, barretts_esophagus, overweight, smoker]).
+anamnesis(hiatal_hernia, [overweight, pregnancy, smoker, heavy_lifting, physical_strain,  persistent_coughing, persistent_vomiting,  born_with_larger_hiatus, straining_during_bowel_movements]).
+anamnesis(gallstone, [overweight, high_blood_cholesterol, family_history_of_gallstones, pregnancy, diabetes,  crohns_disease, ibs, rapid_weight_loss]).
+anamnesis(gerb, [overweight, pregnancy, hiatal_hernia, delayed_stomach_emptying, smoker, abusing_alchohol]).
+anamnesis(stomach_cancer, [pernicious_anaemia, family_history_of_stomach_cancer, previous_stomach_surgery, h_pylori_infection,
+			 overweight, smoker, abusing_alchohol, long_term_stomach_inflammation, stomach_polyps, chronic_gastritis,
+			diet_high_in_salty_foods, diet_high_in_smoked_foods, diet_low_in_fruits, diet_low_in_vegetables ]).
+
+
+
 %-------------------------------------------------------------------------------------------------------------------------------------------
 % PERSONAL ANAMNESIS
 %---------------------
@@ -17,6 +27,17 @@ personal_anamnesis(sara, [abusing_alchohol]).
 personal_anamnesis(peca, [abusing_alchohol]).
 personal_anamnesis(isi, [hepatitis_A]).
 
+personal_anamnesis(mima, [gerb, smoker]).
+personal_anamnesis(marti, [overweight, smoker, persistent_coughing]).
+personal_anamnesis(neca, [overweight, high_blood_cholesterol, family_history_of_gallstones]).
+personal_anamnesis(masa, [pregnancy, hiatal_hernia, delayed_stomach_emptying]).
+personal_anamnesis(ljilja, [family_history_of_stomach_cancer, chronic_gastritis, diet_high_in_salty_foods]).
+
+
+
+
+
+
 %-------------------------------------------------------------------------------------------------------------------------------------------
 % PERSONAL INFORMATIONS
 %-----------------------
@@ -24,6 +45,7 @@ personal_anamnesis(isi, [hepatitis_A]).
 female(ana).
 female(sara).
 female(masa).
+female(mima).
 male(aca).
 male(peca).
 male(neca).
@@ -37,6 +59,7 @@ age(sara,22).
 age(peca,65).
 age(masa,50).
 age(neca,70).
+age(mima, 53).
 
 %baby(X):- age(X,Y), Y<=2.
 %child(X):- age(X,Y), Y>2, Y<=12.
