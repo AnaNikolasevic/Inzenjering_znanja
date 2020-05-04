@@ -1,4 +1,9 @@
 % ANAMNESIS
+
+% Non-steroidal anti-inflammatory drug (nsaid_abuse)
+% Presence of non–type O blood antigens (nt0ba)
+% Body_mass_index (BMI)
+
 %--------------
 
 anamnesis(hepatitis_A, [drug_abuse, unprotected_sex, abusing_alchohol]).
@@ -7,6 +12,10 @@ anamnesis(hepatitis_C, [drug_abuse, abusing_alchohol, hiv_positive, hepatitis_C_
 anamnesis(drug_induced_hepatitis, [abusing_alchohol, aspirin_abuse, steroids_abuse, antibiotics_abuse, herbal_supplements_abuse, vitamin_supplements_abuse]). 
 anamnesis(inherited_hepatitis, [family_history_of_liver_disease]). 
 anamnesis(cirrhosis, [autoimmune_hepatitis, hepatitis_A, hepatitis_B, hepatitis_C, abusing_alchohol, inherited_hepatitis, drug_abuse]).
+anamnesis(gastritis, [genetic_predisposition_gastritis, active_smoking, nsaid_abuse, stress, abusing_alchohol]).
+anamnesis(pancreatic_cancer, [active_smoking, abusing_alchohol,nt0ba, BMI_over_35, family_history_of_pancreatic_cancer]).
+anamnesis(ulceraive_colitis, [active_smoking, nsaid_abuse]).
+anamnesis(crohn_disease, [active_smoking, nsaid_abuse, family_history_of_crohn_disease]).
 
 anamnesis(esophageal_cancer, [abusing_alchohol, gerb, barretts_esophagus, overweight, smoker]).
 anamnesis(hiatal_hernia, [overweight, pregnancy, smoker, heavy_lifting, physical_strain,  persistent_coughing, persistent_vomiting,  born_with_larger_hiatus, straining_during_bowel_movements]).
@@ -23,9 +32,10 @@ anamnesis(stomach_cancer, [pernicious_anaemia, family_history_of_stomach_cancer,
 %---------------------
 
 personal_anamnesis(anaa, [hiv_positive]).
-personal_anamnesis(sara, [abusing_alchohol]).
-personal_anamnesis(peca, [abusing_alchohol]).
+personal_anamnesis(sara, [abusing_alchohol, nt0ba]).
+personal_anamnesis(peca, [abusing_alchohol, sterss]).
 personal_anamnesis(isi, [hepatitis_A]).
+personal_anamnesis(una, active_smoking).
 
 personal_anamnesis(mima, [gerb, smoker]).
 personal_anamnesis(marti, [overweight, smoker, persistent_coughing]).
@@ -45,6 +55,8 @@ personal_anamnesis(ljilja, [family_history_of_stomach_cancer, chronic_gastritis,
 female(ana).
 female(sara).
 female(masa).
+female(una).
+female(tijana).
 female(mima).
 male(aca).
 male(peca).
@@ -59,6 +71,8 @@ age(sara,22).
 age(peca,65).
 age(masa,50).
 age(neca,70).
+age(una, 25).
+age(tijana, 60).
 age(mima, 53).
 
 %baby(X):- age(X,Y), Y<=2.
@@ -68,5 +82,3 @@ age(mima, 53).
 %older_adult(X):- age(X,Y), Y>=40, Y<60.
 %old(X):- age(X,Y), Y>=60.
 
-%alcoholic(sara).
-%alcoholic(peca).

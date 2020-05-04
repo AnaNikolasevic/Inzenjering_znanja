@@ -10,8 +10,10 @@ symptoms(stomach_cancer, [fatigue, vomiting, nausea, sharp_abdominal_pain, weakn
 
 
 
-symptoms(gastritis, [sharp_abdominal_pain,vomiting, vomiting_blood,burning_abdominal_pain,upper_abdominal_pain,diarrhea]).
-symptoms(pancreatic_cancer, [sharp_abdominal_pain, jaundice, stomach_bloating, nausea, fatigue]).
+symptoms(gastritis, [sharp_abdominal_pain,vomiting, nausea, vomiting_blood,burning_abdominal_pain,upper_abdominal_pain,diarrhea, sharp_chest_pain, fever, headache, heartburn, regurgitation]).
+symptoms(pancreatic_cancer, [sharp_abdominal_pain, jaundice, stomach_bloating, nausea, fatigue, diarrhea, arm_swelling, elbow_swelling, vomiting_blood]).
+symptoms(ulcerative_colitis, [diarrhea, sharp_abdominal_pain, blood_in_stool, nausea, vomiting, burning_abdominal_pain, rectal_bleeding, lower_abdominal_pain, melena, loss_of_appetite, swollen_lymph_nodes, discharge_in_stools]).
+symptoms(crohn_disease, [sharp_abdominal_pain, diarrhea, vomiting, nausea, burning_abdominal_pain, blood_in_stool, rectal_bleeding, pain_of_the_anus, joint_aches, stomach_bloating, heartburn, regurgitation]).
 
 symptoms(hepatitis_A, [fatigue, nausea, sharp_abdominal_pain, joint_aches, itching, jaundice, loss_of_appetite, dark_colored_urine, light_colored_stools]).
 symptoms(hepatitis_B, [fatigue, nausea, sharp_abdominal_pain, joint_aches, itching, jaundice, loss_of_appetite, dark_colored_urine, light_colored_stools]).
@@ -31,6 +33,8 @@ personal_symptoms(anaa, [nausea, itching, joint_aches]).
 personal_symptoms(aca, [nausea, itching, weakness]).
 personal_symptoms(sara, [jaundice, stomach_bloating, nausea]).
 personal_symptoms(peca, [vomiting_blood, upper_abdominal_pain]).
+personal_symptoms(una, [lower_abdominal_pain, melena]).
+personal_symptoms(tijana, [joint_aches, stomach_bloating, heartburn]).
 
 personal_symptoms(mima, [weakness, loss_of_appetite, sharp_abdominal_pain]). %rak jednjaka
 personal_symptoms(masa, [sharp_abdominal_pain, heartburn, vomiting, difficulty_in_swallowing]). %gerb

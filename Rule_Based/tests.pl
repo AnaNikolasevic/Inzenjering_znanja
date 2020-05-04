@@ -11,6 +11,11 @@
 % Computed tomography (ct) 
 % Endoscopic retrograde cholangiopancreatography (ercp)
 % Magnetic resonance imaging (mri)
+% Upper Endoscopy (edg)
+% Perinuclear anti-neutrophil antibodies (pANCA) 
+% Anti-Saccharomyces Cerevisiae antibody (ASCA)
+% Anti-flagellin antibody (cBir1) 
+
 
 %-------------------------------------------------------------------------------------------------------------------------------------------
 % LIST OF TESTS
@@ -33,6 +38,10 @@ barium_swallow(_, n/a).
 x_ray(_, n/a).
 endoscopy(_, n/a).
 urinalysis(_, n/a).
+c13(_,n/a).
+c14(_,n/a).
+stool_test(_,n/a).
+blood_test(_,n/a).
 h_pylori_test(_,n/a).
 c19_9(_, n/a).
 cea(_,n/a).
@@ -45,6 +54,8 @@ ast(_, n/a).
 alp(_, n/a).
 bilirubin(_, n/a).
 albumin(_, n/a).
+cBir1(_,n/a).
+
 
 
 %--------------------------------------------------------------------------------------------------------------------------------------
@@ -57,8 +68,12 @@ test( gerb, [endoscopy, x_ray, esophageal_manometry, ambulatory_pH_probe, esopha
 test( esophageal_cancer, [barium_swallow, x_ray,  endoscopy, biopsy, ct, mri, ultrasound, cbc, her2]).
 test( stomach_cancer, [barium_swallow,  endoscopy, biopsy, ct, mri, ultrasound, cbc, her2]).
 
+test(gastritis, [cbc, urinalysis, endoscopy, c13, c14, stool_test, blood_test]). 
+
 test(gastritis, [cbc, urinalysis, endoscopy, h_pylori_test]). 
 test(pancreatic_cancer,[x_ray, c19_9, cea, mri, ct, mr_cholangiopancreatography]).
+test(ulcerative_colitis, [blood_test, cbc]).
+test(crohn_disease, [blood_test, cBir1, cbc]).
 
 test(hepatitis_A, [anti_hepatitis_A]).
 test(hepatitis_B, [anti_hepatitis_B]).
@@ -85,9 +100,14 @@ unconjugated_bilirubin(aca, high).
 albumin(aca, low).
 liver_biopsy(isi, cirrhosis).
 
-cbc(sara,anemia).
-urinalysis(sara, 8-ohdg).
-h_pylori_test(peca, positive).
+c19_9(sara, high_level).
+x_ray(sara, pancreatic_cancer).
+c13(peca, h_pylori).
+blood_test(una, pANCA).
+cbc(una, anemia).
+cBir1(tijana, positive).
+cbc(tijana, infection).
+
 
 
 
