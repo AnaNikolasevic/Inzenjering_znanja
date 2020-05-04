@@ -17,6 +17,16 @@ anamnesis(pancreatic_cancer, [active_smoking, abusing_alchohol,nt0ba, BMI_over_3
 anamnesis(ulceraive_colitis, [active_smoking, nsaid_abuse]).
 anamnesis(crohn_disease, [active_smoking, nsaid_abuse, family_history_of_crohn_disease]).
 
+anamnesis(esophageal_cancer, [abusing_alchohol, gerb, barretts_esophagus, overweight, smoker]).
+anamnesis(hiatal_hernia, [overweight, pregnancy, smoker, heavy_lifting, physical_strain,  persistent_coughing, persistent_vomiting,  born_with_larger_hiatus, straining_during_bowel_movements]).
+anamnesis(gallstone, [overweight, high_blood_cholesterol, family_history_of_gallstones, pregnancy, diabetes,  crohns_disease, ibs, rapid_weight_loss]).
+anamnesis(gerb, [overweight, pregnancy, hiatal_hernia, delayed_stomach_emptying, smoker, abusing_alchohol]).
+anamnesis(stomach_cancer, [pernicious_anaemia, family_history_of_stomach_cancer, previous_stomach_surgery, h_pylori_infection,
+			 overweight, smoker, abusing_alchohol, long_term_stomach_inflammation, stomach_polyps, chronic_gastritis,
+			diet_high_in_salty_foods, diet_high_in_smoked_foods, diet_low_in_fruits, diet_low_in_vegetables ]).
+
+
+
 %-------------------------------------------------------------------------------------------------------------------------------------------
 % PERSONAL ANAMNESIS
 %---------------------
@@ -27,6 +37,17 @@ personal_anamnesis(peca, [abusing_alchohol, sterss]).
 personal_anamnesis(isi, [hepatitis_A]).
 personal_anamnesis(una, active_smoking).
 
+personal_anamnesis(mima, [gerb, smoker]).
+personal_anamnesis(marti, [overweight, smoker, persistent_coughing]).
+personal_anamnesis(neca, [overweight, high_blood_cholesterol, family_history_of_gallstones]).
+personal_anamnesis(masa, [pregnancy, hiatal_hernia, delayed_stomach_emptying]).
+personal_anamnesis(ljilja, [family_history_of_stomach_cancer, chronic_gastritis, diet_high_in_salty_foods]).
+
+
+
+
+
+
 %-------------------------------------------------------------------------------------------------------------------------------------------
 % PERSONAL INFORMATIONS
 %-----------------------
@@ -36,6 +57,7 @@ female(sara).
 female(masa).
 female(una).
 female(tijana).
+female(mima).
 male(aca).
 male(peca).
 male(neca).
@@ -51,6 +73,7 @@ age(masa,50).
 age(neca,70).
 age(una, 25).
 age(tijana, 60).
+age(mima, 53).
 
 %baby(X):- age(X,Y), Y<=2.
 %child(X):- age(X,Y), Y>2, Y<=12.

@@ -3,6 +3,12 @@
 
 symptoms(hiatal_hernia, [sharp_abdominal_pain, sharp_chest_pain, nausea, vomiting, difficulty_in_swallowing, heartburn, vomiting_blood]).
 symptoms(gallstone, [sharp_abdominal_pain, upper_abdominal_pain, nausea, vomiting, back_pain, burning_abdominal_pain, sharp_chest_pain]).
+%Gastroesophageal reflux disease
+symptoms(gerb, [sharp_abdominal_pain, heartburn, vomiting, difficulty_in_swallowing, nausea, sharp_chest_pain, cough]).
+symptoms(esophageal_cancer, [fatigue, ache_all_over, sharp_abdominal_pain, vomiting, difficulty_in_swallowing, weakness, shortness_of_breath, loss_of_appetite]).
+symptoms(stomach_cancer, [fatigue, vomiting, nausea, sharp_abdominal_pain, weakness,  burning_abdominal_pain, diarrhea, loss_of_appetite, heartburn, vomiting_blood, blood_in_stool, jaundice]).
+
+
 
 symptoms(gastritis, [sharp_abdominal_pain,vomiting, nausea, vomiting_blood,burning_abdominal_pain,upper_abdominal_pain,diarrhea, sharp_chest_pain, fever, headache, heartburn, regurgitation]).
 symptoms(pancreatic_cancer, [sharp_abdominal_pain, jaundice, stomach_bloating, nausea, fatigue, diarrhea, arm_swelling, elbow_swelling, vomiting_blood]).
@@ -29,4 +35,13 @@ personal_symptoms(sara, [jaundice, stomach_bloating, nausea]).
 personal_symptoms(peca, [vomiting_blood, upper_abdominal_pain]).
 personal_symptoms(una, [lower_abdominal_pain, melena]).
 personal_symptoms(tijana, [joint_aches, stomach_bloating, heartburn]).
+
+personal_symptoms(mima, [weakness, loss_of_appetite, sharp_abdominal_pain]). %rak jednjaka
+personal_symptoms(masa, [sharp_abdominal_pain, heartburn, vomiting, difficulty_in_swallowing]). %gerb
+personal_symptoms(neca, [vomiting, back_pain, burning_abdominal_pain, sharp_chest_pain]). %kamen u zuci
+personal_symptoms(marti, [sharp_chest_pain, nausea, vomiting, difficulty_in_swallowing]). %cir na zeludcu
+personal_symptoms(ljilja, [fatigue, vomiting, nausea, sharp_abdominal_pain]). %rak zeludca
+
+
+
 
