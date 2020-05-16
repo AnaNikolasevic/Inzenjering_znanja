@@ -68,9 +68,7 @@ test( gerb, [endoscopy, x_ray, esophageal_manometry, ambulatory_pH_probe, esopha
 test( esophageal_cancer, [barium_swallow, x_ray,  endoscopy, biopsy, ct, mri, ultrasound, cbc, her2]).
 test( stomach_cancer, [barium_swallow,  endoscopy, biopsy, ct, mri, ultrasound, cbc, her2]).
 
-test(gastritis, [cbc, urinalysis, endoscopy, c13, c14, stool_test, blood_test]). 
-
-test(gastritis, [cbc, urinalysis, endoscopy, h_pylori_test]). 
+test(gastritis, [cbc, urinalysis, endoscopy, c13, c14, stool_test, blood_test]).
 test(pancreatic_cancer,[x_ray, c19_9, cea, mri, ct, mr_cholangiopancreatography]).
 test(ulcerative_colitis, [blood_test, cbc]).
 test(crohn_disease, [blood_test, cBir1, cbc]).
