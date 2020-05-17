@@ -1,0 +1,17 @@
+#bolest; anamnesis; medications
+hiatal_hernia; overweight, active_smoking; midazolam, pantoprazole
+gallstone; high_blood_cholesterol, family_history_of_gallstones; glycopyrrolate, rocuronium
+gerb; delayed_stomach_emptying, active_smoking;omeprazole, esomeprazole
+esophageal_cancer;  gerb, barretts_esophagus;dexamethasone_topical_product, fluorouracil
+stomach_cancer;long_term_stomach_inflammation, stomach_polyps;vitamin_b_12, pegfilgrastim
+gastritis;nsaid_abuse, stress;pantoprazole, ranitidine;
+pancreatic_cancer;active_smoking, abusing_alchohol,nt0ba;dexamethasone
+ulcerative_colitis;nsaid_abuse; mesalamine, infliximab
+crohn_disease;family_history_of_crohn_disease;azathioprine, metronidazole
+hepatitis_A;drug_abuse, unprotected_sex; ribavirin
+hepatitis_B;hiv_positive; tenofovir
+hepatitis_C;abusing_alchohol;elbasvir, grazoprevir
+drug_induced_hepatitis;aspirin_abuse;lactulose, tacrolimus, ritonavir
+inherited_hepatitis;family_history_of_liver_disease;peginterferon_alfa_2b
+autoimmune_hepatitis;;prednisone
+cirrhosis;active_smoking; furosemide
