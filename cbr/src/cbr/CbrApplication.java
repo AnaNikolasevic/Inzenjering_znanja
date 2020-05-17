@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import connector.CsvConnector;
-import model.Examination;
 import model.Examination2;
 import similarity.TableSimilarity;
 import ucm.gaia.jcolibri.casebase.LinealCaseBase;
@@ -76,22 +75,8 @@ public class CbrApplication implements StandardCBRApplication {
 		
 		// Ansukice ovde ti supas na delo <3
 		simConfig.addMapping(new Attribute("binSymptoms", Examination2.class), new NotXOR());
-		
-		
-		/*simConfig.addMapping(new Attribute("sharp_abdominal_pain", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("sharp_chest_pain", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("nausea", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("vomiting", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("heartburn", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("vomiting_blood", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("upper_abdominal_pain", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("back_pain", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("burning_abdominal_pain", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("cough", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("diarrhea", Examination.class), new EqualsStringIgnoreCase());*/
-		
+		simConfig.addMapping(new Attribute("binAnamnesis", Examination2.class), new NotXOR());
 
-		// simConfig.addMapping(new Attribute("attribute", CaseDescription.class), new Interval(5));
 		// TODO
 
 		// Equal - returns 1 if both individuals are equal, otherwise returns 0
@@ -137,20 +122,9 @@ public class CbrApplication implements StandardCBRApplication {
 			examination.setAge(50);
 			examination.setSex("F");
 			String [] symp = {"harp_chest_pain" , "nausea", "difficulty_in_swallowing"};
+			String [] anam= { "abusing_alchohol", "long_term_stomach_inflammation" };
 			examination.createBinSymp(symp);
-		/*	examination.setSharp_abdominal_pain("T");
-			examination.setSharp_chest_pain("F");
-			examination.setNausea("T");
-			examination.setVomiting("T");
-			examination.setDifficulty_in_swallowing("F");
-			examination.setHeartburn("T");
-			examination.setVomiting_blood("F");
-			examination.setUpper_abdominal_pain("T");
-			examination.setBack_pain("F");
-			examination.setBurning_abdominal_pain("T");
-			examination.setCough("F");
-			examination.setDiarrhea("T");*/
-			// TODO
+
 			
 			query.setDescription( examination );
 
