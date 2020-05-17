@@ -1,0 +1,7 @@
+#bolest; age; sex; symptoms; anamnesis; tests
+hiatal_hernia;50;F;harp_chest_pain,nausea,vomiting,difficulty_in_swallowing
+gallstone;30;F;vomiting,back_pain,burning_abdominal_pain,sharp_chest_pain
+gerb;45;M;sharp_abdominal_pain,heartburn,vomiting,difficulty_in_swallowing
+esophageal_cancer;67;F;weakness,loss_of_appetite,sharp_abdominal_pain
+stomach_cancer;65;M;fatigue,vomiting,nausea,sharp_abdominal_pain
+
