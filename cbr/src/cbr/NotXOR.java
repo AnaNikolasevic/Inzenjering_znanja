@@ -34,7 +34,7 @@ public class NotXOR implements LocalSimilarityFunction {
 				size++;
 			}
 		}
-		return ((double) size/ (double) 12);
+		return ((double) size/ (double) s.length());
 
     }
 
