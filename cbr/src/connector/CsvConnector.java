@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import model.Examination;
 import model.Examination2;
 import ucm.gaia.jcolibri.cbrcore.CBRCase;
 import ucm.gaia.jcolibri.cbrcore.CaseBaseFilter;
@@ -38,11 +37,14 @@ public class CsvConnector implements Connector {
 				examination.setDisease(values[0]);
 				examination.setAge(Integer.parseInt(values[1]));
 				examination.setSex(values[2]);
-				
+				examination.setTests(values[5]);
 				
 				String[] symp = values[3].split(",");
 				examination.createBinSymp(symp);
-
+		
+				System.out.println(values[4]);
+				String[] anam = values[4].split(",");
+				examination.createBinAnam(anam);
 				
 				cbrCase.setDescription(examination);
 				cases.add(cbrCase);

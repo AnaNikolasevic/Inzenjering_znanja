@@ -16,6 +16,7 @@ import com.sun.net.httpserver.Authenticator.Result;
 import connector.CsvConnector;
 import connector.CsvConnectorResults;
 import model.Examination;
+
 import model.Examination2;
 import model.Results;
 import similarity.TableSimilarity;
@@ -81,8 +82,8 @@ public class CbrApplication implements StandardCBRApplication {
 		// Ansukice ovde ti supas na delo <3
 		simConfig.addMapping(new Attribute("binSymptoms", Examination2.class), new NotXOR());
 
+		simConfig.addMapping(new Attribute("binAnamnesis", Examination2.class), new NotXOR());
 
-		// simConfig.addMapping(new Attribute("attribute", CaseDescription.class), new Interval(5));
 		// TODO
 
 		// Equal - returns 1 if both individuals are equal, otherwise returns 0
@@ -131,20 +132,9 @@ public class CbrApplication implements StandardCBRApplication {
 			examination.setAge(50);
 			examination.setSex("F");
 			String [] symp = {"harp_chest_pain" , "nausea", "difficulty_in_swallowing"};
+			String [] anam= { "abusing_alchohol", "long_term_stomach_inflammation" };
 			examination.createBinSymp(symp);
-		/*	examination.setSharp_abdominal_pain("T");
-			examination.setSharp_chest_pain("F");
-			examination.setNausea("T");
-			examination.setVomiting("T");
-			examination.setDifficulty_in_swallowing("F");
-			examination.setHeartburn("T");
-			examination.setVomiting_blood("F");
-			examination.setUpper_abdominal_pain("T");
-			examination.setBack_pain("F");
-			examination.setBurning_abdominal_pain("T");
-			examination.setCough("F");
-			examination.setDiarrhea("T");*/
-			// TODO
+
 			
 			query.setDescription( examination );
 

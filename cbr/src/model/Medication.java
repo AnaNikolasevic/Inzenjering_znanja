@@ -5,65 +5,18 @@ import java.util.HashMap;
 import ucm.gaia.jcolibri.cbrcore.Attribute;
 import ucm.gaia.jcolibri.cbrcore.CaseComponent;
 
-public class Examination2 implements CaseComponent {
-	
-	private int age;
-	private String sex;
-	private HashMap<String, Integer> symptoms;
-	private HashMap<String, Integer> anamnesis;
-	//ovde cemmo vrednosti iz HashMap-e cuvati kao binarnu vrednost
-	private String binSymptoms;
-	private String binAnamnesis;
+public class Medication implements CaseComponent {
+
 	private String disease;
-	private String tests;
+	private HashMap<String, Integer> anamnesis;
+	private String medications;
 	
-	public Examination2() {
-		//prilikom kreiranja pregleda podesavamo sve simptome na 0
-		this.setSymptoms();
+	private String binAnamnesis;
+	
+	public Medication() {
 		this.setAnamnesis();
 	}
-	private void setSymptoms () {
-		this.symptoms = new HashMap<String, Integer>();
-		this.symptoms.put("abdominal_discomfort", 0);
-		this.symptoms.put(" abdominal_swelling", 0);
-		this.symptoms.put("ache_all_over", 0);
-		this.symptoms.put("arm_swelling", 0);
-		this.symptoms.put("back_pain", 0);
-		this.symptoms.put("blood_in_stool", 0);
-		this.symptoms.put("burning_abdominal_pain", 0);
-		this.symptoms.put("cough", 0);
-		this.symptoms.put("dark_colored_urine", 0);
-		this.symptoms.put("diarrhea", 0);
-		this.symptoms.put("difficulty_in_swallowing", 0);
-		this.symptoms.put("discharge_in_stools", 0);
-		this.symptoms.put("elbow_swelling", 0);
-		this.symptoms.put("fatigue", 0);
-		this.symptoms.put("fever", 0);
-		this.symptoms.put("headache", 0);
-		this.symptoms.put("heartburn", 0);
-		this.symptoms.put("heartburn", 0);
-		this.symptoms.put("itching", 0);
-		this.symptoms.put("jaundice", 0);
-		this.symptoms.put("joint_aches", 0);
-		this.symptoms.put("light_colored_stools", 0);
-		this.symptoms.put("loss_of_appetite", 0);
-		this.symptoms.put("loss_of_weight", 0);
-		this.symptoms.put("lower_abdominal_pain", 0);
-		this.symptoms.put("melena", 0);
-		this.symptoms.put("nausea", 0);
-		this.symptoms.put("pain_of_the_anus", 0);
-		this.symptoms.put("rectal_bleeding", 0);
-		this.symptoms.put("regurgitation", 0);
-		this.symptoms.put("sharp_chest_pain", 0);
-		this.symptoms.put("sharp_abdominal_pain", 0);
-		this.symptoms.put("shortness_of_breath", 0);
-		this.symptoms.put("stomach_bloating", 0);
-		this.symptoms.put("swollen_lymph_nodes", 0);
-		this.symptoms.put("upper_abdominal_pain", 0);
-		this.symptoms.put("vomiting", 0);
-		this.symptoms.put("vomiting_blood", 0);
-		this.symptoms.put("weakness", 0);		
-	}
+	
 	public void setAnamnesis() {
 		this.anamnesis = new HashMap<String, Integer>();
 		this.anamnesis.put("active_smoking", 0);
@@ -120,24 +73,7 @@ public class Examination2 implements CaseComponent {
 		this.anamnesis.put("vitamin_supplements_abuse", 0);
 
 	}
-	// vrednosti simptoma koji se nalaze u prosledjenom nizu postavljamo na 1
-	//vrednosti mape pretvaramo u string
-	public void createBinSymp(String [] symp) {
-		int i;
-		for (i = 0; i < symp.length; i++) { 
-			 this.symptoms.replace(symp[i], 1);
-        } 
-		
-		this.binSymptoms = "";
-
-		for (Integer value : this.symptoms.values()) {
-			  this.binSymptoms += String.valueOf(value);
-			}
-		System.out.println(this.symptoms.toString());
-		System.out.println(this.binSymptoms);
-		
-		
-	}
+	
 	public void createBinAnam(String [] anam) {
 		int i;
 		for (i = 0; i < anam.length; i++) { 
@@ -150,89 +86,49 @@ public class Examination2 implements CaseComponent {
 			  this.binAnamnesis += String.valueOf(value);
 			}
 		System.out.println(this.anamnesis.toString());
-		System.out.println(this.binAnamnesis);
-		
-		
+		System.out.println(this.binAnamnesis);	
+	
 	}
 	
-	public String getBinSymptoms() {
-		return binSymptoms;
+	@Override
+	public String toString() {
+		return "Medication [disease=" + disease + ", anamnesis=" + anamnesis + ", medications=" + medications + "]";
 	}
-
-	public void setBinSymptoms(String binSymptoms) {
-		this.binSymptoms = binSymptoms;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-
-	public String getTests() {
-		return tests;
-	}
-	public void setTests(String tests) {
-		this.tests = tests;
-	}
-	public String getSex() {
-		return sex;
-	}
-
-
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-
-	public HashMap<String, Integer> getSymptoms() {
-		return symptoms;
-	}
-
-
-	public void setSymptoms(HashMap<String, Integer> symptoms) {
-		this.symptoms = symptoms;
-	}
-
 
 	public String getDisease() {
 		return disease;
 	}
 
-
 	public void setDisease(String disease) {
 		this.disease = disease;
 	}
-	
-
 
 	public HashMap<String, Integer> getAnamnesis() {
 		return anamnesis;
 	}
+
 	public void setAnamnesis(HashMap<String, Integer> anamnesis) {
 		this.anamnesis = anamnesis;
 	}
+
+	public String getMedications() {
+		return medications;
+	}
+
+	public void setMedications(String medications) {
+		this.medications = medications;
+	}
+
 	public String getBinAnamnesis() {
 		return binAnamnesis;
 	}
+
 	public void setBinAnamnesis(String binAnamnesis) {
 		this.binAnamnesis = binAnamnesis;
 	}
-	
 
-
-	
-	@Override
-	public String toString() {
-		return "Examination2 [age=" + age + ", sex=" + sex +  ", disease=" + disease
-				+ ", tests=" + tests + "]";
-	}
 	@Override
 	public Attribute getIdAttribute() {
-		// TODO Auto-generated method stub
 		return new Attribute("id",this.getClass());
 	}
 	
