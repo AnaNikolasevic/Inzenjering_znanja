@@ -7,22 +7,23 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import model.Examination;
-import model.Examination2;
+import model.Results;
 import ucm.gaia.jcolibri.cbrcore.CBRCase;
 import ucm.gaia.jcolibri.cbrcore.CaseBaseFilter;
 import ucm.gaia.jcolibri.cbrcore.Connector;
 import ucm.gaia.jcolibri.exception.InitializingException;
 import ucm.gaia.jcolibri.util.FileIO;
 
-public class CsvConnector implements Connector {
+public class CsvConnectorResults implements Connector {
+	
+	
 
 	@Override
 	public Collection<CBRCase> retrieveAllCases() {
 		LinkedList<CBRCase> cases = new LinkedList<CBRCase>();
 		
 		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(FileIO.openFile("data/anamnesis.csv")));
+			BufferedReader br = new BufferedReader(new InputStreamReader(FileIO.openFile("data/tests.csv")));
 			if (br == null)
 				throw new Exception("Error opening file");
 
@@ -30,21 +31,23 @@ public class CsvConnector implements Connector {
 			while ((line = br.readLine()) != null) {
 				if (line.startsWith("#") || (line.length() == 0))
 					continue;
-				String[] values = line.strip().split(";");
+				String[] values = line.split(";");
+
 				CBRCase cbrCase = new CBRCase();
 
-				Examination2 examination = new Examination2();
+				Results results = new Results();
 				
-				examination.setDisease(values[0]);
-				examination.setAge(Integer.parseInt(values[1]));
-				examination.setSex(values[2]);
+				results.setDisease(values[0]);
+				HashMap<String, String> resultsOfTests = new HashMap<String, String>();
+				String[] tests = values[1].split(",");
+				for(int i=0; i<tests.length; i++) {
+					String[] test = tests[i].split(":");
+					resultsOfTests.put(test[0], test[1]);
+				}
 				
+				results.setResultsOfTests(resultsOfTests);				
 				
-				String[] symp = values[3].split(",");
-				examination.createBinSymp(symp);
-
-				
-				cbrCase.setDescription(examination);
+				cbrCase.setDescription(results);
 				cases.add(cbrCase);
 			}
 			br.close();
@@ -53,14 +56,7 @@ public class CsvConnector implements Connector {
 		}
 		return cases;
 	}
-	//u ovoj metodi postavljamo sve vrednosti simtoma na nula
-	public String createBinValue() {
-	
-		HashMap<String, Integer> symp = new HashMap<String, Integer>();
-		
-		
-		return null;
-	}
+
 	@Override
 	public Collection<CBRCase> retrieveSomeCases(CaseBaseFilter arg0) {
 		return null;

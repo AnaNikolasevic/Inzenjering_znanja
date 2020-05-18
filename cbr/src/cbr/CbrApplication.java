@@ -11,9 +11,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import com.sun.net.httpserver.Authenticator.Result;
+
 import connector.CsvConnector;
+import connector.CsvConnectorResults;
 import model.Examination;
 import model.Examination2;
+import model.Results;
 import similarity.TableSimilarity;
 import ucm.gaia.jcolibri.casebase.LinealCaseBase;
 import ucm.gaia.jcolibri.cbraplications.StandardCBRApplication;
@@ -76,20 +80,7 @@ public class CbrApplication implements StandardCBRApplication {
 		
 		// Ansukice ovde ti supas na delo <3
 		simConfig.addMapping(new Attribute("binSymptoms", Examination2.class), new NotXOR());
-		
-		
-		/*simConfig.addMapping(new Attribute("sharp_abdominal_pain", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("sharp_chest_pain", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("nausea", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("vomiting", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("heartburn", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("vomiting_blood", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("upper_abdominal_pain", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("back_pain", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("burning_abdominal_pain", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("cough", Examination.class), new EqualsStringIgnoreCase());
-		simConfig.addMapping(new Attribute("diarrhea", Examination.class), new EqualsStringIgnoreCase());*/
-		
+
 
 		// simConfig.addMapping(new Attribute("attribute", CaseDescription.class), new Interval(5));
 		// TODO
@@ -109,8 +100,9 @@ public class CbrApplication implements StandardCBRApplication {
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
 		eval = SelectCases.selectTopKRR(eval, 5);
 		System.out.println("Retrieved cases:");
-		for (RetrievalResult nse : eval)
+		for (RetrievalResult nse : eval) {
 			System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
+		}
 	}
 
 	public void postCycle() throws ExecutionException {
@@ -133,6 +125,8 @@ public class CbrApplication implements StandardCBRApplication {
 			recommender.preCycle();
 
 			CBRQuery query = new CBRQuery();
+			
+
 			Examination2 examination = new Examination2();
 			examination.setAge(50);
 			examination.setSex("F");
