@@ -132,3 +132,5 @@ possible_diseases(Name,D) :- personal_symptoms(Name, L),  symptoms(D,L1), contai
                              personal_anamnesis(Name, A),  anamnesis(D,A1), contains(A1,A). 
 
 additional_tests(Name,T) :-  possible_diseases(Name,D), test(D,T).
+
+medications(Name,M) :-  diagnosis(Name,D), medication(D,M).
