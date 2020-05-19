@@ -2,33 +2,26 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
-import javax.swing.AbstractListModel;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
-import com.ugos.jiprolog.engine.JIPAtom;
 import com.ugos.jiprolog.engine.JIPEngine;
-import com.ugos.jiprolog.engine.JIPFunctor;
-import com.ugos.jiprolog.engine.JIPList;
 import com.ugos.jiprolog.engine.JIPQuery;
 import com.ugos.jiprolog.engine.JIPSyntaxErrorException;
 import com.ugos.jiprolog.engine.JIPTerm;
 import com.ugos.jiprolog.engine.JIPVariable;
-import javax.swing.JScrollPane;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import javax.swing.JPanel;
-import javax.swing.JToggleButton;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 
 public class App {
@@ -36,7 +29,10 @@ public class App {
 	private JFrame frame;
 	JPanel panel = new JPanel();
 	JPanel panelAdditionalTests = new JPanel();
-	
+	JPanel panelResults = new JPanel();
+	JPanel panelDiagnosis = new JPanel();
+
+	String person;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -134,12 +130,21 @@ public class App {
 				for (Object selected : list_1.getSelectedValuesList()) {
 					personalAnamnesis.add(selected.toString());
 				}
-				String person = formattedTextField.getText();
-				String term = "possible_diseases(" + person + "," + personalSymptoms + "," + personalAnamnesis + ", S)";
-	            ArrayList<String> pd = consultProlog(term);
-	          
-				term = "additional_tests(" + person + "," + personalSymptoms + "," + personalAnamnesis + ", T)";
-				ArrayList<String> additional_tests = consultProlog(term);
+				person = formattedTextField.getText();
+				
+				String write = "personal_symptoms(" + person + "," + personalSymptoms + ").";
+				ArrayList<String> writeInFile = new ArrayList<String>();
+				writeInFile.add(write);
+				writeProlog(writeInFile, "rule_based/symptoms.pl");
+				
+				write = "personal_anamnesis(" + person + "," + personalAnamnesis + ").";
+				writeInFile.clear();
+				writeInFile.add(write);
+				writeProlog(writeInFile, "rule_based/patients.pl");
+				
+				String term = "additional_tests(" + person + ", S)";
+	            ArrayList<String> additional_tests = consultProlog(term);
+	            
 	    		additionalTestsPanel(additional_tests);
 			}
 
@@ -173,7 +178,11 @@ public class App {
 		JList list_2 = new JList();
 		list_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		scrollPane_2.setViewportView(list_2);
-    	list_2.setListData((String[]) additional_tests.toArray(new String[0]));
+		
+		String additionalTestsString = additional_tests.toString().replace("[", "").replace("]", "");
+		String[] list= additionalTestsString.split(",");
+		
+    	list_2.setListData(list);
 		System.out.println(additional_tests.size());
 
 		ArrayList<String> personalTests = new ArrayList<String>();
@@ -185,8 +194,10 @@ public class App {
 				for (Object selected : list_2.getSelectedValuesList()) {
 					personalTests.add(selected.toString());
 				}
-				
+				panelForTestsResults(personalTests);				
 			}
+
+
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewButton.setBounds(846, 447, 100, 36);
@@ -194,7 +205,79 @@ public class App {
 		
 	}
 	
+	private void panelForTestsResults(ArrayList<String> personalTests) {
+		// TODO Auto-generated method stub
+		panel.setVisible(false);
+		panelAdditionalTests.setVisible(false);
+		panelResults.setVisible(true);
+		panelResults.setBounds(0, 0, 992, 531);
+		frame.getContentPane().add(panelResults);
+		panelResults.setLayout(null);
+		
+		Object[] list1 = personalTests.toArray();
+		JTable table = new JTable();
+		DefaultTableModel tableModel = new DefaultTableModel();
+		tableModel.addColumn("Test", list1);
+		tableModel.addColumn("Result");
+
+		table.setModel(tableModel);
+
+		table.setBounds(109, 22, 648, 286);
+		panelResults.add(table);
+		
+		JButton btnNewButton = new JButton("Disease");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i < tableModel.getRowCount(); i++) {
+					String test = (String) tableModel.getValueAt(i, 0);
+					String result = (String) tableModel.getValueAt(i, 1);
+					String resultOfTest = test + "(" + person + "," + result + ").";
+					ArrayList<String> writeInFile = new ArrayList<String>();
+					writeInFile.add(resultOfTest);
+					writeProlog(writeInFile, "rule_based/tests.pl");
+				}
+				String term = "diagnosis(" + person + ", D)";
+	            ArrayList<String> diagnosis = consultProlog(term);
+	            panelDiagnosis(diagnosis);
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton.setBounds(846, 447, 100, 36);
+		panelResults.add(btnNewButton);
+	}
 	
+	protected void panelDiagnosis(ArrayList<String> diagnosis) {
+		// TODO Auto-generated method stub
+		panel.setVisible(false);
+		panelAdditionalTests.setVisible(false);
+		panelResults.setVisible(false);
+		panelDiagnosis.setVisible(true);
+		panelDiagnosis.setBounds(0, 0, 992, 531);
+		frame.getContentPane().add(panelDiagnosis);
+		panelDiagnosis.setLayout(null);
+		
+		JLabel lblDiagnosisForYou = new JLabel("Diagnosis for you patient is: ");
+		lblDiagnosisForYou.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblDiagnosisForYou.setBounds(62, 43, 216, 69);
+		panelDiagnosis.add(lblDiagnosisForYou);
+		
+		JLabel lblMedicam = new JLabel("Recommended medications:");
+		lblMedicam.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblMedicam.setBounds(62, 122, 216, 69);
+		panelDiagnosis.add(lblMedicam);
+		
+		JLabel diagnosisLabel = new JLabel(" ");
+		diagnosisLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		diagnosisLabel.setBounds(288, 43, 216, 69);
+		diagnosisLabel.setText(diagnosis.get(0));
+		panelDiagnosis.add(diagnosisLabel);
+		
+		JList list = new JList();
+		list.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		list.setBounds(288, 151, 216, 157);
+		panelDiagnosis.add(list);
+	}
+
 	private ArrayList<String> consultProlog(String term){
 		// New instance of prolog engine
         JIPEngine jip = new JIPEngine();
@@ -206,8 +289,9 @@ public class App {
         {
             // consult file
             jip.consultFile("rule_based/symptoms.pl");
-            jip.consultFile("rule_based/tests.pl");
             jip.consultFile("rule_based/patients.pl");
+            jip.consultFile("rule_based/tests.pl");
+            jip.consultFile("rule_based/diagnosis.pl");
 
 
             queryTerm = jip.getTermParser().parseTerm(term);
@@ -221,7 +305,6 @@ public class App {
         // open Query
         JIPQuery jipQuery = jip.openSynchronousQuery(queryTerm);
         JIPTerm solution;
-
         ArrayList<String> listOfSymptoms = new ArrayList<String>();
         ArrayList<String> listOfAnamnesis = new ArrayList<String>();
         ArrayList<String> returnList = new ArrayList<String>();
@@ -260,7 +343,10 @@ public class App {
                     } else if(solution.toString(jip).contains("additional_tests")) {
                     	System.out.println("Additional tests: " + var.toString(jip));
                     	returnList.add(var.toString(jip));
-                    }
+	                } else if(solution.toString(jip).contains("diagnosis")) {
+	                	System.out.println("Diagnosis: " + var.toString(jip));
+	                	returnList.add(var.toString(jip));
+	                }
                 }
             }
         	}
@@ -268,5 +354,28 @@ public class App {
 		System.out.println("-------------------------------------------");
         return returnList;
      }
+	
+	public static void writeProlog(ArrayList<String> terms, String fileName) {
+		FileWriter file = null;
+		PrintWriter pw = null;
+
+		try {
+			file = new FileWriter(fileName, true);
+			pw = new PrintWriter(file);
+
+			for(String t: terms) {
+				pw.println(t);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null != file)
+					file.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
 	
 }

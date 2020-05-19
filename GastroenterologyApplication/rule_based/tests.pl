@@ -131,17 +131,21 @@ contains(S,[]).
 contains(S,[H|T]) :- member(H,S), contains(S,T).
 
 % OLD
-%possible_diseases(Name,D) :- personal_symptoms(Name, L),  symptoms(D,L1), contains(L1,L);
-%                             personal_anamnesis(Name, A),  anamnesis(D,A1), contains(A1,A). 
+possible_diseases(Name,D) :- personal_symptoms(Name, L),  symptoms(D,L1), contains(L1,L),
+                             personal_anamnesis(Name, A),  anamnesis(D,A1), contains(A1,A). 
 
 % NEW
 % possible_diseases(Name, listOfSymptoms, anamnesis, answer)
 
-possible_diseases(Name, L, A, D) :- symptoms(D,L1), contains(L1,L),
-									anamnesis(D,A1), contains(A1,A). 
+%possible_diseases(Name, L, A, D) :- symptoms(D,L1), contains(L1,L),
+%									anamnesis(D,A1), contains(A1,A). 
 %old
-%additional_tests(Name,T) :-  possible_diseases(Name,D), test(D,T).
+additional_tests(Name,T) :-  possible_diseases(Name,D), test(D,T).
 
 %new
-additional_tests(Name, L, A, T) :-  possible_diseases(Name,L,A,D), test(D,T).
+%additional_tests(Name, L, A, T) :-  possible_diseases(Name,L,A,D), test(D,T).
 
+anti_hepatitis_C(r,null).
+anti_hepatitis_C(fds,positive).
+anti_hepatitis_C(r,null).
+anti_hepatitis_C(yt,positive).

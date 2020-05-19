@@ -43,5 +43,6 @@ personal_symptoms(marti, [sharp_chest_pain, nausea, vomiting, difficulty_in_swal
 personal_symptoms(ljilja, [fatigue, vomiting, nausea, sharp_abdominal_pain]). %rak zeludca
 
 
-
-
+personal_symptoms(fds,[nausea]).
+personal_symptoms(r,[nausea]).
+personal_symptoms(yt,[nausea]).

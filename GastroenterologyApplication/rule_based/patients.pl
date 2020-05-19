@@ -82,3 +82,7 @@ age(mima, 53).
 %older_adult(X):- age(X,Y), Y>=40, Y<60.
 %old(X):- age(X,Y), Y>=60.
 
+
+personal_anamnesis(fds,[hepatitis_C_risk_group]).
+personal_anamnesis(r,[hepatitis_C_risk_group]).
+personal_anamnesis(yt,[hepatitis_C_risk_group]).
