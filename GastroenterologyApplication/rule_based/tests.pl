@@ -144,5 +144,12 @@ additional_tests(Name,T) :-  possible_diseases(Name,D), test(D,T).
 %additional_tests(Name, L, A, T) :-  possible_diseases(Name,L,A,D), test(D,T).
 
 medications(Name,M) :-  diagnosis(Name,D), medication(D,M).
-anti_hepatitis_C(ana,null).
-anti_hepatitis_C(s,positive).
+
+anti_hepatitis_C(dsa,null).
+anti_hepatitis_C(das,positive).
+anti_hepatitis_C(ww,positive).
+anti_hepatitis_C(qqq,null).
+anti_hepatitis_C(rrr,positive).
+anti_hepatitis_C(asdsada,positive).
+ anti_hepatitis_A(qqq,positive).
+ anti_hepatitis_B(qqq,positive).

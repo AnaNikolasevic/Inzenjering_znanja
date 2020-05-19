@@ -90,7 +90,7 @@ public class CbrApplicationResults implements StandardCBRApplication {
 		//	resultsOfTests.put("cbc", "anemia");
 			resultsOfTests.put("ast", "high");
 			resultsOfTests.put("alp", "high");
-			resultsOfTests.put("alt", "high");
+		//	resultsOfTests.put("alt", "high");
 
 			resultsOfTests.put("bilirubin", "high");
 			resultsOfTests.put("albumin", "low");
@@ -98,7 +98,7 @@ public class CbrApplicationResults implements StandardCBRApplication {
 
 		//	resultsOfTests.put("platelets", "low");
 
-		//	resultsOfTests.put("ana", "positive");
+			resultsOfTests.put("ana", "positive");
 
 			results.setResultsOfTests(resultsOfTests);
 			
