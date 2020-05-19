@@ -128,9 +128,19 @@ cbc(ljilja, anemia).
 contains(S,[]).
 contains(S,[H|T]) :- member(H,S), contains(S,T).
 
-possible_diseases(Name,D) :- personal_symptoms(Name, L),  symptoms(D,L1), contains(L1,L);
+% OLD
+possible_diseases(Name,D) :- personal_symptoms(Name, L),  symptoms(D,L1), contains(L1,L),
                              personal_anamnesis(Name, A),  anamnesis(D,A1), contains(A1,A). 
 
+% NEW
+% possible_diseases(Name, listOfSymptoms, anamnesis, answer)
+
+%possible_diseases(Name, L, A, D) :- symptoms(D,L1), contains(L1,L),
+%									anamnesis(D,A1), contains(A1,A). 
+%old
 additional_tests(Name,T) :-  possible_diseases(Name,D), test(D,T).
+
+%new
+%additional_tests(Name, L, A, T) :-  possible_diseases(Name,L,A,D), test(D,T).
 
 medications(Name,M) :-  diagnosis(Name,D), medication(D,M).

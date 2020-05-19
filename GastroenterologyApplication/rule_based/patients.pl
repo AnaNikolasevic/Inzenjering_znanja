@@ -2,7 +2,7 @@
 
 % Non-steroidal anti-inflammatory drug (nsaid_abuse)
 % Presence of non–type O blood antigens (nt0ba)
-% Body_mass_index (BMI)
+% Body_mass_index (bmi)
 
 %--------------
 
@@ -13,7 +13,7 @@ anamnesis(drug_induced_hepatitis, [abusing_alchohol, aspirin_abuse, steroids_abu
 anamnesis(inherited_hepatitis, [family_history_of_liver_disease]). 
 anamnesis(cirrhosis, [autoimmune_hepatitis, hepatitis_A, hepatitis_B, hepatitis_C, abusing_alchohol, inherited_hepatitis, drug_abuse]).
 anamnesis(gastritis, [genetic_predisposition_gastritis, active_smoking, nsaid_abuse, stress, abusing_alchohol]).
-anamnesis(pancreatic_cancer, [active_smoking, abusing_alchohol,nt0ba, BMI_over_35, family_history_of_pancreatic_cancer]).
+anamnesis(pancreatic_cancer, [active_smoking, abusing_alchohol, nt0ba, bmi_over_35, family_history_of_pancreatic_cancer]).
 anamnesis(ulceraive_colitis, [active_smoking, nsaid_abuse]).
 anamnesis(crohn_disease, [active_smoking, nsaid_abuse, family_history_of_crohn_disease]).
 
@@ -82,3 +82,7 @@ age(mima, 53).
 %older_adult(X):- age(X,Y), Y>=40, Y<60.
 %old(X):- age(X,Y), Y>=60.
 
+
+personal_anamnesis(fds,[hepatitis_C_risk_group]).
+personal_anamnesis(r,[hepatitis_C_risk_group]).
+personal_anamnesis(yt,[hepatitis_C_risk_group]).
