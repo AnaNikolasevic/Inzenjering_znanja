@@ -46,3 +46,5 @@ personal_symptoms(ljilja, [fatigue, vomiting, nausea, sharp_abdominal_pain]). %r
 personal_symptoms(fds,[nausea]).
 personal_symptoms(r,[nausea]).
 personal_symptoms(yt,[nausea]).
+personal_symptoms(ana,[nausea]).
+personal_symptoms(s,[nausea]).

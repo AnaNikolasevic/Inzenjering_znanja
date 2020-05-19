@@ -86,3 +86,5 @@ age(mima, 53).
 personal_anamnesis(fds,[hepatitis_C_risk_group]).
 personal_anamnesis(r,[hepatitis_C_risk_group]).
 personal_anamnesis(yt,[hepatitis_C_risk_group]).
+personal_anamnesis(ana,[hepatitis_C_risk_group]).
+personal_anamnesis(s,[hepatitis_C_risk_group]).
