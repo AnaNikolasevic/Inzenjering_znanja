@@ -1,0 +1,81 @@
+# disease; test1:result1, test2:result2
+
+gallstone; cbc:high_wbc, bilirubin:high, alp:high, pancreatic_enzymes:high
+gallstone; mri:gallstone
+gallstone; ct:gallstone
+gallstone; ercp:gallstone
+gallstone; ultrasound:gallstone
+
+hiatal_hernia; barium_swallow:hiatal_hernia
+hiatal_hernia; x_ray:hiatal_hernia;
+hiatal_hernia; endoscopy:hiatal_hernia
+hiatal_hernia; ct:hiatal_hernia
+
+gerb; x_ray:gerb
+gerb; endoscopy:gerb 
+gerb; esophageal_manometry:gerb 
+gerb; ambulatory_pH_probe:gerb
+gerb; esophageal_impedance_pH:gerb
+gerb; bravo_wireless:gerb
+
+
+esophageal_cancer; x_ray:esophageal_cancer
+esophageal_cancer; barium_swallow:esophageal_cancer
+esophageal_cancer; mri:esophageal_cancer
+esophageal_cancer; ultrasound:esophageal_cancer
+esophageal_cancer; endoscopy:esophageal_cancer
+esophageal_cancer; biopsy:esophageal_cancer
+
+stomach_cancer; x_ray:stomach_cancer
+stomach_cancer; barium_swallow:stomach_cancer
+stomach_cancer; mri:stomach_cancer
+stomach_cancer; ultrasound:stomach_cancer
+stomach_cancer; endoscopy:stomach_cancer
+stomach_cancer; biopsy:stomach_cancer
+
+
+gastritis; cbc:anemia, urinalysis:8-ohdg
+gastritis; cbc:anemia, endoscopy:inflamation
+gastritis; c13:h_pylori
+gastritis; c14:h_pylori
+gastritis; blood_test:h_pylori
+gastritis; stool_test:h_pylori
+
+pancreatic_cancer; c19_9:high, x_ray:pancreatic_cancer
+pancreatic_cancer; cea:high, x_ray:pancreatic_cancer
+pancreatic_cancer; c19_9:high, mri:pancreatic_cancer
+pancreatic_cancer; cea:high, mri:pancreatic_cancer
+pancreatic_cancer; c19_9:high, ct:pancreatic_cancer
+pancreatic_cancer; cea:high, ct:pancreatic_cancer
+
+ulcerative_colitis; blood_test:pANCA, cbc:anemia
+ulcerative_colitis; blood_test:pANCA, cbc:infection 
+
+crohn_disease; blood_test:ASCA, cbc:anemia
+crohn_disease; blood_test:ASCA, cbc:infection
+crohn_disease; cBir1:positive, cbc:anemia
+crohn_disease; cBir1:positive, cbc:infection
+
+
+hepatitis_A; anti_hepatitis_A:positive
+hepatitis_B; anti_hepatitis_B:positive
+hepatitis_C; anti_hepatitis_C:positive
+
+drug_induced_hepatitis; alt:high, ast:high, alp:normal, bilirubin:normal, albumin:normal, eaodt:toxic
+
+hemochromatosis; iron_tests:hemochromatosis
+
+alpha_1_antitrypsin_deficiency; alpha_1_antirypsin:low
+
+wilson_disease; ceruloplasmin:positive, copper_tests:positive
+
+autoimmune_hepatitis_type1; ana:positive
+autoimmune_hepatitis_type1; asma:positive
+
+autoimmune_hepatitis_type2; anti_lkm1:positive
+
+cirrhosis; alt:high, ast:high, alp:high, bilirubin:high, albumin:low, cbc:platelets_low
+cirrhosis; alt:high, ast:high, alp:high, bilirubin:high, albumin:normal, cbc:platelets_low
+cirrhosis; alt:high, ast:high, alp:normal, bilirubin:high, albumin:low, cbc:platelets_low
+cirrhosis; alt:high, ast:high, alp:normal, bilirubin:high, albumin:normal, cbc:platelets_low
+cirrhosis; liver_biopsy:cirrhosis

@@ -1,7 +1,7 @@
 % DIAGNOSIS
 %-----------
 
-diagnosis(X,  gallstone):- (cbc(X, high_wbc); bilirubin(X, high); alp(X, high); pancreatic_enzymes(X, high)), 
+diagnosis(X,  gallstone):- (cbc(X, high_wbc), bilirubin(X, high), alp(X, high), pancreatic_enzymes(X, high)); 
 			  	   (mri(X, gallstone); ct(X, gallstone); ercp(X, gallstone); ultrasound(X, gallstone)).
 
 diagnosis(X, hiatal_hernia):- barium_swallow(X, hiatal_hernia); x_ray(X, hiatal_hernia); 
@@ -21,13 +21,12 @@ diagnosis(X, stomach_cancer):- (barium_swallow(X, stomach_cancerr); mri(X, stoma
  
 
 
-diagnosis(X, gastritis):- cbc(X, anemia),
-			             (urinalysis(X, 8-ohdg); endoscopy(X, inflamation));
+diagnosis(X, gastritis):- (cbc(X, anemia),(urinalysis(X, 8-ohdg); endoscopy(X, inflamation)));
                          (c13(X, h_pylori); c14(X, h_pylori); blood_test(X, h_pylori); stool_test(X, h_pylori)).
 
-diagnosis(X, pancreatic_cancer):- (c19_9(X, high_level); cea(X, high_level)),
+diagnosis(X, pancreatic_cancer):- (c19_9(X, high); cea(X, high)),
                                   x_ray(X, pancreatic_cancer);
-                                  (mr_cholangiopancreatography(X, pancreatitic_cancer); mri(X, pancreatitic_cancer); ct(X, pancreatitic_cancer)).
+                                  mri(X, pancreatitic_cancer); ct(X, pancreatitic_cancer)).
 
 diagnosis(X, ulcerative_colitis):-blood_test(X, pANCA), (cbc(X, anemia); cbc(X, infection)). 
 diagnosis(X, crohn_disease):- (blood_test(X, ASCA); cBir1(X, positive)), (cbc(X, anemia); cbc(X, infection)) .
