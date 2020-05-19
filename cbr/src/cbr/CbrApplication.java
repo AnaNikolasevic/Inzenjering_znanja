@@ -74,11 +74,9 @@ public class CbrApplication implements StandardCBRApplication {
 		simConfig = new NNConfig(); // KNN configuration
 		simConfig.setDescriptionSimFunction(new Average());  // global similarity function = average
 		
-		// treba interval ali jos ne znam kako
-		simConfig.addMapping(new Attribute("age", Examination2.class), new Interval(20));
+		simConfig.addMapping(new Attribute("age", Examination2.class), new Interval(40));
 		simConfig.addMapping(new Attribute("sex", Examination2.class), new EqualsStringIgnoreCase());
 		
-		// Ansukice ovde ti supas na delo <3
 		simConfig.addMapping(new Attribute("binSymptoms", Examination2.class), new NotXOR());
 
 		simConfig.addMapping(new Attribute("binAnamnesis", Examination2.class), new NotXOR());
@@ -130,9 +128,10 @@ public class CbrApplication implements StandardCBRApplication {
 			Examination2 examination = new Examination2();
 			examination.setAge(50);
 			examination.setSex("F");
-			String [] symp = {"harp_chest_pain" , "nausea", "difficulty_in_swallowing"};
-			String [] anam= { "abusing_alchohol", "long_term_stomach_inflammation" };
+			String [] symp = {"harp_chest_pain" , "nausea"};
+			String [] anam= { "heavy_lifting", "physical_strain", "persistent_coughing" };
 			examination.createBinSymp(symp);
+			examination.createBinAnam(anam);
 
 			
 			query.setDescription( examination );

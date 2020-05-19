@@ -238,7 +238,11 @@ public class App {
 				}
 				String term = "diagnosis(" + person + ", D)";
 	            ArrayList<String> diagnosis = consultProlog(term);
-	            panelDiagnosis(diagnosis);
+	            
+				term = "medications(" + person + ", M)";
+	            ArrayList<String> medications = consultProlog(term);
+	            
+	            panelDiagnosis(diagnosis, medications);
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -246,7 +250,7 @@ public class App {
 		panelResults.add(btnNewButton);
 	}
 	
-	protected void panelDiagnosis(ArrayList<String> diagnosis) {
+	protected void panelDiagnosis(ArrayList<String> diagnosis, ArrayList<String> medications) {
 		// TODO Auto-generated method stub
 		panel.setVisible(false);
 		panelAdditionalTests.setVisible(false);
@@ -275,6 +279,10 @@ public class App {
 		JList list = new JList();
 		list.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		list.setBounds(288, 151, 216, 157);
+		String additionalTestsString = medications.toString().replace("[", "").replace("]", "");
+		String[] medicationsString= additionalTestsString.split(",");
+		
+    	list.setListData(medicationsString);
 		panelDiagnosis.add(list);
 	}
 
@@ -292,6 +300,7 @@ public class App {
             jip.consultFile("rule_based/patients.pl");
             jip.consultFile("rule_based/tests.pl");
             jip.consultFile("rule_based/diagnosis.pl");
+            jip.consultFile("rule_based/medications.pl");
 
 
             queryTerm = jip.getTermParser().parseTerm(term);
@@ -345,6 +354,9 @@ public class App {
                     	returnList.add(var.toString(jip));
 	                } else if(solution.toString(jip).contains("diagnosis")) {
 	                	System.out.println("Diagnosis: " + var.toString(jip));
+	                	returnList.add(var.toString(jip));
+	                } else if(solution.toString(jip).contains("medications")) {
+	                	System.out.println("Medications: " + var.toString(jip));
 	                	returnList.add(var.toString(jip));
 	                }
                 }

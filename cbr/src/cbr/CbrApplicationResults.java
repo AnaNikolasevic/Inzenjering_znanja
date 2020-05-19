@@ -88,13 +88,17 @@ public class CbrApplicationResults implements StandardCBRApplication {
 			
 			HashMap<String, String> resultsOfTests = new HashMap<String, String>();
 		//	resultsOfTests.put("cbc", "anemia");
-		//	resultsOfTests.put("ast", "high");
+			resultsOfTests.put("ast", "high");
 			resultsOfTests.put("alp", "high");
+		//	resultsOfTests.put("alt", "high");
 
 			resultsOfTests.put("bilirubin", "high");
-		//	resultsOfTests.put("albumin", "low");
-		//	resultsOfTests.put("cbc", "platelets_low");
-		//	resultsOfTests.put("ana", "positive");
+			resultsOfTests.put("albumin", "low");
+			resultsOfTests.put("cbc", "platelets_low");
+
+		//	resultsOfTests.put("platelets", "low");
+
+			resultsOfTests.put("ana", "positive");
 
 			results.setResultsOfTests(resultsOfTests);
 			

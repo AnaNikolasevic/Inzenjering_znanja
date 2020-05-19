@@ -77,7 +77,7 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 			CBRQuery query1 = new CBRQuery();
 			Medication medication = new Medication();
 			medication.setDisease("hiatal_hernia");
-			String [] a= { "active_smoking", "long_term_stomach_inflammation" };
+			String [] a= { "overweight"};
 			
 			medication.createBinAnam(a);
 	

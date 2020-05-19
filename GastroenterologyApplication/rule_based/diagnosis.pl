@@ -26,7 +26,7 @@ diagnosis(X, gastritis):- (cbc(X, anemia),(urinalysis(X, 8-ohdg); endoscopy(X, i
 
 diagnosis(X, pancreatic_cancer):- (c19_9(X, high); cea(X, high)),
                                   x_ray(X, pancreatic_cancer);
-                                  mri(X, pancreatitic_cancer); ct(X, pancreatitic_cancer)).
+                                  mri(X, pancreatitic_cancer); ct(X, pancreatitic_cancer).
 
 diagnosis(X, ulcerative_colitis):-blood_test(X, pANCA), (cbc(X, anemia); cbc(X, infection)). 
 diagnosis(X, crohn_disease):- (blood_test(X, ASCA); cBir1(X, positive)), (cbc(X, anemia); cbc(X, infection)) .
