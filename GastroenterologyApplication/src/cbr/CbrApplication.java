@@ -111,7 +111,6 @@ public class CbrApplication implements StandardCBRApplication {
 		_caseBase.init(_connector);
 		java.util.Collection<CBRCase> cases = _caseBase.getCases();
 		for (CBRCase c: cases) {
-			System.out.println("hejhej");
 			System.out.println(c.getDescription());
 		}
 		return _caseBase;
