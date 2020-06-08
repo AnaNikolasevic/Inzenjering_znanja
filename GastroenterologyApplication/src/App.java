@@ -23,6 +23,11 @@ import com.ugos.jiprolog.engine.JIPSyntaxErrorException;
 import com.ugos.jiprolog.engine.JIPTerm;
 import com.ugos.jiprolog.engine.JIPVariable;
 
+import cbr.CbrApplication;
+import model.Examination2;
+import ucm.gaia.jcolibri.cbraplications.StandardCBRApplication;
+import ucm.gaia.jcolibri.cbrcore.CBRQuery;
+
 
 public class App {
 
@@ -80,6 +85,32 @@ public class App {
 		panel.setBounds(0, 0, 992, 521);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
+		
+		StandardCBRApplication recommender = new CbrApplication();
+		try {
+			recommender.configure();
+
+			recommender.preCycle();
+
+			CBRQuery query = new CBRQuery();	
+
+			Examination2 examination = new Examination2();
+			examination.setAge(50);
+			examination.setSex("F");
+			String [] symp = {"harp_chest_pain" , "nausea"};
+			String [] anam= { "heavy_lifting", "physical_strain", "persistent_coughing" };
+			examination.createBinSymp(symp);
+			examination.createBinAnam(anam);
+
+			
+			query.setDescription( examination );
+
+			recommender.cycle(query);
+
+			recommender.postCycle();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		JLabel lblNameAndSurname = new JLabel("Name and surname");
 		lblNameAndSurname.setBounds(53, 36, 139, 20);

@@ -1,0 +1,48 @@
+#bolest; anamnesis; medications
+hiatal_hernia; overweight, active_smoking; midazolam, pantoprazole
+hiatal_hernia;heavy_lifting, physical_strain;pantoprazole
+hiatal_hernia; persistent_coughing, persistent_vomiting;fentanyl
+gallstone; high_blood_cholesterol, family_history_of_gallstones; glycopyrrolate, rocuronium
+gallstone;overweight, high_blood_cholesterol; glycopyrrolate, rocuronium
+gallstone;diabetes,  crohns_disease; sevoflurane
+gallstone;ibs, rapid_weight_loss; glycopyrrolate
+gerb; delayed_stomach_emptying, active_smoking;omeprazole, esomeprazole
+gerb;overweight;lansoprazole
+gerb; pregnancy; pantoprazole
+gerb;hiatal_hernia; omeprazole
+gerb;;omeprazole
+esophageal_cancer;  gerb, barretts_esophagus;dexamethasone_topical_product, fluorouracil
+esophageal_cancer;abusing_alchohol;metoclopramide
+esophageal_cancer;gerb;cisplatin
+esophageal_cancer;;metoclopramide
+stomach_cancer;long_term_stomach_inflammation, stomach_polyps;vitamin_b_12, pegfilgrastim
+stomach_cancer;family_history_of_stomach_cancer;cisplatin
+stomach_cancer;chronic_gastritis; fluorouracil
+stomach_cancer;diet_high_in_salty_foods;paclitaxel
+gastritis;nsaid_abuse, stress;pantoprazole, ranitidine
+gastritis;abusing_alchohol;famotidine
+gastritis;;famotidine
+pancreatic_cancer;active_smoking, abusing_alchohol,nt0ba;dexamethasone
+pancreatic_cancer;;gemcitabine
+pancreatic_cancer;;dexamethasone
+ulcerative_colitis;nsaid_abuse; mesalamine, infliximab
+ulcerative_colitis;active_smoking;infliximab
+ulcerative_colitis;active_smoking;azathioprine
+ulcerative_colitis;; mesalamine
+crohn_disease;family_history_of_crohn_disease;azathioprine, metronidazole
+crohn_disease;;mesalamine, infliximab
+crohn_disease; family_history_of_crohn_disease;mesalamine
+hepatitis_A;drug_abuse, unprotected_sex; ribavirin
+hepatitis_A;unprotected_sex; methadone
+hepatitis_B;hiv_positive; tenofovir
+hepatitis_B;;entecavir
+hepatitis_C;abusing_alchohol;elbasvir, grazoprevir
+hepatitis_C;; lamivudine
+drug_induced_hepatitis;aspirin_abuse;lactulose, tacrolimus, ritonavir
+drug_induced_hepatitis;steroids_abuse;lactulose
+inherited_hepatitis;family_history_of_liver_disease;peginterferon_alfa_2b
+autoimmune_hepatitis;;prednisone
+autoimmune_hepatitis;; azathioprine
+cirrhosis;active_smoking; furosemide
+cirrhosis; hepatitis_B; spironolactone
+cirrhosis;hepatitis_C;furosemide
