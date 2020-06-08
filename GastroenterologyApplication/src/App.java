@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -22,6 +23,11 @@ import com.ugos.jiprolog.engine.JIPQuery;
 import com.ugos.jiprolog.engine.JIPSyntaxErrorException;
 import com.ugos.jiprolog.engine.JIPTerm;
 import com.ugos.jiprolog.engine.JIPVariable;
+
+import cbr.CbrApplication;
+import model.Examination2;
+import ucm.gaia.jcolibri.cbraplications.StandardCBRApplication;
+import ucm.gaia.jcolibri.cbrcore.CBRQuery;
 
 
 public class App {
@@ -81,14 +87,32 @@ public class App {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNameAndSurname = new JLabel("Name and surname");
-		lblNameAndSurname.setBounds(53, 36, 139, 20);
+		JLabel lblNameAndSurname = new JLabel("Name and surname: ");
+		lblNameAndSurname.setBounds(53, 26, 150, 20);
 		lblNameAndSurname.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(lblNameAndSurname);
 		
+		JLabel lblAge = new JLabel("Age: ");
+		lblAge.setBounds(53, 46, 139, 20);
+		lblAge.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		panel.add(lblAge);
+		
+		JLabel lblSex = new JLabel("Gender: ");
+		lblSex.setBounds(53, 66, 139, 20);
+		lblSex.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		panel.add(lblSex);
+		
 		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(201, 39, 258, 19);
+		formattedTextField.setBounds(201, 26, 258, 19);
 		panel.add(formattedTextField);
+		
+		JFormattedTextField formattedTextFieldAge = new JFormattedTextField();
+		formattedTextFieldAge.setBounds(201, 46, 200, 19);
+		panel.add(formattedTextFieldAge);
+		
+		JFormattedTextField formattedTextFieldSex = new JFormattedTextField();
+		formattedTextFieldSex.setBounds(201, 66, 200, 19);
+		panel.add(formattedTextFieldSex);
 
 		JLabel lblSymptoms = new JLabel("Symptoms");
 		lblSymptoms.setBounds(118, 97, 74, 20);
@@ -120,12 +144,13 @@ public class App {
 		list_1.setListData((String[]) listOfAnamnesis.toArray(new String[0]));
 		
 		JButton btnFindAdditionalTests = new JButton("Find possible diseases");
-		btnFindAdditionalTests.setBounds(441, 455, 191, 29);
+		btnFindAdditionalTests.setBounds(441, 435, 220, 29);
 		btnFindAdditionalTests.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				for (Object selected : list.getSelectedValuesList()) {
 					personalSymptoms.add(selected.toString());
+					System.out.println(personalSymptoms);
 				}
 				for (Object selected : list_1.getSelectedValuesList()) {
 					personalAnamnesis.add(selected.toString());
@@ -148,11 +173,65 @@ public class App {
 	    		additionalTestsPanel(additional_tests);
 			}
 
-
-
 		});
 		btnFindAdditionalTests.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(btnFindAdditionalTests);	
+		
+		String[] persSympt = new String[list.getModel().getSize()];
+		String[] persAnam= new String[list_1.getModel().getSize()];
+		
+		JButton btnFindAdditionalTestsCBR = new JButton("Find possible diseases CBR");
+		btnFindAdditionalTestsCBR.setBounds(441, 475, 250, 29);
+		btnFindAdditionalTestsCBR.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				int i=0;
+				for (Object selected : list.getSelectedValuesList()) {
+					persSympt[i] = selected.toString();
+					i++;		
+				}
+						
+				int j=0;
+				for (Object selected : list_1.getSelectedValuesList()) {
+					persAnam[j]=selected.toString();
+					j++;
+				}
+				person = formattedTextField.getText();
+				
+				StandardCBRApplication recommender = new CbrApplication();
+				try {
+					recommender.configure();
+
+					recommender.preCycle();
+
+					CBRQuery query = new CBRQuery();	
+
+					Examination2 examination = new Examination2();
+					examination.setAge(Integer.parseInt(formattedTextFieldAge.getText()));
+					examination.setSex(formattedTextFieldSex.toString());
+					examination.createBinSymp(persSympt);
+					examination.createBinAnam(persAnam);
+					
+					query.setDescription( examination );
+
+					recommender.cycle(query);
+
+					recommender.postCycle();
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+				
+				//zapisati u fajl (tj u neki string pa na kraju-poslenjoj fji- u fajl)
+				
+				String term = "additional_tests(" + person + ", S)";
+	            ArrayList<String> additional_tests = consultProlog(term);
+	            
+	    		additionalTestsPanel(additional_tests);
+			}
+
+		});
+		btnFindAdditionalTestsCBR.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		panel.add(btnFindAdditionalTestsCBR);	
 
 	}
 
