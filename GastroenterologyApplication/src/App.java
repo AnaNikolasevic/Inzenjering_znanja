@@ -37,7 +37,6 @@ public class App {
 	JPanel panelAdditionalTests = new JPanel();
 	JPanel panelResults = new JPanel();
 	JPanel panelDiagnosis = new JPanel();
-
 	String person;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -198,14 +197,13 @@ public class App {
 				}
 				person = formattedTextField.getText();
 				
-				StandardCBRApplication recommender = new CbrApplication();
+				/*StandardCBRApplication recommender = new CbrApplication();
 				try {
 					recommender.configure();
 
 					recommender.preCycle();
-
 					CBRQuery query = new CBRQuery();	
-
+					System.out.println("-------------?" + recommender.toString());
 					Examination2 examination = new Examination2();
 					examination.setAge(Integer.parseInt(formattedTextFieldAge.getText()));
 					examination.setSex(formattedTextFieldSex.toString());
@@ -223,9 +221,9 @@ public class App {
 				
 				//zapisati u fajl (tj u neki string pa na kraju-poslenjoj fji- u fajl)
 				
-				String term = "additional_tests(" + person + ", S)";
-	            ArrayList<String> additional_tests = consultProlog(term);
-	            
+				String term = "additional_tests(" + person + ", S)";*/
+	            ArrayList<String> additional_tests = new ArrayList<String>();
+	            additional_tests.addAll(cbr.CbrApplication.main(personalAnamnesis, personalSymptoms, formattedTextFieldAge.getText(), formattedTextFieldSex.getText()));
 	    		additionalTestsPanel(additional_tests);
 			}
 

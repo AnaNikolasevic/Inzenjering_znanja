@@ -15,7 +15,7 @@ import com.sun.net.httpserver.Authenticator.Result;
 
 import connector.CsvConnector;
 import connector.CsvConnectorResults;
-
+import jdk.jfr.internal.StringPool;
 import model.Examination2;
 import model.Results;
 import similarity.TableSimilarity;
@@ -65,12 +65,13 @@ public class CbrApplication implements StandardCBRApplication {
 	CBRCaseBase _caseBase;  /** CaseBase object */
 
 	NNConfig simConfig;  /** KNN configuration */
+	private static ArrayList<String> list = new ArrayList<String>();
 	
 	public void configure() throws ExecutionException {
 		_connector =  new CsvConnector();
 		
 		_caseBase = new LinealCaseBase();  // Create a Lineal case base for in-memory organization
-		
+	
 		simConfig = new NNConfig(); // KNN configuration
 		simConfig.setDescriptionSimFunction(new Average());  // global similarity function = average
 		
@@ -100,6 +101,11 @@ public class CbrApplication implements StandardCBRApplication {
 		System.out.println("Retrieved cases:");
 		for (RetrievalResult nse : eval) {
 			System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
+			String description = nse.get_case().getDescription().toString();
+			String[] tests= description.split("tests")[1].substring(1).split(",");
+			for (String test : tests) {
+				list.add(test);
+			}
 		}
 	}
 
@@ -116,7 +122,7 @@ public class CbrApplication implements StandardCBRApplication {
 		return _caseBase;
 	}
 
-	public static void main(Examination2 ex) {
+	public static ArrayList<String> main(ArrayList<String> anamnesis, ArrayList<String> symptoms, String age, String sex) {
 		StandardCBRApplication recommender = new CbrApplication();
 		try {
 			recommender.configure();
@@ -127,22 +133,25 @@ public class CbrApplication implements StandardCBRApplication {
 			
 
 			Examination2 examination = new Examination2();
-			examination.setAge(50);
-			examination.setSex("F");
-			String [] symp = {"harp_chest_pain" , "nausea"};
-			String [] anam= { "heavy_lifting", "physical_strain", "persistent_coughing" };
+			examination.setAge(Integer.parseInt(age));
+			examination.setSex(sex);
+			String [] symp = symptoms.toArray(new String[0]);
+			String [] anam= anamnesis.toArray(new String[0]);
 			examination.createBinSymp(symp);
 			examination.createBinAnam(anam);
 
 			
-			query.setDescription( ex );
+			query.setDescription( examination );
 
 			recommender.cycle(query);
 
 			recommender.postCycle();
+			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
+
 
 }
