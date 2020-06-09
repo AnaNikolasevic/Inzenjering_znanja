@@ -171,3 +171,5 @@ anti_hepatitis_A(masa,positive).
 anti_hepatitis_A(Masa,positive).
 anti_hepatitis_A(neko,positive).
 anti_hepatitis_A(masa,positive).
+anti_hepatitis_A(masa,positive).
+anti_hepatitis_A(suncica,null).
