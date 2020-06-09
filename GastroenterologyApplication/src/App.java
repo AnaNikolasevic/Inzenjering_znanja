@@ -43,6 +43,15 @@ public class App {
 	JPanel panelResults = new JPanel();
 	JPanel panelDiagnosis = new JPanel();
 	String person;
+	public static JList list_2; 
+	public static JList list_1;
+	public static JList list;
+	public static JList list_0;
+	public static JTable table;
+	public static JScrollPane scrollPane_1;
+	public static JScrollPane scrollPane;
+	public static Object[] list1;
+	public static DefaultTableModel tableModel;
 	private static String[] persAnam;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -124,26 +133,26 @@ public class App {
 		lblSymptoms.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(lblSymptoms);
 
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(201, 97, 258, 278);
 		panel.add(scrollPane);
 		
 		//setting list of symptoms
-		JList list = new JList();
-		scrollPane.setViewportView(list);
-		list.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		list.setListData((String[]) listOfSymptoms.toArray(new String[0]));
+		list_0 = new JList();
+		scrollPane.setViewportView(list_0);
+		list_0.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		list_0.setListData((String[]) listOfSymptoms.toArray(new String[0]));
 
 		JLabel lblNewLabel = new JLabel("Anamnesis");
 		lblNewLabel.setBounds(539, 45, 77, 125);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(lblNewLabel);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(626, 97, 258, 278);
 		panel.add(scrollPane_1);
 		
-		JList list_1 = new JList();
+		list_1 = new JList();
 		scrollPane_1.setViewportView(list_1);
 		list_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		list_1.setListData((String[]) listOfAnamnesis.toArray(new String[0]));
@@ -182,7 +191,7 @@ public class App {
 		btnFindAdditionalTests.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(btnFindAdditionalTests);	
 		
-		String[] persSympt = new String[list.getModel().getSize()];
+		String[] persSympt = new String[list_0.getModel().getSize()];
 		persAnam= new String[list_1.getModel().getSize()];
 		
 		JButton btnFindAdditionalTestsCBR = new JButton("Find possible diseases CBR");
@@ -191,7 +200,7 @@ public class App {
 			public void actionPerformed(ActionEvent e) {
 
 				int i=0;
-				for (Object selected : list.getSelectedValuesList()) {
+				for (Object selected : list_0.getSelectedValuesList()) {
 					persSympt[i] = selected.toString();
 					i++;		
 				}
@@ -234,7 +243,7 @@ public class App {
 		scrollPane_2.setBounds(222, 77, 594, 342);
 		panelAdditionalTests.add(scrollPane_2);
 		
-		JList list_2 = new JList();
+		list_2 = new JList();
 		list_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		scrollPane_2.setViewportView(list_2);
 		
@@ -273,9 +282,9 @@ public class App {
 		frame.getContentPane().add(panelResults);
 		panelResults.setLayout(null);
 		
-		Object[] list1 = personalTests.toArray();
-		JTable table = new JTable();
-		DefaultTableModel tableModel = new DefaultTableModel();
+		list1 = personalTests.toArray();
+		table = new JTable();
+		tableModel = new DefaultTableModel();
 		tableModel.addColumn("Test", list1);
 		tableModel.addColumn("Result");
 
@@ -340,6 +349,7 @@ public class App {
 		btnNewButtonCBR.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewButtonCBR.setBounds(441, 475, 250, 29);
 		panelResults.add(btnNewButtonCBR);
+		
 	}
 	
 	protected void panelDiagnosis(ArrayList<String> diagnosis, ArrayList<String> medications) {
@@ -369,7 +379,7 @@ public class App {
 		diagnosisLabel.setText(diagnosis.get(0));
 		panelDiagnosis.add(diagnosisLabel);
 		
-		JList list = new JList();
+		list = new JList();
 		list.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		list.setBounds(288, 151, 216, 157);
 		String additionalTestsString = medications.toString().replace("[", "").replace("]", "");
@@ -377,6 +387,27 @@ public class App {
 		
     	list.setListData(medicationsString);
 		panelDiagnosis.add(list);
+		
+		JButton btnBack = new JButton("Back to start");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+	            
+				list_0.clearSelection();
+				list_1.clearSelection();
+				list_2.clearSelection();
+				list.clearSelection();
+				tableModel.setRowCount(0);
+				
+				panel.setVisible(true);
+				panelAdditionalTests.setVisible(false);
+				panelResults.setVisible(false);
+				panelDiagnosis.setVisible(false);
+				
+			}
+		});
+		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBack.setBounds(141, 475, 250, 29);
+		panelDiagnosis.add(btnBack);
 	}
 
 	private ArrayList<String> consultProlog(String term){
