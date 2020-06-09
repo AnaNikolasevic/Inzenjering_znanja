@@ -56,3 +56,4 @@ personal_symptoms(rrr,[nausea]).
 personal_symptoms(asdsada,[nausea]).
 personal_symptoms(qqq,[nausea, joint_aches, itching]).
 personal_symptoms(fds,[nausea, vomiting]).
+personal_symptoms(das,[sharp_abdominal_pain, sharp_chest_pain, nausea, vomiting]).

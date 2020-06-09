@@ -96,3 +96,4 @@ personal_anamnesis(rrr,[hepatitis_C_risk_group]).
 personal_anamnesis(asdsada,[hepatitis_C_risk_group]).
 personal_anamnesis(qqq,[]).
 personal_anamnesis(fds,[unprotected_sex]).
+personal_anamnesis(das,[drug_abuse]).
