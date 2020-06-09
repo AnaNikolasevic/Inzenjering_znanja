@@ -153,3 +153,21 @@ anti_hepatitis_C(rrr,positive).
 anti_hepatitis_C(asdsada,positive).
  anti_hepatitis_A(qqq,positive).
  anti_hepatitis_B(qqq,positive).
+ x_ray(Masa,null).
+ x_ray(masa,null).
+barium_swallow(masa,null).
+ x_ray(masa,null).
+ x_ray(masa,null).
+ x_ray(masa,null).
+anti_hepatitis_A(masa,null).
+anti_hepatitis_A(masa,positive).
+anti_hepatitis_A(masa,positive).
+anti_hepatitis_A(masa,positive).
+anti_hepatitis_A(masa,null).
+anti_hepatitis_A(masa,positive).
+anti_hepatitis_A(masa,positive).
+anti_hepatitis_A(masa,null).
+anti_hepatitis_A(masa,positive).
+anti_hepatitis_A(Masa,positive).
+anti_hepatitis_A(neko,positive).
+anti_hepatitis_A(masa,positive).

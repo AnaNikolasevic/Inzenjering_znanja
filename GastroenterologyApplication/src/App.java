@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -25,7 +26,11 @@ import com.ugos.jiprolog.engine.JIPTerm;
 import com.ugos.jiprolog.engine.JIPVariable;
 
 import cbr.CbrApplication;
+import cbr.CbrApplicationMed;
+import cbr.CbrApplicationResults;
 import model.Examination2;
+import model.Medication;
+import model.Results;
 import ucm.gaia.jcolibri.cbraplications.StandardCBRApplication;
 import ucm.gaia.jcolibri.cbrcore.CBRQuery;
 
@@ -38,6 +43,7 @@ public class App {
 	JPanel panelResults = new JPanel();
 	JPanel panelDiagnosis = new JPanel();
 	String person;
+	private static String[] persAnam;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -177,7 +183,7 @@ public class App {
 		panel.add(btnFindAdditionalTests);	
 		
 		String[] persSympt = new String[list.getModel().getSize()];
-		String[] persAnam= new String[list_1.getModel().getSize()];
+		persAnam= new String[list_1.getModel().getSize()];
 		
 		JButton btnFindAdditionalTestsCBR = new JButton("Find possible diseases CBR");
 		btnFindAdditionalTestsCBR.setBounds(441, 475, 250, 29);
@@ -197,31 +203,7 @@ public class App {
 				}
 				person = formattedTextField.getText();
 				
-				/*StandardCBRApplication recommender = new CbrApplication();
-				try {
-					recommender.configure();
-
-					recommender.preCycle();
-					CBRQuery query = new CBRQuery();	
-					System.out.println("-------------?" + recommender.toString());
-					Examination2 examination = new Examination2();
-					examination.setAge(Integer.parseInt(formattedTextFieldAge.getText()));
-					examination.setSex(formattedTextFieldSex.toString());
-					examination.createBinSymp(persSympt);
-					examination.createBinAnam(persAnam);
-					
-					query.setDescription( examination );
-
-					recommender.cycle(query);
-
-					recommender.postCycle();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
 				
-				//zapisati u fajl (tj u neki string pa na kraju-poslenjoj fji- u fajl)
-				
-				String term = "additional_tests(" + person + ", S)";*/
 	            ArrayList<String> additional_tests = new ArrayList<String>();
 	            additional_tests.addAll(cbr.CbrApplication.main(personalAnamnesis, personalSymptoms, formattedTextFieldAge.getText(), formattedTextFieldSex.getText()));
 	    		additionalTestsPanel(additional_tests);
@@ -302,7 +284,7 @@ public class App {
 		table.setBounds(109, 22, 648, 286);
 		panelResults.add(table);
 		
-		JButton btnNewButton = new JButton("Disease");
+		JButton btnNewButton = new JButton("Disease wiht RBR");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < tableModel.getRowCount(); i++) {
@@ -323,8 +305,41 @@ public class App {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButton.setBounds(846, 447, 100, 36);
+		btnNewButton.setBounds(441, 435, 220, 29);
 		panelResults.add(btnNewButton);
+		
+		JButton btnNewButtonCBR = new JButton("Disease with CBR");
+		btnNewButtonCBR.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Results results = new Results();
+				Medication medication = new Medication();
+				
+				HashMap<String, String> resultsOfTests = new HashMap<String, String>();
+				for (int i = 0; i < tableModel.getRowCount(); i++) {
+					String test = (String) tableModel.getValueAt(i, 0);
+					String result = (String) tableModel.getValueAt(i, 1);
+					resultsOfTests.put(test, result);
+				
+				}
+				results.setResultsOfTests(resultsOfTests);
+				//String term = "diagnosis(" + person + ", D)";
+	            ArrayList<String> diagnosis = CbrApplicationResults.main(results);
+	            
+				//term = "medications(" + person + ", M)";
+	            medication.setDisease(diagnosis.get(0));
+				medication.createBinAnam(persAnam);
+	            ArrayList<String> medications = CbrApplicationMed.main(medication);
+	            
+	           // ArrayList<String> list = new ArrayList<>();
+	           // list.add(diagnosis.get(0));
+	            System.out.println("ovo vracaaa!!!!!!!!!!!!!!!!!" + diagnosis.toString());
+	            
+	            panelDiagnosis(diagnosis, medications);
+			}
+		});
+		btnNewButtonCBR.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButtonCBR.setBounds(441, 475, 250, 29);
+		panelResults.add(btnNewButtonCBR);
 	}
 	
 	protected void panelDiagnosis(ArrayList<String> diagnosis, ArrayList<String> medications) {
@@ -350,6 +365,7 @@ public class App {
 		JLabel diagnosisLabel = new JLabel(" ");
 		diagnosisLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		diagnosisLabel.setBounds(288, 43, 216, 69);
+		//diagnosisLabel.setText("");
 		diagnosisLabel.setText(diagnosis.get(0));
 		panelDiagnosis.add(diagnosisLabel);
 		

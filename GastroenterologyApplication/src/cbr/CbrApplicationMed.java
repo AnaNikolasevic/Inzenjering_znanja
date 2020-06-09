@@ -1,5 +1,6 @@
 package cbr;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import connector.CsvConnector;
@@ -29,6 +30,8 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 
 	NNConfig simConfigM;  /** KNN configuration */
 	
+	private static ArrayList<String> output = new ArrayList<String>();
+	
 	
 	public void configure() throws ExecutionException {
 		
@@ -49,7 +52,8 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 		eval = SelectCases.selectTopKRR(eval, 5);
 		System.out.println("Retrieved cases:");
 		for (RetrievalResult nse : eval)
-			System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
+			output.add(nse.get_case().getDescription().toString());
+			//System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
 	}
 
 	public void postCycle() throws ExecutionException {
@@ -66,7 +70,7 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 		return _caseBaseM;
 	}
 	
-	public static void main(String[] args) {
+	public static ArrayList<String> main(Medication medication) {
 		StandardCBRApplication recommenderMedication = new CbrApplicationMed();
 		
 		try {
@@ -75,11 +79,11 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 			recommenderMedication.preCycle();
 
 			CBRQuery query1 = new CBRQuery();
-			Medication medication = new Medication();
-			medication.setDisease("hiatal_hernia");
-			String [] a= { "overweight"};
+		//	Medication medication = new Medication();
+		//	medication.setDisease("hiatal_hernia");
+		//	String [] a= { "overweight"};
 			
-			medication.createBinAnam(a);
+			//medication.createBinAnam(a);
 	
 			query1.setDescription( medication );
 
@@ -89,6 +93,7 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return output;
 	}	
 
 }

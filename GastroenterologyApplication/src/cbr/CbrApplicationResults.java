@@ -1,5 +1,6 @@
 package cbr;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -28,6 +29,8 @@ public class CbrApplicationResults implements StandardCBRApplication {
 	CBRCaseBase _caseBaseR;  /** CaseBase object */
 
 	NNConfig simConfigR;  /** KNN configuration */
+	
+	private static ArrayList<String> output = new ArrayList<String>();
 	
 	public void configure() throws ExecutionException {
 		_connectorR =  new CsvConnectorResults();
@@ -61,6 +64,7 @@ public class CbrApplicationResults implements StandardCBRApplication {
 		System.out.println("Retrieved cases:");
 		for (RetrievalResult nse : eval) {
 			System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
+			output.add(nse.get_case().getDescription().toString());
 		}
 	}
 
@@ -76,7 +80,7 @@ public class CbrApplicationResults implements StandardCBRApplication {
 		return _caseBaseR;
 	}
 
-	public static void main(String[] args) {
+	public static ArrayList<String> main(Results results) {
 		StandardCBRApplication recommender = new CbrApplicationResults();
 		try {
 			recommender.configure();
@@ -84,23 +88,23 @@ public class CbrApplicationResults implements StandardCBRApplication {
 			recommender.preCycle();
 
 			CBRQuery query = new CBRQuery();
-			Results results = new Results();
+			//Results results = new Results();
 			
-			HashMap<String, String> resultsOfTests = new HashMap<String, String>();
+		//	HashMap<String, String> resultsOfTests = new HashMap<String, String>();
 		//	resultsOfTests.put("cbc", "anemia");
-			resultsOfTests.put("ast", "high");
-			resultsOfTests.put("alp", "high");
+	//		resultsOfTests.put("ast", "high");
+		//	resultsOfTests.put("alp", "high");
 		//	resultsOfTests.put("alt", "high");
 
-			resultsOfTests.put("bilirubin", "high");
-			resultsOfTests.put("albumin", "low");
-			resultsOfTests.put("cbc", "platelets_low");
+		//	resultsOfTests.put("bilirubin", "high");
+		//	resultsOfTests.put("albumin", "low");
+//			resultsOfTests.put("cbc", "platelets_low");
 
 		//	resultsOfTests.put("platelets", "low");
 
-			resultsOfTests.put("ana", "positive");
+			//resultsOfTests.put("ana", "positive");
 
-			results.setResultsOfTests(resultsOfTests);
+			//results.setResultsOfTests(resultsOfTests);
 			
 			query.setDescription( results );
 
@@ -110,6 +114,7 @@ public class CbrApplicationResults implements StandardCBRApplication {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return output;
 	}
 
 }

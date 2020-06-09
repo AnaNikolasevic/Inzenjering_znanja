@@ -11,6 +11,6 @@
 			<attribute name="javadoc_location" value="file:/D:/Downloads/JIProlog-4.1.6.1/JIProlog/sdk/javadoc/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/23nik/Desktop/Inzenjering_znanja/Inzenjering_znanja/GastroenterologyApplication/jCOLIBRI-3.0.jar"/>
+	<classpathentry kind="lib" path="jCOLIBRI-3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

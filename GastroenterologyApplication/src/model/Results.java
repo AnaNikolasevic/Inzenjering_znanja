@@ -32,7 +32,7 @@ public class Results implements CaseComponent {
 
 	@Override
 	public String toString() {
-		return "Results [resultsOfTests=" + resultsOfTests + ", disease=" + disease + "]";
+		return  disease;
 	}
 
 

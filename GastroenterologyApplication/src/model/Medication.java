@@ -85,14 +85,14 @@ public class Medication implements CaseComponent {
 		for (Integer value : this.anamnesis.values()) {
 			  this.binAnamnesis += String.valueOf(value);
 			}
-		System.out.println(this.anamnesis.toString());
-		System.out.println(this.binAnamnesis);	
+		//System.out.println(this.anamnesis.toString());
+		//System.out.println(this.binAnamnesis);	
 	
 	}
 	
 	@Override
 	public String toString() {
-		return "Medication [disease=" + disease + ", anamnesis=" + anamnesis + ", medications=" + medications + "]";
+		return  medications;
 	}
 
 	public String getDisease() {
