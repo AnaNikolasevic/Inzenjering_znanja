@@ -75,7 +75,7 @@ public class CbrApplication implements StandardCBRApplication {
 		simConfig = new NNConfig(); // KNN configuration
 		simConfig.setDescriptionSimFunction(new Average());  // global similarity function = average
 		
-		simConfig.addMapping(new Attribute("age", Examination2.class), new Interval(40));
+		simConfig.addMapping(new Attribute("age", Examination2.class), new Interval(15));
 		simConfig.addMapping(new Attribute("sex", Examination2.class), new EqualsStringIgnoreCase());
 		
 		simConfig.addMapping(new Attribute("binSymptoms", Examination2.class), new NotXOR());

@@ -133,8 +133,8 @@ public class Examination2 implements CaseComponent {
 		for (Integer value : this.symptoms.values()) {
 			  this.binSymptoms += String.valueOf(value);
 			}
-		System.out.println(this.symptoms.toString());
-		System.out.println(this.binSymptoms);
+		//System.out.println(this.symptoms.toString());
+		//System.out.println(this.binSymptoms);
 		
 		
 	}
@@ -149,8 +149,8 @@ public class Examination2 implements CaseComponent {
 		for (Integer value : this.anamnesis.values()) {
 			  this.binAnamnesis += String.valueOf(value);
 			}
-		System.out.println(this.anamnesis.toString());
-		System.out.println(this.binAnamnesis);
+		//System.out.println(this.anamnesis.toString());
+		//System.out.println(this.binAnamnesis);
 		
 		
 	}
