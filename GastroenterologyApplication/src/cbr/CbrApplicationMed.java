@@ -31,6 +31,7 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 	NNConfig simConfigM;  /** KNN configuration */
 	
 	private static ArrayList<String> output = new ArrayList<String>();
+	private static ArrayList<String> medications = new ArrayList<>();
 	
 	
 	public void configure() throws ExecutionException {
@@ -51,9 +52,10 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBaseM.getCases(), query, simConfigM);
 		eval = SelectCases.selectTopKRR(eval, 5);
 		System.out.println("Retrieved cases:");
-		for (RetrievalResult nse : eval)
+		for (RetrievalResult nse : eval) {
 			output.add(nse.get_case().getDescription().toString());
 			//System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
+		}
 	}
 
 	public void postCycle() throws ExecutionException {
@@ -85,15 +87,24 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 			
 			//medication.createBinAnam(a);
 	
-			query1.setDescription( medication );
+			query1.setDescription(medication);
 
 			recommenderMedication.cycle(query1);
+			
+			
+			
+			for (String s : output) {
+				String[] values = s.strip().split(" ");
+				if (values[0].equals(medication.getDisease())){
+					medications.add(values[2]);
+				}
+			}
 
 			recommenderMedication.postCycle();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return output;
+		return medications;
 	}	
 
 }
