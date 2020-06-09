@@ -93,18 +93,18 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 			
 			
 			
-			for (String s : output) {
-				String[] values = s.strip().split(" ");
+		/*	for (String s : output) {
+				String[] values = s.strip().split(",");
 				if (values[0].equals(medication.getDisease())){
-					medications.add(values[2]);
+					medications.add(values[1]);
 				}
 			}
-
+*/
 			recommenderMedication.postCycle();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return medications;
+		return output;
 	}	
 
 }
