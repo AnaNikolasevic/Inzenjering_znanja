@@ -293,8 +293,8 @@ public class App {
 		table.setBounds(109, 22, 648, 286);
 		panelResults.add(table);
 		
-		JButton btnNewButton = new JButton("Disease wiht RBR");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnNewButton1 = new JButton("Disease wiht RBR");
+		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < tableModel.getRowCount(); i++) {
 					String test = (String) tableModel.getValueAt(i, 0);
@@ -313,9 +313,9 @@ public class App {
 	            panelDiagnosis(diagnosis, medications);
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButton.setBounds(441, 435, 220, 29);
-		panelResults.add(btnNewButton);
+		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton1.setBounds(441, 435, 220, 29);
+		panelResults.add(btnNewButton1);
 		
 		JButton btnNewButtonCBR = new JButton("Disease with CBR");
 		btnNewButtonCBR.addActionListener(new ActionListener() {
