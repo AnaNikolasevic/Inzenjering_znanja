@@ -162,7 +162,7 @@ public class App {
 		btnFindAdditionalTests.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				for (Object selected : list.getSelectedValuesList()) {
+				for (Object selected : list_0.getSelectedValuesList()) {
 					personalSymptoms.add(selected.toString());
 					System.out.println(personalSymptoms);
 				}
