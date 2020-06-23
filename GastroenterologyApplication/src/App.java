@@ -326,8 +326,9 @@ public class App {
 				HashMap<String, String> resultsOfTests = new HashMap<String, String>();
 				for (int i = 0; i < tableModel.getRowCount(); i++) {
 					String test = (String) tableModel.getValueAt(i, 0);
+					String[] test1 = test.split("\\(");
 					String result = (String) tableModel.getValueAt(i, 1);
-					resultsOfTests.put(test, result);
+					resultsOfTests.put(test1[0], result);
 				
 				}
 				results.setResultsOfTests(resultsOfTests);
