@@ -105,8 +105,8 @@ public class CbrApplication implements StandardCBRApplication {
 			//String[] tests= description.split("tests")[1].substring(1).split(",");
 			String[] tests= description.split("=")[1].split(",");
 			for (String test : tests) {
-				//list.add(test + "  (" +description.split("=")[0]+ ")");
-				list.add(test);
+				list.add(test + "  (" +description.split("=")[0]+ ")");
+				//list.add(test);
 			}
 		}
 	}
