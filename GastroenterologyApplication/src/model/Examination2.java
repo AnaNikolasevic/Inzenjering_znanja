@@ -227,9 +227,10 @@ public class Examination2 implements CaseComponent {
 	
 	@Override
 	public String toString() {
-		return "Examination2 [age=" + age + ", sex=" + sex +  ", disease=" + disease
-				+ ", tests=" + tests + "]";
+		return disease + "=" + tests;
 	}
+	
+	
 	@Override
 	public Attribute getIdAttribute() {
 		// TODO Auto-generated method stub
