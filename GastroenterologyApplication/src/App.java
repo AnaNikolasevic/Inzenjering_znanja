@@ -157,7 +157,7 @@ public class App {
 		list_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		list_1.setListData((String[]) listOfAnamnesis.toArray(new String[0]));
 		
-		JButton btnFindAdditionalTests = new JButton("Find possible diseases");
+		JButton btnFindAdditionalTests = new JButton("Find tests");
 		btnFindAdditionalTests.setBounds(441, 435, 220, 29);
 		btnFindAdditionalTests.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -194,7 +194,7 @@ public class App {
 		String[] persSympt = new String[list_0.getModel().getSize()];
 		persAnam= new String[list_1.getModel().getSize()];
 		
-		JButton btnFindAdditionalTestsCBR = new JButton("Find possible diseases CBR");
+		JButton btnFindAdditionalTestsCBR = new JButton("Find tests CBR");
 		btnFindAdditionalTestsCBR.setBounds(441, 475, 250, 29);
 		btnFindAdditionalTestsCBR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
