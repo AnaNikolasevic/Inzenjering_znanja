@@ -3,6 +3,8 @@ package cbr;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.sun.tools.javac.util.StringUtils;
+
 import connector.CsvConnector;
 import connector.CsvConnectorMedication;
 import model.Examination2;
@@ -55,7 +57,6 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 		System.out.println("Retrieved cases:");
 		for (RetrievalResult nse : eval) {
 			output.add(nse.get_case().getDescription().toString());
-			//System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
 		}
 	}
 
@@ -64,12 +65,12 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 	}
 	
 	public CBRCaseBase preCycle() throws ExecutionException {
-		
 		_caseBaseM.init(_connectorM);
 		java.util.Collection<CBRCase> cases = _caseBaseM.getCases();
-		for (CBRCase c: cases)
-			System.out.println(c.getDescription());
-		
+	//	for (CBRCase c: cases) {
+		//	System.out.println("OVDDE ISUU SLUCAJEVI ZA LEKOVE");
+	//		System.out.println(c.getDescription());
+	//	}
 		return _caseBaseM;
 	}
 	
@@ -79,6 +80,7 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 		try {
 			
 			recommenderMedication.configure();
+			CsvConnectorMedication.setDisease(medication.getDisease());
 			recommenderMedication.preCycle();
 
 			CBRQuery query1 = new CBRQuery();
@@ -91,24 +93,30 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 			query1.setDescription(medication);
 
 			recommenderMedication.cycle(query1);
-			
-			
-			
-		/*	for (String s : output) {
-				String[] values = s.strip().split(",");
-				if (values[0].equals(medication.getDisease())){
-					medications.add(values[1]);
+			medications.clear();
+			for (String s : output) {
+				if (s.contains(",")) {
+					String [] values = s.split(",");
+					for (String str : values) {
+						if (!medications.contains(str)) {
+							medications.add(str);
+						}
+					}
+				} else if (!medications.contains(s)) {
+					medications.add(s);
 				}
 			}
 		
-*/
-			System.out.println("OVDE JE OUTPUT ZA LEKOVE");
-			System.out.println(output.toString());
+
+		//	System.out.println("OVDE JE OUTPUT ZA LEKOVE");
+		////	System.out.println(output.toString());
+		//	System.out.println(medications.toString());
+			
 			recommenderMedication.postCycle();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return output;
+		return medications;
 	}	
 
 }

@@ -3,6 +3,7 @@ package connector;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -16,6 +17,8 @@ import ucm.gaia.jcolibri.exception.InitializingException;
 import ucm.gaia.jcolibri.util.FileIO;
 
 public class CsvConnectorMedication implements Connector {
+	
+	private static String disease;
 
 	@Override
 	public Collection<CBRCase> retrieveAllCases() {
@@ -33,15 +36,17 @@ public class CsvConnectorMedication implements Connector {
 				String[] values = line.strip().split(";");
 
 				CBRCase cbrCase = new CBRCase();
+				
+				if (!values[0].equals(disease))
+					continue;
 
 				Medication medication = new Medication();
-				
 				medication.setDisease(values[0]);
 				
 				String[] anam = values[1].split(",");
 				medication.createBinAnam(anam);
 				
-				medication.setMedications(values[2]);
+				medication.setMedications(values[2].replaceAll("\\s+",""));
 				
 				cbrCase.setDescription(medication);
 				cases.add(cbrCase);
@@ -80,5 +85,14 @@ public class CsvConnectorMedication implements Connector {
 	public void storeCases(Collection<CBRCase> arg0) {
 		
 	}
+
+	public static String getDisease() {
+		return disease;
+	}
+
+	public static void setDisease(String disease) {
+		CsvConnectorMedication.disease = disease;
+	}
+	
 
 }

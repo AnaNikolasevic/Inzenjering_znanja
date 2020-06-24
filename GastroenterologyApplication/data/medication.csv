@@ -1,11 +1,11 @@
 #bolest; anamnesis; medications
-hiatal_hernia; overweight, active_smoking; midazolam, pantoprazole
+hiatal_hernia; overweight, active_smoking; midazolam,pantoprazole
 hiatal_hernia;heavy_lifting, physical_strain;pantoprazole
 hiatal_hernia; persistent_coughing, persistent_vomiting;fentanyl
-gallstone; high_blood_cholesterol, family_history_of_gallstones; glycopyrrolate, rocuronium
-gallstone;overweight, high_blood_cholesterol; glycopyrrolate, rocuronium
-gallstone;diabetes, crohns_disease; sevoflurane
-gallstone;ibs, rapid_weight_loss; glycopyrrolate
+gallstone; high_blood_cholesterol, family_history_of_gallstones;glycopyrrolate, rocuronium
+gallstone;overweight, high_blood_cholesterol; glycopyrrolate,rocuronium
+gallstone;diabetes, crohns_disease;sevoflurane
+gallstone;ibs, rapid_weight_loss;glycopyrrolate
 gerb; delayed_stomach_emptying, active_smoking;omeprazole, esomeprazole
 gerb;overweight;lansoprazole
 gerb; pregnancy; pantoprazole

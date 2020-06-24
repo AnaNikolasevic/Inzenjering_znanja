@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.text.Collator;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public class App {
 	public static JFormattedTextField formattedTextField;
 	public static JFormattedTextField formattedTextFieldAge;
 	public static JFormattedTextField formattedTextFieldSex;
-	public static HashMap<String, String> resultsOfTests ;
+	public static HashMap<String, String> resultsOfTests =  new HashMap<String, String> ();
 	public static String[] persSympt ;
 	public static ArrayList<String> personalSymptoms;
 	public static ArrayList<String> personalAnamnesis ;
@@ -140,12 +141,12 @@ public class App {
 		formattedTextField.setBounds(201, 26, 258, 19);
 		panel.add(formattedTextField);
 		
-	    formattedTextFieldAge = new JFormattedTextField();
-		formattedTextFieldAge.setBounds(201, 46, 200, 19);
+	   formattedTextFieldAge = new JFormattedTextField();
+		formattedTextFieldAge.setBounds(201, 46, 258, 19);
 		panel.add(formattedTextFieldAge);
 		
 		formattedTextFieldSex = new JFormattedTextField();
-		formattedTextFieldSex.setBounds(201, 66, 200, 19);
+		formattedTextFieldSex.setBounds(201, 66, 258, 19);
 		panel.add(formattedTextFieldSex);
 
 		JLabel lblSymptoms = new JLabel("Symptoms");
@@ -161,6 +162,7 @@ public class App {
 		list_0 = new JList();
 		scrollPane.setViewportView(list_0);
 		list_0.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		java.util.Collections.sort(listOfSymptoms, Collator.getInstance());
 		list_0.setListData((String[]) listOfSymptoms.toArray(new String[0]));
 
 		JLabel lblNewLabel = new JLabel("Anamnesis");
@@ -175,6 +177,7 @@ public class App {
 		list_1 = new JList();
 		scrollPane_1.setViewportView(list_1);
 		list_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		java.util.Collections.sort(listOfAnamnesis, Collator.getInstance());
 		list_1.setListData((String[]) listOfAnamnesis.toArray(new String[0]));
 		
 		JButton btnFindAdditionalTests = new JButton("Find tests");
@@ -186,8 +189,9 @@ public class App {
 				// check if each field is filled
 				if ( formattedTextFieldAge.getText().equals("") || formattedTextFieldSex.getText().equals("") || person.equals("")) {
 					JOptionPane.showMessageDialog(frame, "You must enter patient information.");
-					return;
-				}
+				} else if (list_0.getSelectedValuesList().isEmpty() ||  list_1.getSelectedValuesList().isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "You must select the patient's symptoms and anamnesis.");
+				} else {
 
 				for (Object selected : list_0.getSelectedValuesList()) {
 					personalSymptoms.add(selected.toString());
@@ -195,17 +199,6 @@ public class App {
 				}
 				for (Object selected : list_1.getSelectedValuesList()) {
 					personalAnamnesis.add(selected.toString());
-				}
-				
-				if (personalSymptoms.isEmpty()) {
-					JOptionPane.showMessageDialog(frame, "You must select the patient's symptoms.");
-					return;
-					
-				}
-				if (personalAnamnesis.isEmpty()) {
-					JOptionPane.showMessageDialog(frame, "You must select the patient's anamnesis.");
-					return;
-					
 				}
 				
 				String write = "personal_symptoms(" + person + "," + personalSymptoms + ").";
@@ -222,6 +215,7 @@ public class App {
 				ArrayList<String> additional_tests = consultProlog(term);
 	            
 	    		additionalTestsPanel(additional_tests);
+				}
 			}
 
 		});
@@ -245,33 +239,26 @@ public class App {
 				
 				if ( age.equals("") || gender.equals("") || person.equals("")) {
 					JOptionPane.showMessageDialog(frame, "You must enter patient information.");
-				}
-
-				if (list_0.getSelectedValuesList().isEmpty()) {
-					JOptionPane.showMessageDialog(frame, "You must select the patient's symptoms.");
-					return;
+				} else if (list_0.getSelectedValuesList().isEmpty() || list_1.getSelectedValuesList().isEmpty() ) {
+					JOptionPane.showMessageDialog(frame, "You must select the patient's symptoms and anamnesis.");
 					
-				}
+				}else {
+					int i=0;
+					for (Object selected : list_0.getSelectedValuesList()) {
+						persSympt[i] = selected.toString();
+						i++;		
+					}
+					int j=0;
+					for (Object selected : list_1.getSelectedValuesList()) {
+						persAnam[j]=selected.toString();
+						j++;
+					}
 				
-				int i=0;
-				for (Object selected : list_0.getSelectedValuesList()) {
-					persSympt[i] = selected.toString();
-					i++;		
+					ArrayList<String> additional_tests = new ArrayList<String>();
+					additional_tests.clear();
+					additional_tests.addAll(cbr.CbrApplication.main(personalAnamnesis, personalSymptoms, formattedTextFieldAge.getText(), formattedTextFieldSex.getText()));
+					additionalTestsPanel(additional_tests);
 				}
-				if (list_1.getSelectedValuesList().isEmpty()) {
-					JOptionPane.showMessageDialog(frame, "You must select the patient's anamnesis.");
-					return;
-				}
-				int j=0;
-				for (Object selected : list_1.getSelectedValuesList()) {
-					persAnam[j]=selected.toString();
-					j++;
-				}
-				
-				ArrayList<String> additional_tests = new ArrayList<String>();
-	            additional_tests.clear();
-	            additional_tests.addAll(cbr.CbrApplication.main(personalAnamnesis, personalSymptoms, formattedTextFieldAge.getText(), formattedTextFieldSex.getText()));
-	            additionalTestsPanel(additional_tests);
 			}
 
 		});
@@ -388,7 +375,7 @@ public class App {
 				Results results = new Results();
 				Medication medication = new Medication();
 				
-				resultsOfTests = new HashMap<String, String>();
+			//	resultsOfTests = new HashMap<String, String>();
 				for (int i = 0; i < tableModel.getRowCount(); i++) {
 					String test = (String) tableModel.getValueAt(i, 0);
 					String[] test1 = test.split("\\(");
@@ -457,9 +444,15 @@ public class App {
 		
 		JLabel diagnosisLabel = new JLabel(" ");
 		diagnosisLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		diagnosisLabel.setBounds(288, 43, 216, 69);
-		//diagnosisLabel.setText("");
-		diagnosisLabel.setText(diagnosis.get(0));
+		diagnosisLabel.setBounds(288, 43, 400, 69);
+		ArrayList<String> outputDiagnosis = new ArrayList<>();
+		for (String s : diagnosis) {
+			if (!outputDiagnosis.contains(s)) {
+				outputDiagnosis.add(s);
+			}
+		}
+		
+		diagnosisLabel.setText(outputDiagnosis.toString());
 		panelDiagnosis.add(diagnosisLabel);
 		
 		list = new JList();

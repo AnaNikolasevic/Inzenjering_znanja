@@ -43,16 +43,11 @@ personal_symptoms(marti, [sharp_chest_pain, nausea, vomiting, difficulty_in_swal
 personal_symptoms(ljilja, [fatigue, vomiting, nausea, sharp_abdominal_pain]). %rak zeludca
 
 
-personal_symptoms(fds,[nausea]).
-personal_symptoms(r,[nausea]).
-personal_symptoms(yt,[nausea]).
-personal_symptoms(ana,[nausea]).
-personal_symptoms(s,[nausea]).
-personal_symptoms(dsa,[nausea]).
-personal_symptoms(das,[nausea]).
-personal_symptoms(ww,[nausea]).
-personal_symptoms(qqq,[nausea]).
-personal_symptoms(rrr,[nausea]).
-personal_symptoms(asdsada,[nausea]).
-personal_symptoms(qqq,[nausea, joint_aches, itching]).
-personal_symptoms(fds,[nausea, vomiting]).
+personal_symptoms(steva,[sharp_abdominal_pain, fatigue]).
+personal_symptoms(nasa,[sharp_abdominal_pain, fatigue]).
+personal_symptoms(niko,[sharp_abdominal_pain, fatigue]).
+personal_symptoms(rbr,[sharp_abdominal_pain, fatigue]).
+personal_symptoms(ere,[nausea, upper_abdominal_pain]).
+personal_symptoms(grrrrrr,[sharp_abdominal_pain, fatigue]).
+personal_symptoms(das,[sharp_abdominal_pain, fatigue]).
+personal_symptoms(khg,[nausea, upper_abdominal_pain]).

@@ -116,6 +116,7 @@ public class CbrApplication implements StandardCBRApplication {
 	}
 
 	public CBRCaseBase preCycle() throws ExecutionException {
+		
 		_caseBase.init(_connector);
 		java.util.Collection<CBRCase> cases = _caseBase.getCases();
 		for (CBRCase c: cases) {
