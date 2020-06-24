@@ -3,9 +3,13 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,9 +38,12 @@ import cbr.CbrApplicationResults;
 import model.Examination2;
 import model.Medication;
 import model.Results;
+import sun.nio.cs.StandardCharsets;
 import ucm.gaia.jcolibri.cbraplications.StandardCBRApplication;
 import ucm.gaia.jcolibri.cbrcore.CBRQuery;
 
+import java.io.FileWriter;
+import com.opencsv.CSVWriter;
 
 public class App {
 
@@ -46,6 +53,7 @@ public class App {
 	JPanel panelResults = new JPanel();
 	JPanel panelDiagnosis = new JPanel();
 	String person;
+	public static final StandardCharsets UTF_8 = new StandardCharsets();
 	public static JList list_2; 
 	public static JList list_1;
 	public static JList list;
@@ -64,6 +72,7 @@ public class App {
 	public static String[] persSympt ;
 	public static ArrayList<String> personalSymptoms;
 	public static ArrayList<String> personalAnamnesis ;
+	public static String choosenTests;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -131,7 +140,7 @@ public class App {
 		formattedTextField.setBounds(201, 26, 258, 19);
 		panel.add(formattedTextField);
 		
-	  formattedTextFieldAge = new JFormattedTextField();
+	    formattedTextFieldAge = new JFormattedTextField();
 		formattedTextFieldAge.setBounds(201, 46, 200, 19);
 		panel.add(formattedTextFieldAge);
 		
@@ -411,6 +420,16 @@ public class App {
 		btnNewButtonCBR.setBounds(441, 475, 250, 29);
 		panelResults.add(btnNewButtonCBR);
 		
+		//testovi za pisanje u fajl
+ 		choosenTests= new String();
+ 		String choosen = personalTests.toString().replace("[", "").replace("]", "");
+ 		String [] c= choosen.split(","); 
+ 		for(int i=0; i<c.length; i++) {
+ 			if(i!=0) { choosenTests+=",";}
+ 			String c1[]= c[i].split("\\(");
+ 			choosenTests+=c1[0];
+ 		}
+		
 	}
 	
 	protected void panelDiagnosis(ArrayList<String> diagnosis, ArrayList<String> medications) {
@@ -455,7 +474,66 @@ public class App {
 		JButton btnBack = new JButton("Back to start");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				String anamnesis_csv= diagnosis.get(0)+";"+formattedTextFieldAge.getText()+";"+formattedTextFieldSex.getText()+";";
+				String medication_csv= diagnosis.get(0)+";";
+				String tests_csv= diagnosis.get(0)+";";
+				
+				System.out.println(Arrays.toString(persSympt));
+				String symptoms = Arrays.toString(persSympt);
+				String symptoms1 = symptoms.toString().replace("[", "").replace("]", "");
+				String[] symptomsWithNull= symptoms1.split("null");
+				String[] sympt = symptomsWithNull[0].split(",");
+				for(int i=0; i<sympt.length-1; i++) {
+					System.out.println(sympt[i]);
+					if(i!=0) { anamnesis_csv+=",";}
+					anamnesis_csv+=sympt[i];
+				}
+				anamnesis_csv+=";";
 	            
+				System.out.println(Arrays.toString(persAnam));
+				String anamnesis = Arrays.toString(persAnam);
+				String anamnesis1 = anamnesis.toString().replace("[", "").replace("]", "");
+				String[] anamnWithNull= anamnesis1.split("null");
+				String[] anamn = anamnWithNull[0].split(",");
+				for(int i=0; i<anamn.length-1; i++) {
+					if(i!=0) { anamnesis_csv+=","; medication_csv+=",";}
+					anamnesis_csv+=anamn[i];
+					medication_csv+=anamn[i];
+				}
+				anamnesis_csv+=";"+choosenTests;
+				medication_csv+=";";
+				
+				long size3= list.getModel().getSize();
+				for(int i=0; i<size3; i++) {
+					if(i!=0) {medication_csv+=",";}
+					medication_csv+=list.getModel().getElementAt(i).toString().split("\\(")[0];			
+				}	
+				
+				int a=0;
+				for(String key : resultsOfTests.keySet()) {
+					tests_csv+=key+":"+resultsOfTests.get(key);
+					a++;
+					if(a<resultsOfTests.size()) {tests_csv+=",";}			
+				}
+				
+				System.out.println(anamnesis_csv);
+				System.out.println(medication_csv);
+				System.out.println(tests_csv);				
+				
+				ArrayList<String> writeInFile = new ArrayList<String>();
+				writeInFile.add(anamnesis_csv);
+				writeProlog(writeInFile, "data/anamnesis.csv");
+				
+				ArrayList<String> writeInFile1 = new ArrayList<String>();
+				writeInFile1.add(medication_csv);
+				writeProlog(writeInFile, "data/medication.csv");
+				
+				ArrayList<String> writeInFile2 = new ArrayList<String>();
+				writeInFile2.add(medication_csv);
+				writeProlog(writeInFile, "data/tests.csv");
+				
+			      				
 				list_0.clearSelection();
 				list_1.clearSelection();
 				list_2.clearSelection();
