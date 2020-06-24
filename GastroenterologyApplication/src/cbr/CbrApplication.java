@@ -99,6 +99,7 @@ public class CbrApplication implements StandardCBRApplication {
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
 		eval = SelectCases.selectTopKRR(eval, 5);
 		System.out.println("Retrieved cases:");
+		list.clear();
 		for (RetrievalResult nse : eval) {
 			System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
 			String description = nse.get_case().getDescription().toString();
@@ -106,7 +107,6 @@ public class CbrApplication implements StandardCBRApplication {
 			String[] tests= description.split("=")[1].split(",");
 			for (String test : tests) {
 				list.add(test + "  (" +description.split("=")[0]+ ")");
-				//list.add(test);
 			}
 		}
 	}

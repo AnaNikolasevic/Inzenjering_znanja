@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -19,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 import com.ugos.jiprolog.engine.JIPEngine;
 import com.ugos.jiprolog.engine.JIPQuery;
 import com.ugos.jiprolog.engine.JIPSyntaxErrorException;
@@ -48,11 +50,19 @@ public class App {
 	public static JList list;
 	public static JList list_0;
 	public static JTable table;
+	public static JScrollPane scrollPane_2;
 	public static JScrollPane scrollPane_1;
 	public static JScrollPane scrollPane;
 	public static Object[] list1;
 	public static DefaultTableModel tableModel;
 	private static String[] persAnam;
+	public static JFormattedTextField formattedTextField;
+	public static JFormattedTextField formattedTextFieldAge;
+	public static JFormattedTextField formattedTextFieldSex;
+	public static HashMap<String, String> resultsOfTests ;
+	public static String[] persSympt ;
+	public static ArrayList<String> personalSymptoms;
+	public static ArrayList<String> personalAnamnesis ;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -86,8 +96,8 @@ public class App {
 		frame.getContentPane().setLayout(null);
 
 		//list of personal symptoms/anamnesis/tests (selected from list)
-		ArrayList<String> personalSymptoms = new ArrayList<String>();
-		ArrayList<String> personalAnamnesis = new ArrayList<String>();
+		 personalSymptoms = new ArrayList<String>();
+		 personalAnamnesis = new ArrayList<String>();
 
 		//lists from prolog
 	    ArrayList<String> listOfSymptoms = consultProlog("symptoms(_, X)");
@@ -116,15 +126,15 @@ public class App {
 		lblSex.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(lblSex);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
+		formattedTextField = new JFormattedTextField();
 		formattedTextField.setBounds(201, 26, 258, 19);
 		panel.add(formattedTextField);
 		
-		JFormattedTextField formattedTextFieldAge = new JFormattedTextField();
+	    formattedTextFieldAge = new JFormattedTextField();
 		formattedTextFieldAge.setBounds(201, 46, 200, 19);
 		panel.add(formattedTextFieldAge);
 		
-		JFormattedTextField formattedTextFieldSex = new JFormattedTextField();
+		formattedTextFieldSex = new JFormattedTextField();
 		formattedTextFieldSex.setBounds(201, 66, 200, 19);
 		panel.add(formattedTextFieldSex);
 
@@ -182,7 +192,7 @@ public class App {
 				writeProlog(writeInFile, "rule_based/patients.pl");
 				
 				String term = "additional_tests(" + person + ", S)";
-	            ArrayList<String> additional_tests = consultProlog(term);
+				ArrayList<String> additional_tests = consultProlog(term);
 	            
 	    		additionalTestsPanel(additional_tests);
 			}
@@ -191,7 +201,7 @@ public class App {
 		btnFindAdditionalTests.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(btnFindAdditionalTests);	
 		
-		String[] persSympt = new String[list_0.getModel().getSize()];
+		persSympt = new String[list_0.getModel().getSize()];
 		persAnam= new String[list_1.getModel().getSize()];
 		
 		JButton btnFindAdditionalTestsCBR = new JButton("Find tests CBR");
@@ -213,9 +223,10 @@ public class App {
 				person = formattedTextField.getText();
 				
 				
-	            ArrayList<String> additional_tests = new ArrayList<String>();
+				ArrayList<String> additional_tests = new ArrayList<String>();
+	            additional_tests.clear();
 	            additional_tests.addAll(cbr.CbrApplication.main(personalAnamnesis, personalSymptoms, formattedTextFieldAge.getText(), formattedTextFieldSex.getText()));
-	    		additionalTestsPanel(additional_tests);
+	            additionalTestsPanel(additional_tests);
 			}
 
 		});
@@ -228,31 +239,33 @@ public class App {
 		// TODO Auto-generated method stub
 		
 		// ------------------- panel for additional tests--------------------
-		panel.setVisible(false);
-		panelAdditionalTests.setVisible(true);
-		panelAdditionalTests.setBounds(0, 0, 992, 531);
-		frame.getContentPane().add(panelAdditionalTests);
-		panelAdditionalTests.setLayout(null);
+		panelAdditionalTests=new JPanel();
 		
 		JLabel lblNewLabel_1 = new JLabel("Additional tests:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel_1.setBounds(50, 77, 154, 36);
 		panelAdditionalTests.add(lblNewLabel_1);
 		
-		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(222, 77, 594, 342);
-		panelAdditionalTests.add(scrollPane_2);
+		
+		String additionalTestsString1 = additional_tests.toString().replace("[", "").replace("]", "");
+		String[] list= additionalTestsString1.split(",");
 		
 		list_2 = new JList();
 		list_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		scrollPane_2.setViewportView(list_2);
-		
-		String additionalTestsString = additional_tests.toString().replace("[", "").replace("]", "");
-		String[] list= additionalTestsString.split(",");
 		
     	list_2.setListData(list);
-		System.out.println(additional_tests.size());
-
+    	scrollPane_2.setViewportView(list_2);
+		
+		panelAdditionalTests.add(scrollPane_2);
+		
+		panel.setVisible(false);
+		panelAdditionalTests.setVisible(true);
+		panelAdditionalTests.setBounds(0, 0, 992, 531);
+		frame.getContentPane().add(panelAdditionalTests);
+		panelAdditionalTests.setLayout(null);
+		
 		ArrayList<String> personalTests = new ArrayList<String>();
 
 		
@@ -270,11 +283,14 @@ public class App {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewButton.setBounds(846, 447, 100, 36);
 		panelAdditionalTests.add(btnNewButton);
-		
+			
 	}
 	
 	private void panelForTestsResults(ArrayList<String> personalTests) {
 		// TODO Auto-generated method stub
+
+		panelResults=new JPanel();
+		
 		panel.setVisible(false);
 		panelAdditionalTests.setVisible(false);
 		panelResults.setVisible(true);
@@ -323,7 +339,7 @@ public class App {
 				Results results = new Results();
 				Medication medication = new Medication();
 				
-				HashMap<String, String> resultsOfTests = new HashMap<String, String>();
+				resultsOfTests = new HashMap<String, String>();
 				for (int i = 0; i < tableModel.getRowCount(); i++) {
 					String test = (String) tableModel.getValueAt(i, 0);
 					String[] test1 = test.split("\\(");
@@ -332,6 +348,10 @@ public class App {
 				
 				}
 				results.setResultsOfTests(resultsOfTests);
+				System.out.println(" Rezultati testova ");
+				System.out.println(resultsOfTests);
+				System.out.println(" Rezultati testova - ovako se salju: ");
+				System.out.println(results);
 				//String term = "diagnosis(" + person + ", D)";
 	            ArrayList<String> diagnosis = CbrApplicationResults.main(results);
 	            
@@ -355,6 +375,9 @@ public class App {
 	
 	protected void panelDiagnosis(ArrayList<String> diagnosis, ArrayList<String> medications) {
 		// TODO Auto-generated method stub
+		
+		panelDiagnosis= new JPanel();
+		
 		panel.setVisible(false);
 		panelAdditionalTests.setVisible(false);
 		panelResults.setVisible(false);
@@ -397,7 +420,12 @@ public class App {
 				list_1.clearSelection();
 				list_2.clearSelection();
 				list.clearSelection();
-				tableModel.setRowCount(0);
+				resultsOfTests.clear();
+				formattedTextField.setValue("");
+				formattedTextFieldAge.setValue("");
+				formattedTextFieldSex.setValue("");
+				personalSymptoms.clear();
+				personalAnamnesis.clear();
 				
 				panel.setVisible(true);
 				panelAdditionalTests.setVisible(false);
