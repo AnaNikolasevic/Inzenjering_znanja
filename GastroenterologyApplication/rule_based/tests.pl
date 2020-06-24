@@ -145,31 +145,16 @@ additional_tests(Name,T) :-  possible_diseases(Name,D), test(D,T).
 
 medications(Name,M) :-  diagnosis(Name,D), medication(D,M).
 
-anti_hepatitis_C(dsa,null).
-anti_hepatitis_C(das,positive).
-anti_hepatitis_C(ww,positive).
-anti_hepatitis_C(qqq,null).
-anti_hepatitis_C(rrr,positive).
-anti_hepatitis_C(asdsada,positive).
- anti_hepatitis_A(qqq,positive).
- anti_hepatitis_B(qqq,positive).
- x_ray(Masa,null).
- x_ray(masa,null).
-barium_swallow(masa,null).
- x_ray(masa,null).
- x_ray(masa,null).
- x_ray(masa,null).
-anti_hepatitis_A(masa,null).
-anti_hepatitis_A(masa,positive).
-anti_hepatitis_A(masa,positive).
-anti_hepatitis_A(masa,positive).
-anti_hepatitis_A(masa,null).
-anti_hepatitis_A(masa,positive).
-anti_hepatitis_A(masa,positive).
-anti_hepatitis_A(masa,null).
-anti_hepatitis_A(masa,positive).
-anti_hepatitis_A(Masa,positive).
-anti_hepatitis_A(neko,positive).
-anti_hepatitis_A(masa,positive).
-anti_hepatitis_A(masa,positive).
-anti_hepatitis_A(suncica,null).
+x_ray(steva,esophageal_cancer).
+barium_swallow(nasa,esophageal_cancer).
+barium_swallow(niko,esophageal_cancer).
+barium_swallow(rbr,esophageal_cancer).
+cbc(rbr,null).
+cbc(ere,anemia).
+c14(ere,h_pylori).
+x_ray(grrrrrr,esophageal_cancer).
+cbc(grrrrrr,anemia).
+x_ray(das,esophageal_cancer).
+cbc(das,anemia).
+cbc(khg,anemia).
+c14(khg,h_pylori).

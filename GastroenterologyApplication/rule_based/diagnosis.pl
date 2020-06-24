@@ -11,7 +11,7 @@ diagnosis(X, gerb):-  x_ray(X, gerb); endoscopy(X, gerb); esophageal_manometry(X
 			esophageal_impedance_pH(X, gerb); bravo_wireless(X, gerb).  
 
 
-diagnosis(X,esophageal_cancer):- (barium_swallow(X, esophageal_cancer); x_ray(X, esophageal_cancer); mri(X, esophageal_cancer ); 
+diagnosis(X, esophageal_cancer):- (barium_swallow(X, esophageal_cancer); x_ray(X, esophageal_cancer); mri(X, esophageal_cancer ); 
 				ultrasound(X, esophageal_cancer); endoscopy(X, esophageal_cancer); ct(X, esophageal_cancer); 
 				biopsy(X, esophageal_cancer)), (cbc(X, anemia); her2(X, high)).
 

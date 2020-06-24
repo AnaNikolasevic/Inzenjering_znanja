@@ -82,17 +82,11 @@ age(mima, 53).
 %older_adult(X):- age(X,Y), Y>=40, Y<60.
 %old(X):- age(X,Y), Y>=60.
 
-
-personal_anamnesis(fds,[hepatitis_C_risk_group]).
-personal_anamnesis(r,[hepatitis_C_risk_group]).
-personal_anamnesis(yt,[hepatitis_C_risk_group]).
-personal_anamnesis(ana,[hepatitis_C_risk_group]).
-personal_anamnesis(s,[hepatitis_C_risk_group]).
-personal_anamnesis(dsa,[hepatitis_C_risk_group]).
-personal_anamnesis(das,[hepatitis_C_risk_group]).
-personal_anamnesis(ww,[hepatitis_C_risk_group]).
-personal_anamnesis(qqq,[hepatitis_C_risk_group]).
-personal_anamnesis(rrr,[hepatitis_C_risk_group]).
-personal_anamnesis(asdsada,[hepatitis_C_risk_group]).
-personal_anamnesis(qqq,[]).
-personal_anamnesis(fds,[unprotected_sex]).
+personal_anamnesis(steva,[gerb]).
+personal_anamnesis(nasa,[gerb]).
+personal_anamnesis(niko,[gerb]).
+personal_anamnesis(rbr,[gerb]).
+personal_anamnesis(ere,[active_smoking, stress]).
+personal_anamnesis(grrrrrr,[gerb]).
+personal_anamnesis(das,[gerb]).
+personal_anamnesis(khg,[active_smoking, stress]).
