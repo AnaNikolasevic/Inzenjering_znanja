@@ -100,7 +100,10 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 					medications.add(values[1]);
 				}
 			}
+		
 */
+			System.out.println("OVDE JE OUTPUT ZA LEKOVE");
+			System.out.println(output.toString());
 			recommenderMedication.postCycle();
 		} catch (Exception e) {
 			e.printStackTrace();
