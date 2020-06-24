@@ -51,6 +51,7 @@ public class CbrApplicationMed  implements StandardCBRApplication  {
 	public void cycle(CBRQuery query) throws ExecutionException {
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBaseM.getCases(), query, simConfigM);
 		eval = SelectCases.selectTopKRR(eval, 5);
+		output.clear();
 		System.out.println("Retrieved cases:");
 		for (RetrievalResult nse : eval) {
 			output.add(nse.get_case().getDescription().toString());
