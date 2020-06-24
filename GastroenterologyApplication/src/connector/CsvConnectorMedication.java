@@ -30,7 +30,7 @@ public class CsvConnectorMedication implements Connector {
 			while ((line = br.readLine()) != null) {
 				if (line.startsWith("#") || (line.length() == 0))
 					continue;
-				String[] values = line.split(";");
+				String[] values = line.strip().split(";");
 
 				CBRCase cbrCase = new CBRCase();
 
@@ -38,7 +38,6 @@ public class CsvConnectorMedication implements Connector {
 				
 				medication.setDisease(values[0]);
 				
-				System.out.println(values[1]);
 				String[] anam = values[1].split(",");
 				medication.createBinAnam(anam);
 				

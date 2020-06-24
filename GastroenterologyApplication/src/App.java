@@ -14,6 +14,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -121,11 +122,11 @@ public class App {
 		panel.add(formattedTextField);
 		
 		JFormattedTextField formattedTextFieldAge = new JFormattedTextField();
-		formattedTextFieldAge.setBounds(201, 46, 200, 19);
+		formattedTextFieldAge.setBounds(201, 46, 258, 19);
 		panel.add(formattedTextFieldAge);
 		
 		JFormattedTextField formattedTextFieldSex = new JFormattedTextField();
-		formattedTextFieldSex.setBounds(201, 66, 200, 19);
+		formattedTextFieldSex.setBounds(201, 66, 258, 19);
 		panel.add(formattedTextFieldSex);
 
 		JLabel lblSymptoms = new JLabel("Symptoms");
@@ -161,6 +162,13 @@ public class App {
 		btnFindAdditionalTests.setBounds(441, 435, 220, 29);
 		btnFindAdditionalTests.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				person = formattedTextField.getText();
+				// check if each field is filled
+				if ( formattedTextFieldAge.getText().equals("") || formattedTextFieldSex.getText().equals("") || person.equals("")) {
+					JOptionPane.showMessageDialog(frame, "You must enter patient information.");
+					return;
+				}
 
 				for (Object selected : list_0.getSelectedValuesList()) {
 					personalSymptoms.add(selected.toString());
@@ -169,7 +177,17 @@ public class App {
 				for (Object selected : list_1.getSelectedValuesList()) {
 					personalAnamnesis.add(selected.toString());
 				}
-				person = formattedTextField.getText();
+				
+				if (personalSymptoms.isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "You must select the patient's symptoms.");
+					return;
+					
+				}
+				if (personalAnamnesis.isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "You must select the patient's anamnesis.");
+					return;
+					
+				}
 				
 				String write = "personal_symptoms(" + person + "," + personalSymptoms + ").";
 				ArrayList<String> writeInFile = new ArrayList<String>();
@@ -192,26 +210,43 @@ public class App {
 		panel.add(btnFindAdditionalTests);	
 		
 		String[] persSympt = new String[list_0.getModel().getSize()];
-		persAnam= new String[list_1.getModel().getSize()];
+	    persAnam= new String[list_1.getModel().getSize()];
 		
 		JButton btnFindAdditionalTestsCBR = new JButton("Find possible diseases CBR");
 		btnFindAdditionalTestsCBR.setBounds(441, 475, 250, 29);
 		btnFindAdditionalTestsCBR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				person = formattedTextField.getText();
+				String age = formattedTextFieldAge.getText();
+				String gender = formattedTextFieldSex.getText();
+				
+				
+				
+				if ( age.equals("") || gender.equals("") || person.equals("")) {
+					JOptionPane.showMessageDialog(frame, "You must enter patient information.");
+				}
 
+				if (list_0.getSelectedValuesList().isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "You must select the patient's symptoms.");
+					return;
+					
+				}
+				
 				int i=0;
 				for (Object selected : list_0.getSelectedValuesList()) {
 					persSympt[i] = selected.toString();
 					i++;		
 				}
-						
+				if (list_1.getSelectedValuesList().isEmpty()) {
+					JOptionPane.showMessageDialog(frame, "You must select the patient's anamnesis.");
+					return;
+				}
 				int j=0;
 				for (Object selected : list_1.getSelectedValuesList()) {
 					persAnam[j]=selected.toString();
 					j++;
 				}
-				person = formattedTextField.getText();
-				
 				
 	            ArrayList<String> additional_tests = new ArrayList<String>();
 	            additional_tests.addAll(cbr.CbrApplication.main(personalAnamnesis, personalSymptoms, formattedTextFieldAge.getText(), formattedTextFieldSex.getText()));
@@ -260,6 +295,9 @@ public class App {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for (Object selected : list_2.getSelectedValuesList()) {
+					//String line = selected.toString();
+					//String[] values = line.strip().split("\\(");
+					//personalTests.add(values[0]);
 					personalTests.add(selected.toString());
 				}
 				panelForTestsResults(personalTests);				
@@ -282,6 +320,7 @@ public class App {
 		frame.getContentPane().add(panelResults);
 		panelResults.setLayout(null);
 		
+
 		list1 = personalTests.toArray();
 		table = new JTable();
 		tableModel = new DefaultTableModel();

@@ -31,7 +31,7 @@ public class CsvConnectorResults implements Connector {
 			while ((line = br.readLine()) != null) {
 				if (line.startsWith("#") || (line.length() == 0))
 					continue;
-				String[] values = line.split(";");
+				String[] values = line.strip().split(";");
 
 				CBRCase cbrCase = new CBRCase();
 
