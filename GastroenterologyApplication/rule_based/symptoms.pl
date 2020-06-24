@@ -51,3 +51,4 @@ personal_symptoms(ere,[nausea, upper_abdominal_pain]).
 personal_symptoms(grrrrrr,[sharp_abdominal_pain, fatigue]).
 personal_symptoms(das,[sharp_abdominal_pain, fatigue]).
 personal_symptoms(khg,[nausea, upper_abdominal_pain]).
+personal_symptoms(dsada,[back_pain, blood_in_stool]).

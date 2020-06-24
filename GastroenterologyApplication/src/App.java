@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -44,7 +45,15 @@ import ucm.gaia.jcolibri.cbraplications.StandardCBRApplication;
 import ucm.gaia.jcolibri.cbrcore.CBRQuery;
 
 import java.io.FileWriter;
-import com.opencsv.CSVWriter;
+import javax.swing.JRadioButton;
+import javax.swing.JSeparator;
+import java.awt.SystemColor;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.UIManager;
 
 public class App {
 
@@ -68,12 +77,12 @@ public class App {
 	private static String[] persAnam;
 	public static JFormattedTextField formattedTextField;
 	public static JFormattedTextField formattedTextFieldAge;
-	public static JFormattedTextField formattedTextFieldSex;
 	public static HashMap<String, String> resultsOfTests =  new HashMap<String, String> ();
 	public static String[] persSympt ;
 	public static ArrayList<String> personalSymptoms;
 	public static ArrayList<String> personalAnamnesis ;
 	public static String choosenTests;
+	public String gender = "";
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -117,105 +126,89 @@ public class App {
 	    // ------------------------------first panel--------------------------
 	    
 		panelAdditionalTests.setVisible(false);
+		panel.setBackground(new Color(255, 250, 240));
 		
-		panel.setBounds(0, 0, 992, 521);
+		panel.setBounds(0, 0, 992, 529);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-		
-		JLabel lblNameAndSurname = new JLabel("Name and surname: ");
-		lblNameAndSurname.setBounds(53, 26, 150, 20);
-		lblNameAndSurname.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panel.add(lblNameAndSurname);
-		
-		JLabel lblAge = new JLabel("Age: ");
-		lblAge.setBounds(53, 46, 139, 20);
-		lblAge.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panel.add(lblAge);
-		
-		JLabel lblSex = new JLabel("Gender: ");
-		lblSex.setBounds(53, 66, 139, 20);
-		lblSex.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panel.add(lblSex);
-		
-		formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(201, 26, 258, 19);
-		panel.add(formattedTextField);
-		
-	   formattedTextFieldAge = new JFormattedTextField();
-		formattedTextFieldAge.setBounds(201, 46, 258, 19);
-		panel.add(formattedTextFieldAge);
-		
-		formattedTextFieldSex = new JFormattedTextField();
-		formattedTextFieldSex.setBounds(201, 66, 258, 19);
-		panel.add(formattedTextFieldSex);
 
 		JLabel lblSymptoms = new JLabel("Symptoms");
-		lblSymptoms.setBounds(118, 97, 74, 20);
+		lblSymptoms.setBounds(118, 130, 74, 20);
 		lblSymptoms.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(lblSymptoms);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(201, 97, 258, 278);
+		scrollPane.setBounds(201, 130, 258, 278);
 		panel.add(scrollPane);
 		
 		//setting list of symptoms
 		list_0 = new JList();
+		list_0.setBackground(new Color(255, 255, 255));
 		scrollPane.setViewportView(list_0);
 		list_0.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		java.util.Collections.sort(listOfSymptoms, Collator.getInstance());
 		list_0.setListData((String[]) listOfSymptoms.toArray(new String[0]));
 
 		JLabel lblNewLabel = new JLabel("Anamnesis");
-		lblNewLabel.setBounds(539, 45, 77, 125);
+		lblNewLabel.setBounds(535, 130, 77, 29);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(lblNewLabel);
 		
 		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(626, 97, 258, 278);
+		scrollPane_1.setBounds(626, 130, 258, 278);
 		panel.add(scrollPane_1);
 		
 		list_1 = new JList();
+		list_1.setBackground(new Color(255, 255, 255));
 		scrollPane_1.setViewportView(list_1);
 		list_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		java.util.Collections.sort(listOfAnamnesis, Collator.getInstance());
 		list_1.setListData((String[]) listOfAnamnesis.toArray(new String[0]));
 		
 		JButton btnFindAdditionalTests = new JButton("Find tests");
-		btnFindAdditionalTests.setBounds(441, 435, 220, 29);
+		btnFindAdditionalTests.setBackground(new Color(250, 235, 215));
+		btnFindAdditionalTests.setBounds(593, 468, 141, 29);
 		btnFindAdditionalTests.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				person = formattedTextField.getText();
 				// check if each field is filled
-				if ( formattedTextFieldAge.getText().equals("") || formattedTextFieldSex.getText().equals("") || person.equals("")) {
+				if ( formattedTextFieldAge.getText().equals("") ||  person.equals("")) {
 					JOptionPane.showMessageDialog(frame, "You must enter patient information.");
 				} else if (list_0.getSelectedValuesList().isEmpty() ||  list_1.getSelectedValuesList().isEmpty()) {
 					JOptionPane.showMessageDialog(frame, "You must select the patient's symptoms and anamnesis.");
 				} else {
+		        
+					try {
+							double d = Double.parseDouble(formattedTextFieldAge.getText());
+					} catch (NumberFormatException nfe) {
+					    	JOptionPane.showMessageDialog(frame, "Enter the number in the age field.");
+					    	return;
+					}
 
-				for (Object selected : list_0.getSelectedValuesList()) {
-					personalSymptoms.add(selected.toString());
-					System.out.println(personalSymptoms);
-				}
-				for (Object selected : list_1.getSelectedValuesList()) {
-					personalAnamnesis.add(selected.toString());
-				}
-				
-				String write = "personal_symptoms(" + person + "," + personalSymptoms + ").";
-				ArrayList<String> writeInFile = new ArrayList<String>();
-				writeInFile.add(write);
-				writeProlog(writeInFile, "rule_based/symptoms.pl");
-				
-				write = "personal_anamnesis(" + person + "," + personalAnamnesis + ").";
-				writeInFile.clear();
-				writeInFile.add(write);
-				writeProlog(writeInFile, "rule_based/patients.pl");
-				
-				String term = "additional_tests(" + person + ", S)";
-				ArrayList<String> additional_tests = consultProlog(term);
-	            
-	    		additionalTestsPanel(additional_tests);
-				}
+					for (Object selected : list_0.getSelectedValuesList()) {
+						personalSymptoms.add(selected.toString());
+						System.out.println(personalSymptoms);
+					}
+					for (Object selected : list_1.getSelectedValuesList()) {
+						personalAnamnesis.add(selected.toString());
+					}
+					
+					String write = "personal_symptoms(" + person + "," + personalSymptoms + ").";
+					ArrayList<String> writeInFile = new ArrayList<String>();
+					writeInFile.add(write);
+					writeProlog(writeInFile, "rule_based/symptoms.pl");
+					
+					write = "personal_anamnesis(" + person + "," + personalAnamnesis + ").";
+					writeInFile.clear();
+					writeInFile.add(write);
+					writeProlog(writeInFile, "rule_based/patients.pl");
+					
+					String term = "additional_tests(" + person + ", S)";
+					ArrayList<String> additional_tests = consultProlog(term);
+		            
+		    		additionalTestsPanel(additional_tests);
+					}
 			}
 
 		});
@@ -227,22 +220,30 @@ public class App {
 		persAnam= new String[list_1.getModel().getSize()];
 		
 		JButton btnFindAdditionalTestsCBR = new JButton("Find tests CBR");
-		btnFindAdditionalTestsCBR.setBounds(441, 475, 250, 29);
+		btnFindAdditionalTestsCBR.setBackground(new Color(250, 235, 215));
+		btnFindAdditionalTestsCBR.setBounds(743, 468, 141, 29);
 		btnFindAdditionalTestsCBR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				person = formattedTextField.getText();
-				String age = formattedTextFieldAge.getText();
-				String gender = formattedTextFieldSex.getText();
+		    	String age = formattedTextFieldAge.getText();
+			
 				
 				
 				
-				if ( age.equals("") || gender.equals("") || person.equals("")) {
+				if ( age.equals("") ||  person.equals("")) {
 					JOptionPane.showMessageDialog(frame, "You must enter patient information.");
 				} else if (list_0.getSelectedValuesList().isEmpty() || list_1.getSelectedValuesList().isEmpty() ) {
 					JOptionPane.showMessageDialog(frame, "You must select the patient's symptoms and anamnesis.");
 					
 				}else {
+					try {
+						double d = Double.parseDouble(age);
+					} catch (NumberFormatException nfe) {
+					    	JOptionPane.showMessageDialog(frame, "Enter the number in the age field.");
+					    	return;
+					}
+
 					int i=0;
 					for (Object selected : list_0.getSelectedValuesList()) {
 						persSympt[i] = selected.toString();
@@ -256,7 +257,7 @@ public class App {
 				
 					ArrayList<String> additional_tests = new ArrayList<String>();
 					additional_tests.clear();
-					additional_tests.addAll(cbr.CbrApplication.main(personalAnamnesis, personalSymptoms, formattedTextFieldAge.getText(), formattedTextFieldSex.getText()));
+					additional_tests.addAll(cbr.CbrApplication.main(personalAnamnesis, personalSymptoms, formattedTextFieldAge.getText(), gender));
 					additionalTestsPanel(additional_tests);
 				}
 			}
@@ -264,6 +265,65 @@ public class App {
 		});
 		btnFindAdditionalTestsCBR.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(btnFindAdditionalTestsCBR);	
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_1.setBackground(new Color(253, 245, 230));
+		panel_1.setBounds(118, 23, 766, 82);
+		panel.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblSex = new JLabel("Gender: ");
+		lblSex.setBounds(371, 45, 62, 20);
+		panel_1.add(lblSex);
+		lblSex.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		JLabel lblNameAndSurname = new JLabel("Name and surname: ");
+		lblNameAndSurname.setBounds(10, 45, 149, 20);
+		panel_1.add(lblNameAndSurname);
+		lblNameAndSurname.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		formattedTextField = new JFormattedTextField();
+		formattedTextField.setBackground(new Color(255, 255, 255));
+		formattedTextField.setBounds(160, 45, 182, 19);
+		panel_1.add(formattedTextField);
+		
+		JRadioButton rdbtnF = new JRadioButton("F");
+		rdbtnF.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		rdbtnF.setBackground(new Color(253, 245, 230));
+		rdbtnF.setBounds(435, 45, 38, 23);
+		panel_1.add(rdbtnF);
+		
+		JRadioButton rdbtnM = new JRadioButton("M");
+		rdbtnM.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		rdbtnM.setBackground(new Color(253, 245, 230));
+		rdbtnM.setBounds(475, 45, 52, 23);
+		panel_1.add(rdbtnM);
+		ButtonGroup G = new ButtonGroup();
+		G.add(rdbtnF);
+		G.add(rdbtnM);
+		
+		if (rdbtnM.isSelected()) {
+			this.gender = "M";
+		}else {
+			this.gender = "F";
+			
+		}
+		
+		JLabel lblAge = new JLabel("Age: ");
+		lblAge.setBounds(537, 45, 52, 20);
+		panel_1.add(lblAge);
+		lblAge.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		formattedTextFieldAge = new JFormattedTextField();
+		formattedTextFieldAge.setBackground(new Color(255, 255, 255));
+		formattedTextFieldAge.setBounds(588, 45, 62, 19);
+		panel_1.add(formattedTextFieldAge);
+		
+		JLabel lblNewLabel_2 = new JLabel("Patient information");
+		lblNewLabel_2.setFont(new Font("Tahoma", lblNewLabel_2.getFont().getStyle() | Font.BOLD, 16));
+		lblNewLabel_2.setBounds(295, 7, 193, 23);
+		panel_1.add(lblNewLabel_2);
 
 	}
 
@@ -316,7 +376,8 @@ public class App {
 
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButton.setBounds(846, 447, 100, 36);
+		btnNewButton.setBackground(SystemColor.controlHighlight);
+		btnNewButton.setBounds(593, 468, 141, 29);
 		panelAdditionalTests.add(btnNewButton);
 			
 	}
@@ -345,6 +406,8 @@ public class App {
 		table.setBounds(109, 22, 648, 286);
 		panelResults.add(table);
 		
+		
+		
 		JButton btnNewButton1 = new JButton("Disease wiht RBR");
 		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -366,7 +429,8 @@ public class App {
 			}
 		});
 		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButton1.setBounds(441, 435, 220, 29);
+		btnNewButton1.setBackground(SystemColor.controlHighlight);
+		btnNewButton1.setBounds(593, 468, 141, 29);
 		panelResults.add(btnNewButton1);
 		
 		JButton btnNewButtonCBR = new JButton("Disease with CBR");
@@ -404,7 +468,8 @@ public class App {
 			}
 		});
 		btnNewButtonCBR.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButtonCBR.setBounds(441, 475, 250, 29);
+		btnNewButtonCBR.setBackground(SystemColor.controlHighlight);
+		btnNewButtonCBR.setBounds(743, 468, 141, 29);
 		panelResults.add(btnNewButtonCBR);
 		
 		//testovi za pisanje u fajl
@@ -468,7 +533,7 @@ public class App {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String anamnesis_csv= diagnosis.get(0)+";"+formattedTextFieldAge.getText()+";"+formattedTextFieldSex.getText()+";";
+				String anamnesis_csv= diagnosis.get(0)+";"+formattedTextFieldAge.getText()+";"+formattedTextFieldAge.getText()+";";
 				String medication_csv= diagnosis.get(0)+";";
 				String tests_csv= diagnosis.get(0)+";";
 				
@@ -534,7 +599,7 @@ public class App {
 				resultsOfTests.clear();
 				formattedTextField.setValue("");
 				formattedTextFieldAge.setValue("");
-				formattedTextFieldSex.setValue("");
+				formattedTextFieldAge.setValue("");
 				personalSymptoms.clear();
 				personalAnamnesis.clear();
 				
@@ -653,5 +718,4 @@ public class App {
 			}
 		}
 	}
-	
 }

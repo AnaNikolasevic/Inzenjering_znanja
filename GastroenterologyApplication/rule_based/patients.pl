@@ -90,3 +90,4 @@ personal_anamnesis(ere,[active_smoking, stress]).
 personal_anamnesis(grrrrrr,[gerb]).
 personal_anamnesis(das,[gerb]).
 personal_anamnesis(khg,[active_smoking, stress]).
+personal_anamnesis(dsada,[abusing_alchohol, aspirin_abuse]).
