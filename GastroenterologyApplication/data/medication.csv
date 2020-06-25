@@ -60,4 +60,6 @@ cirrhosis;hepatitis_C;furosemide
 cirrhosis;;lactulose
 cirrhosis;;tacrolimus
 cirrhosis;;nadolol
-cirrhosis;abusing_alchohol;lactulose
+cirrhosis;abusing_alchohol;lactulosehepatitis_A;23;23;abdominal_discomfort, nausea, vomiting;drug_abuse; anti_hepatitis_A  
+hepatitis_A;23;23;arm_swelling, cough;antibiotics_abuse, diet_high_in_salty_foods; anti_hepatitis_A  
+hepatitis_A;32;32;blood_in_stool, diarrhea;barretts_esophagus, delayed_stomach_emptying;anti_hepatitis_A  

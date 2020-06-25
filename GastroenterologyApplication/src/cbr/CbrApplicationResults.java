@@ -65,7 +65,9 @@ public class CbrApplicationResults implements StandardCBRApplication {
 		System.out.println("Retrieved cases:");
 		for (RetrievalResult nse : eval) {
 			System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
+			if (nse.getEval() > 0.5) {
 			output.add(nse.get_case().getDescription().toString());
+			}
 		}
 	}
 
