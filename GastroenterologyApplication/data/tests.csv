@@ -78,4 +78,4 @@ cirrhosis; alt:high, ast:high, alp:high, bilirubin:high, albumin:low, cbc:platel
 #cirrhosis; alt:high, ast:high, alp:high, bilirubin:high, albumin:normal, cbc:platelets_low
 #cirrhosis; alt:high, ast:high, alp:normal, bilirubin:high, albumin:low, cbc:platelets_low
 #cirrhosis; alt:high, ast:high, alp:normal, bilirubin:high, albumin:normal, cbc:platelets_low
-cirrhosis; liver_biopsy:cirrhosis
+cirrhosis; liver_biopsy:cirrhosishepatitis_C;30;30;;; anti_hepatitis_C

@@ -15,7 +15,6 @@ import com.sun.net.httpserver.Authenticator.Result;
 
 import connector.CsvConnector;
 import connector.CsvConnectorResults;
-import jdk.jfr.internal.StringPool;
 import model.Examination2;
 import model.Results;
 import similarity.TableSimilarity;
