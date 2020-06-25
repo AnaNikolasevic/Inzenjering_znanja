@@ -3,7 +3,12 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -16,6 +21,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -25,6 +31,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
@@ -45,11 +53,14 @@ import ucm.gaia.jcolibri.cbraplications.StandardCBRApplication;
 import ucm.gaia.jcolibri.cbrcore.CBRQuery;
 
 import java.io.FileWriter;
+
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
+
 import java.awt.SystemColor;
 import java.awt.Color;
 import java.awt.FlowLayout;
+
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
@@ -72,8 +83,6 @@ public class App {
 	public static JList list_0;
 	public static JTable table;
 	public static JScrollPane scrollPane_2;
-	public static JScrollPane scrollPane_1;
-	public static JScrollPane scrollPane;
 	public static Object[] list1;
 	public static DefaultTableModel tableModel;
 	private static String[] persAnam;
@@ -82,7 +91,9 @@ public class App {
 	public static HashMap<String, String> resultsOfTests =  new HashMap<String, String> ();
 	public static String[] persSympt ;
 	public static ArrayList<String> personalSymptoms;
-	public static ArrayList<String> personalAnamnesis ;
+	public static ArrayList<String> personalAnamnesis;
+	public static ArrayList<String> listOfPatients;
+
 	public static String choosenTests;
 	public String gender = "";
 	public static void main(String[] args) {
@@ -132,52 +143,181 @@ public class App {
 		panel.setBorder(new LineBorder(new Color(255, 235, 205), 1, true));
 		panel.setBackground(new Color(255, 250, 250));
 		
-		panel.setBounds(0, 0, 992, 529);
+		panel.setBounds(-25, 0, 992, 529);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
 		JLabel lblSymptoms = new JLabel("Symptoms");
-		lblSymptoms.setBounds(118, 130, 74, 20);
+		lblSymptoms.setBounds(709, 23, 77, 29);
 		lblSymptoms.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(lblSymptoms);
-
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(201, 130, 258, 278);
+		java.util.Collections.sort(listOfSymptoms, Collator.getInstance());
+		java.util.Collections.sort(listOfAnamnesis, Collator.getInstance());
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(63, 11, 614, 432);
+		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_1.setBackground(new Color(253, 245, 230));
+		panel.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblSex = new JLabel("Gender: ");
+		lblSex.setBounds(10, 220, 62, 20);
+		panel_1.add(lblSex);
+		lblSex.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		JLabel lblNameAndSurname = new JLabel("Name and surname: ");
+		lblNameAndSurname.setBounds(10, 58, 149, 20);
+		panel_1.add(lblNameAndSurname);
+		lblNameAndSurname.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		formattedTextField = new JFormattedTextField();
+		formattedTextField.setBackground(new Color(255, 255, 255));
+		formattedTextField.setBounds(10, 89, 182, 19);
+		panel_1.add(formattedTextField);
+		
+		JRadioButton rdbtnF = new JRadioButton("F");
+		rdbtnF.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		rdbtnF.setBackground(new Color(253, 245, 230));
+		rdbtnF.setBounds(10, 247, 38, 23);
+		panel_1.add(rdbtnF);
+		
+		JRadioButton rdbtnM = new JRadioButton("M");
+		rdbtnM.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		rdbtnM.setBackground(new Color(253, 245, 230));
+		rdbtnM.setBounds(57, 247, 52, 23);
+		panel_1.add(rdbtnM);
+		ButtonGroup G = new ButtonGroup();
+		G.add(rdbtnF);
+		G.add(rdbtnM);
+		
+		JLabel lblAge = new JLabel("Age: ");
+		lblAge.setBounds(10, 133, 52, 20);
+		panel_1.add(lblAge);
+		lblAge.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		formattedTextFieldAge = new JFormattedTextField();
+		formattedTextFieldAge.setBackground(new Color(255, 255, 255));
+		formattedTextFieldAge.setBounds(10, 164, 62, 19);
+		panel_1.add(formattedTextFieldAge);
+		
+		JLabel lblNewLabel_2 = new JLabel("Medical record");
+		lblNewLabel_2.setFont(new Font("Tahoma", lblNewLabel_2.getFont().getStyle() | Font.BOLD, 16));
+		lblNewLabel_2.setBounds(224, 11, 193, 23);
+		panel_1.add(lblNewLabel_2);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(709, 65, 256, 378);
 		panel.add(scrollPane);
 		
 		//setting list of symptoms
 		list_0 = new JList();
-		list_0.setBackground(new Color(255, 255, 255));
 		scrollPane.setViewportView(list_0);
+		list_0.setBackground(new Color(255, 255, 255));
 		list_0.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		java.util.Collections.sort(listOfSymptoms, Collator.getInstance());
 		list_0.setListData((String[]) listOfSymptoms.toArray(new String[0]));
-
-		JLabel lblNewLabel = new JLabel("Anamnesis");
-		lblNewLabel.setBounds(535, 130, 77, 29);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panel.add(lblNewLabel);
+		persSympt = new String[list_0.getModel().getSize()];
 		
-		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(626, 130, 258, 278);
-		panel.add(scrollPane_1);
+		
+		JButton btnLoad = new JButton("Load");
+		btnLoad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				listOfPatients = consultProlog("age(X, _)");
+				Object[] patients = listOfPatients.toArray(new Object[listOfPatients.size()]);
+				String s = (String)JOptionPane.showInputDialog(
+				                    frame,
+				                    "Choose patient:\n",
+				                    "Medical record",
+				                    JOptionPane.PLAIN_MESSAGE,
+				                    null,
+				                    patients,
+				                    patients[2]);
+				if (!s.equals(null)) {
+					formattedTextField.setText(s);
+					ArrayList<String> listOfAges = consultProlog("age(" + s + ",X)");
+					formattedTextFieldAge.setText(listOfAges.get(0));
+					ArrayList<String> listOfSex = consultProlog("male(" + s + ")");
+					System.out.println(listOfSex.size());
+					if(listOfSex.size()!=0){
+						rdbtnF.setSelected(false);
+						rdbtnM.setSelected(true);
+
+					} else{
+						rdbtnF.setSelected(true);
+						rdbtnM.setSelected(false);
+
+					}
+					ArrayList<String> listOfPersonalAnamnesis = consultProlog("personal_anamnesis(" + s + ",X)");
+					Object[] list = ((String[]) listOfPersonalAnamnesis.toArray(new String[0]));
+
+					list_1.clearSelection();
+				    for (Object value : list) {
+				        int index = getIndex(list_1.getModel(), value);
+				        if (index >=0) {
+				        	list_1.addSelectionInterval(index, index);
+				        }
+				    }
+				    list_1.ensureIndexIsVisible(list_1.getSelectedIndex());
+					
+				} else {
+				    System.exit(0);
+				}
+			}
+			public int getIndex(ListModel model, Object value) {
+			    if (value == null) return -1;
+			    if (model instanceof DefaultListModel) {
+			        return ((DefaultListModel) model).indexOf(value);
+			    }
+			    for (int i = 0; i < model.getSize(); i++) {
+			        if (value.equals(model.getElementAt(i))) return i;
+			    }
+			    return -1;
+			}
+		});
+		btnLoad.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnLoad.setBounds(398, 373, 127, 23);
+		panel_1.add(btnLoad);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(269, 89, 256, 260);
+		panel_1.add(scrollPane_1);
 		
 		list_1 = new JList();
-		list_1.setBackground(new Color(255, 255, 255));
 		scrollPane_1.setViewportView(list_1);
+		list_1.setBackground(new Color(255, 255, 255));
 		list_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		java.util.Collections.sort(listOfAnamnesis, Collator.getInstance());
 		list_1.setListData((String[]) listOfAnamnesis.toArray(new String[0]));
+		persAnam= new String[list_1.getModel().getSize()];
+		
+		JLabel lblNewLabel = new JLabel("Anamnesis");
+		lblNewLabel.setBounds(269, 58, 77, 20);
+		panel_1.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		JButton btnCompleteMr = new JButton("Complete MR");
+		btnCompleteMr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnCompleteMr.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnCompleteMr.setBounds(261, 373, 127, 23);
+		panel_1.add(btnCompleteMr);
+
 		
 		JButton btnFindAdditionalTests = new JButton("Find tests");
-		btnFindAdditionalTests.setBackground(new Color(250, 235, 215));
 		btnFindAdditionalTests.setBounds(593, 468, 141, 29);
+		btnFindAdditionalTests.setBackground(new Color(250, 235, 215));
 		btnFindAdditionalTests.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				person = formattedTextField.getText();
+				person = formattedTextField.getText().toLowerCase().replace(" ", "_");
+				if (rdbtnF.isSelected()){
+					gender = "F";
+				} else if (rdbtnM.isSelected()){
+					gender = "M";
+				}
 				// check if each field is filled
-				if ( formattedTextFieldAge.getText().equals("") ||  person.equals("")) {
+				if ( formattedTextFieldAge.getText().equals("") ||  person.equals("") || gender.equals("")) {
 					JOptionPane.showMessageDialog(frame, "You must enter patient information.");
 				} else if (list_0.getSelectedValuesList().isEmpty() ||  list_1.getSelectedValuesList().isEmpty()) {
 					JOptionPane.showMessageDialog(frame, "You must select the patient's symptoms and anamnesis.");
@@ -190,6 +330,17 @@ public class App {
 					    	return;
 					}
 
+					try {
+						System.out.println("zibrisano");
+						changeProlog(person, "rule_based/patients.pl");
+						changeProlog(person, "rule_based/symptoms.pl");
+						changeProlog(person, "rule_based/tests.pl");
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+					
 					for (Object selected : list_0.getSelectedValuesList()) {
 						personalSymptoms.add(selected.toString());
 						System.out.println(personalSymptoms);
@@ -207,6 +358,20 @@ public class App {
 					writeInFile.clear();
 					writeInFile.add(write);
 					writeProlog(writeInFile, "rule_based/patients.pl");
+		
+					write = "age(" + person + "," + formattedTextFieldAge.getText() + ").";
+					writeInFile.clear();
+					writeInFile.add(write);
+					writeProlog(writeInFile, "rule_based/patients.pl");
+					
+					if(rdbtnF.isSelected()){
+						write = "female(" + person + ").";
+					} else {
+						write = "male(" + person + ").";
+					}
+					writeInFile.clear();
+					writeInFile.add(write);
+					writeProlog(writeInFile, "rule_based/patients.pl");
 					
 					String term = "additional_tests(" + person + ", S)";
 					ArrayList<String> additional_tests = consultProlog(term);
@@ -219,23 +384,16 @@ public class App {
 		btnFindAdditionalTests.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(btnFindAdditionalTests);	
 		
-
-		persSympt = new String[list_0.getModel().getSize()];
-		persAnam= new String[list_1.getModel().getSize()];
-		
 		JButton btnFindAdditionalTestsCBR = new JButton("Find tests CBR");
-		btnFindAdditionalTestsCBR.setBackground(new Color(250, 235, 215));
 		btnFindAdditionalTestsCBR.setBounds(743, 468, 141, 29);
+		btnFindAdditionalTestsCBR.setBackground(new Color(250, 235, 215));
 		btnFindAdditionalTestsCBR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				person = formattedTextField.getText();
+				person = formattedTextField.getText().toLowerCase().replace(" ", "_");
 		    	String age = formattedTextFieldAge.getText();
-			
 				
-				
-				
-				if ( age.equals("") ||  person.equals("")) {
+				if ( age.equals("") ||  person.equals("") || gender.equals("")) {
 					JOptionPane.showMessageDialog(frame, "You must enter patient information.");
 				} else if (list_0.getSelectedValuesList().isEmpty() || list_1.getSelectedValuesList().isEmpty() ) {
 					JOptionPane.showMessageDialog(frame, "You must select the patient's symptoms and anamnesis.");
@@ -270,64 +428,6 @@ public class App {
 		btnFindAdditionalTestsCBR.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(btnFindAdditionalTestsCBR);	
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBackground(new Color(250, 235, 215));
-		panel_1.setBounds(118, 23, 766, 82);
-		panel.add(panel_1);
-		panel_1.setLayout(null);
-		
-		JLabel lblSex = new JLabel("Gender: ");
-		lblSex.setBounds(371, 45, 62, 20);
-		panel_1.add(lblSex);
-		lblSex.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		
-		JLabel lblNameAndSurname = new JLabel("Name and surname: ");
-		lblNameAndSurname.setBounds(10, 45, 149, 20);
-		panel_1.add(lblNameAndSurname);
-		lblNameAndSurname.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		
-		formattedTextField = new JFormattedTextField();
-		formattedTextField.setBackground(new Color(255, 255, 255));
-		formattedTextField.setBounds(160, 45, 182, 19);
-		panel_1.add(formattedTextField);
-		
-		JRadioButton rdbtnF = new JRadioButton("F");
-		rdbtnF.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnF.setBackground(new Color(250, 235, 215));
-		rdbtnF.setBounds(435, 45, 38, 23);
-		panel_1.add(rdbtnF);
-		
-		JRadioButton rdbtnM = new JRadioButton("M");
-		rdbtnM.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnM.setBackground(new Color(250, 235, 215));
-		rdbtnM.setBounds(475, 45, 52, 23);
-		panel_1.add(rdbtnM);
-		ButtonGroup G = new ButtonGroup();
-		G.add(rdbtnF);
-		G.add(rdbtnM);
-		
-		if (rdbtnM.isSelected()) {
-			this.gender = "M";
-		}else {
-			this.gender = "F";
-			
-		}
-		
-		JLabel lblAge = new JLabel("Age: ");
-		lblAge.setBounds(537, 45, 52, 20);
-		panel_1.add(lblAge);
-		lblAge.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		
-		formattedTextFieldAge = new JFormattedTextField();
-		formattedTextFieldAge.setBackground(new Color(255, 255, 255));
-		formattedTextFieldAge.setBounds(588, 45, 62, 19);
-		panel_1.add(formattedTextFieldAge);
-		
-		JLabel lblNewLabel_2 = new JLabel("Patient information");
-		lblNewLabel_2.setFont(new Font("Tahoma", lblNewLabel_2.getFont().getStyle() | Font.BOLD, 16));
-		lblNewLabel_2.setBounds(295, 7, 193, 23);
-		panel_1.add(lblNewLabel_2);
 
 	}
 
@@ -371,7 +471,7 @@ public class App {
 			public void actionPerformed(ActionEvent e) {
 				for (Object selected : list_2.getSelectedValuesList()) {
 					String line = selected.toString();
-					String[] values = line.strip().split(" ");
+					String[] values = line.trim().split(" ");
 					personalTests.add(values[0]);
 					//personalTests.add(selected.toString());
 				}
@@ -661,11 +761,23 @@ public class App {
             if(solution!=null) {
             System.out.println("solution: " + solution);
             
+            if(solution.toString(jip).contains("male")) {
+            	returnList.add(solution.toString());
+            } 
+            
             JIPVariable[] vars = solution.getVariables();
             for (JIPVariable var : vars) {
                 if (!var.isAnonymous()) {
                     System.out.println(var.getName() + " = " + var.toString(jip) + " ");
-                    if(solution.toString(jip).contains("symptoms")) {
+                    if(solution.toString(jip).contains("personal_anamnesis")) {
+	                    String[] personal_anamnesis = var.toString(jip).substring(1, var.toString(jip).length()-1).split(",");
+	                    for (String a : personal_anamnesis) {
+	                    	if(!listOfAnamnesis.contains(a)) {
+	                    		listOfAnamnesis.add(a);
+	                    		returnList = listOfAnamnesis;
+	                    	}
+						}    
+                    } else if(solution.toString(jip).contains("symptoms")) {
 	                    String[] symptoms = var.toString(jip).substring(1, var.toString(jip).length()-1).split(",");
 	                    for (String symptom : symptoms) {
 	                    	if(!listOfSymptoms.contains(symptom)) {
@@ -693,6 +805,9 @@ public class App {
 	                } else if(solution.toString(jip).contains("medications")) {
 	                	System.out.println("Medications: " + var.toString(jip));
 	                	returnList.add(var.toString(jip));
+	                } else if(solution.toString(jip).contains("age")) {
+	                	System.out.println("Age: " + var.toString(jip));
+	                	returnList.add(var.toString(jip).replace("_", " "));
 	                }
                 }
             }
@@ -723,5 +838,31 @@ public class App {
 				e2.printStackTrace();
 			}
 		}
+	}
+	
+	public static void changeProlog(String line, String fileName) throws IOException {
+		File inputFile = new File(fileName);
+		File tempFile = new File("myTempFile.txt");
+
+		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+		String lineToRemove = line;
+		String currentLine;
+
+		while((currentLine = reader.readLine()) != null) {
+		    // trim newline when comparing with lineToRemove
+		    String trimmedLine = currentLine.trim();
+
+		    if(trimmedLine.contains(lineToRemove)){
+		    	System.out.println("jeej");
+		    }
+		    if(trimmedLine.contains(lineToRemove)) continue;
+		    writer.write(currentLine + System.getProperty("line.separator"));
+		}
+		writer.close(); 
+		reader.close(); 
+		inputFile.delete();
+		boolean successful = tempFile.renameTo(inputFile);
 	}
 }

@@ -30,25 +30,18 @@ symptoms(cirrhosis, [fatigue, nausea, abdominal_discomfort, abdominal_swelling, 
 
 personal_symptoms(ana, [sharp_abdominal_pain, sharp_chest_pain, nausea, heartburn,upper_abdominal_pain]).
 personal_symptoms(anaa, [nausea, itching, joint_aches]).
-personal_symptoms(aca, [nausea, itching, weakness]).
-personal_symptoms(sara, [jaundice, stomach_bloating, nausea]).
-personal_symptoms(peca, [vomiting_blood, upper_abdominal_pain]).
 personal_symptoms(una, [lower_abdominal_pain, melena]).
 personal_symptoms(tijana, [joint_aches, stomach_bloating, heartburn]).
 
 personal_symptoms(mima, [weakness, loss_of_appetite, sharp_abdominal_pain]). %rak jednjaka
-personal_symptoms(masa, [sharp_abdominal_pain, heartburn, vomiting, difficulty_in_swallowing]). %gerb
-personal_symptoms(neca, [vomiting, back_pain, burning_abdominal_pain, sharp_chest_pain]). %kamen u zuci
 personal_symptoms(marti, [sharp_chest_pain, nausea, vomiting, difficulty_in_swallowing]). %cir na zeludcu
 personal_symptoms(ljilja, [fatigue, vomiting, nausea, sharp_abdominal_pain]). %rak zeludca
 
 
-personal_symptoms(steva,[sharp_abdominal_pain, fatigue]).
-personal_symptoms(nasa,[sharp_abdominal_pain, fatigue]).
-personal_symptoms(niko,[sharp_abdominal_pain, fatigue]).
-personal_symptoms(rbr,[sharp_abdominal_pain, fatigue]).
-personal_symptoms(ere,[nausea, upper_abdominal_pain]).
-personal_symptoms(grrrrrr,[sharp_abdominal_pain, fatigue]).
-personal_symptoms(das,[sharp_abdominal_pain, fatigue]).
-personal_symptoms(khg,[nausea, upper_abdominal_pain]).
-personal_symptoms(dsada,[back_pain, blood_in_stool]).
+
+personal_symptoms(aca,[headache]).
+personal_symptoms(neca,[difficulty_in_swallowing]).
+personal_symptoms(masa,[diarrhea]).
+personal_symptoms(peca,[difficulty_in_swallowing]).
+personal_symptoms(zivka,[jaundice]).
+personal_symptoms(sara,[discharge_in_stools]).

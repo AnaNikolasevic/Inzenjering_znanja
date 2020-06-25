@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
-
+import java.lang.String;
 import model.Results;
 import ucm.gaia.jcolibri.cbrcore.CBRCase;
 import ucm.gaia.jcolibri.cbrcore.CaseBaseFilter;
@@ -31,7 +31,7 @@ public class CsvConnectorResults implements Connector {
 			while ((line = br.readLine()) != null) {
 				if (line.startsWith("#") || (line.length() == 0))
 					continue;
-				String[] values = line.strip().split(";");
+				String[] values = line.trim().split(";");
 
 				CBRCase cbrCase = new CBRCase();
 

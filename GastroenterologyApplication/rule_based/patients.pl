@@ -32,15 +32,11 @@ anamnesis(stomach_cancer, [pernicious_anaemia, family_history_of_stomach_cancer,
 %---------------------
 
 personal_anamnesis(anaa, [hiv_positive]).
-personal_anamnesis(sara, [abusing_alchohol, nt0ba]).
-personal_anamnesis(peca, [abusing_alchohol, sterss]).
 personal_anamnesis(isi, [hepatitis_A]).
 personal_anamnesis(una, active_smoking).
 
 personal_anamnesis(mima, [gerb, active_smoking]).
 personal_anamnesis(marti, [overweight, active_smoking, persistent_coughing]).
-personal_anamnesis(neca, [overweight, high_blood_cholesterol, family_history_of_gallstones]).
-personal_anamnesis(masa, [pregnancy, hiatal_hernia, delayed_stomach_emptying]).
 personal_anamnesis(ljilja, [family_history_of_stomach_cancer, chronic_gastritis, diet_high_in_salty_foods]).
 
 
@@ -53,24 +49,14 @@ personal_anamnesis(ljilja, [family_history_of_stomach_cancer, chronic_gastritis,
 %-----------------------
 
 female(ana).
-female(sara).
-female(masa).
 female(una).
 female(tijana).
 female(mima).
-male(aca).
-male(peca).
-male(neca).
 
 patient(X):- male(X).
 patient(X):- female(X).
 
 age(ana, 33).
-age(aca,46).
-age(sara,22).
-age(peca,65).
-age(masa,50).
-age(neca,70).
 age(una, 25).
 age(tijana, 60).
 age(mima, 53).
@@ -82,12 +68,22 @@ age(mima, 53).
 %older_adult(X):- age(X,Y), Y>=40, Y<60.
 %old(X):- age(X,Y), Y>=60.
 
-personal_anamnesis(steva,[gerb]).
-personal_anamnesis(nasa,[gerb]).
-personal_anamnesis(niko,[gerb]).
-personal_anamnesis(rbr,[gerb]).
-personal_anamnesis(ere,[active_smoking, stress]).
-personal_anamnesis(grrrrrr,[gerb]).
-personal_anamnesis(das,[gerb]).
-personal_anamnesis(khg,[active_smoking, stress]).
-personal_anamnesis(dsada,[abusing_alchohol, aspirin_abuse]).
+
+personal_anamnesis(aca,[aspirin_abuse]).
+age(aca,46).
+female(aca).
+personal_anamnesis(neca,[family_history_of_gallstones, high_blood_cholesterol, overweight]).
+age(neca,70).
+male(neca).
+personal_anamnesis(masa,[delayed_stomach_emptying, hiatal_hernia, pregnancy]).
+age(masa,50).
+female(masa).
+personal_anamnesis(peca,[abusing_alchohol]).
+age(peca,65).
+male(peca).
+personal_anamnesis(zivka,[abusing_alchohol]).
+age(zivka,53).
+female(zivka).
+personal_anamnesis(sara,[hepatitis_B]).
+age(sara,30).
+female(sara).
