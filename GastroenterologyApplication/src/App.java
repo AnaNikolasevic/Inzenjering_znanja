@@ -54,6 +54,8 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.UIManager;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.TitledBorder;
 
 public class App {
 
@@ -111,6 +113,7 @@ public class App {
 	private void initialize() throws IOException {
 		// initializing frame	
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(255, 250, 250));
 		frame.setBounds(100, 100, 1006, 568);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -126,7 +129,8 @@ public class App {
 	    // ------------------------------first panel--------------------------
 	    
 		panelAdditionalTests.setVisible(false);
-		panel.setBackground(new Color(255, 250, 240));
+		panel.setBorder(new LineBorder(new Color(255, 235, 205), 1, true));
+		panel.setBackground(new Color(255, 250, 250));
 		
 		panel.setBounds(0, 0, 992, 529);
 		frame.getContentPane().add(panel);
@@ -268,7 +272,7 @@ public class App {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBackground(new Color(253, 245, 230));
+		panel_1.setBackground(new Color(250, 235, 215));
 		panel_1.setBounds(118, 23, 766, 82);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
@@ -290,13 +294,13 @@ public class App {
 		
 		JRadioButton rdbtnF = new JRadioButton("F");
 		rdbtnF.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnF.setBackground(new Color(253, 245, 230));
+		rdbtnF.setBackground(new Color(250, 235, 215));
 		rdbtnF.setBounds(435, 45, 38, 23);
 		panel_1.add(rdbtnF);
 		
 		JRadioButton rdbtnM = new JRadioButton("M");
 		rdbtnM.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		rdbtnM.setBackground(new Color(253, 245, 230));
+		rdbtnM.setBackground(new Color(250, 235, 215));
 		rdbtnM.setBounds(475, 45, 52, 23);
 		panel_1.add(rdbtnM);
 		ButtonGroup G = new ButtonGroup();
@@ -332,14 +336,15 @@ public class App {
 		
 		// ------------------- panel for additional tests--------------------
 		panelAdditionalTests=new JPanel();
+		panelAdditionalTests.setBackground(new Color(255, 250, 250));
 		
 		JLabel lblNewLabel_1 = new JLabel("Additional tests:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1.setBounds(50, 77, 154, 36);
+		lblNewLabel_1.setBounds(116, 80, 135, 36);
 		panelAdditionalTests.add(lblNewLabel_1);
 		
 		scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(222, 77, 594, 342);
+		scrollPane_2.setBounds(250, 80, 631, 342);
 		
 		String additionalTestsString1 = additional_tests.toString().replace("[", "").replace("]", "");
 		String[] list= additionalTestsString1.split(",");
@@ -365,10 +370,10 @@ public class App {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for (Object selected : list_2.getSelectedValuesList()) {
-					//String line = selected.toString();
-					//String[] values = line.strip().split("\\(");
-					//personalTests.add(values[0]);
-					personalTests.add(selected.toString());
+					String line = selected.toString();
+					String[] values = line.strip().split(" ");
+					personalTests.add(values[0]);
+					//personalTests.add(selected.toString());
 				}
 				panelForTestsResults(personalTests);				
 			}
@@ -376,8 +381,8 @@ public class App {
 
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButton.setBackground(SystemColor.controlHighlight);
-		btnNewButton.setBounds(593, 468, 141, 29);
+		btnNewButton.setBackground(new Color(250, 235, 215));
+		btnNewButton.setBounds(743, 468, 141, 29);
 		panelAdditionalTests.add(btnNewButton);
 			
 	}
@@ -391,6 +396,7 @@ public class App {
 		panelAdditionalTests.setVisible(false);
 		panelResults.setVisible(true);
 		panelResults.setBounds(0, 0, 992, 531);
+		panelResults.setBackground(new Color(255, 250, 250));
 		frame.getContentPane().add(panelResults);
 		panelResults.setLayout(null);
 		
@@ -401,9 +407,10 @@ public class App {
 		tableModel.addColumn("Test", list1);
 		tableModel.addColumn("Result");
 
+		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		table.setModel(tableModel);
 
-		table.setBounds(109, 22, 648, 286);
+		table.setBounds(118, 80, 766, 286);
 		panelResults.add(table);
 		
 		
@@ -429,10 +436,10 @@ public class App {
 			}
 		});
 		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButton1.setBackground(SystemColor.controlHighlight);
+		btnNewButton1.setBackground(new Color(250, 235, 215));
 		btnNewButton1.setBounds(593, 468, 141, 29);
 		panelResults.add(btnNewButton1);
-		
+
 		JButton btnNewButtonCBR = new JButton("Disease with CBR");
 		btnNewButtonCBR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -460,15 +467,11 @@ public class App {
 				medication.createBinAnam(persAnam);
 	            ArrayList<String> medications = CbrApplicationMed.main(medication);
 	            
-	           // ArrayList<String> list = new ArrayList<>();
-	           // list.add(diagnosis.get(0));
-	            System.out.println("ovo vracaaa!!!!!!!!!!!!!!!!!" + diagnosis.toString());
-	            
 	            panelDiagnosis(diagnosis, medications);
 			}
 		});
 		btnNewButtonCBR.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButtonCBR.setBackground(SystemColor.controlHighlight);
+		btnNewButtonCBR.setBackground(new Color(250, 235, 215));
 		btnNewButtonCBR.setBounds(743, 468, 141, 29);
 		panelResults.add(btnNewButtonCBR);
 		
@@ -494,22 +497,23 @@ public class App {
 		panelResults.setVisible(false);
 		panelDiagnosis.setVisible(true);
 		panelDiagnosis.setBounds(0, 0, 992, 531);
+		panelDiagnosis.setBackground(new Color(255, 250, 250));
 		frame.getContentPane().add(panelDiagnosis);
 		panelDiagnosis.setLayout(null);
 		
 		JLabel lblDiagnosisForYou = new JLabel("Diagnosis for you patient is: ");
 		lblDiagnosisForYou.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDiagnosisForYou.setBounds(62, 43, 216, 69);
+		lblDiagnosisForYou.setBounds(118, 80, 216, 69);
 		panelDiagnosis.add(lblDiagnosisForYou);
 		
 		JLabel lblMedicam = new JLabel("Recommended medications:");
 		lblMedicam.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblMedicam.setBounds(62, 122, 216, 69);
+		lblMedicam.setBounds(118, 150, 216, 69);
 		panelDiagnosis.add(lblMedicam);
 		
 		JLabel diagnosisLabel = new JLabel(" ");
 		diagnosisLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		diagnosisLabel.setBounds(288, 43, 400, 69);
+		diagnosisLabel.setBounds(350, 80, 400, 69);
 		ArrayList<String> outputDiagnosis = new ArrayList<>();
 		for (String s : diagnosis) {
 			if (!outputDiagnosis.contains(s)) {
@@ -522,7 +526,8 @@ public class App {
 		
 		list = new JList();
 		list.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		list.setBounds(288, 151, 216, 157);
+		list.setBounds(350, 170, 216, 160);
+		list.setBorder(new LineBorder(new Color(0, 0, 0)));
 		String additionalTestsString = medications.toString().replace("[", "").replace("]", "");
 		String[] medicationsString= additionalTestsString.split(",");
 		
@@ -611,7 +616,8 @@ public class App {
 			}
 		});
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnBack.setBounds(141, 475, 250, 29);
+		btnBack.setBackground(new Color(250, 235, 215));
+		btnBack.setBounds(743, 468, 141, 29);
 		panelDiagnosis.add(btnBack);
 	}
 

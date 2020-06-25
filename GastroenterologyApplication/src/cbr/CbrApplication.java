@@ -3,6 +3,7 @@ package cbr;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -104,9 +105,15 @@ public class CbrApplication implements StandardCBRApplication {
 			System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
 			String description = nse.get_case().getDescription().toString();
 			//String[] tests= description.split("tests")[1].substring(1).split(",");
+			System.out.println("OVDE CE BITI ISPISANI TESTOVI SA PROVENTOM");
 			String[] tests= description.split("=")[1].split(",");
 			for (String test : tests) {
-				list.add(test + "  (" +description.split("=")[0]+ ")");
+				if (nse.getEval() > 0.5) {
+					DecimalFormat df = new DecimalFormat("##.##");
+					System.out.println();
+					list.add(test + "  ( For "  +description.split("=")[0]+ " disease. Similarity with this disease is " + df.format(nse.getEval()*100) + "% )");
+				//	System.out.println(test + "  ( For "  +description.split("=")[0]+ " disease with " + df.format(nse.getEval()*100) + "% )");
+				}
 			}
 		}
 	}
@@ -142,6 +149,7 @@ public class CbrApplication implements StandardCBRApplication {
 			String [] anam= anamnesis.toArray(new String[0]);
 			examination.createBinSymp(symp);
 			examination.createBinAnam(anam);
+	
 
 			
 			query.setDescription( examination );
