@@ -29,7 +29,7 @@ public class CsvConnector implements Connector {
 			while ((line = br.readLine()) != null) {
 				if (line.startsWith("#") || (line.length() == 0))
 					continue;
-				String[] values = line.strip().split(";");
+				String[] values = line.trim().split(";");
 				CBRCase cbrCase = new CBRCase();
 
 				Examination2 examination = new Examination2();

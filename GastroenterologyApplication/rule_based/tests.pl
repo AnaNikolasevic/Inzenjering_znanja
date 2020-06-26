@@ -88,32 +88,15 @@ test(autoimmune_hepatitis, [ana, asma, anti_lkm1]).
 cbc(ana,high_wbc).
 ct(ana, hiatal_hernia).
 
-anti_hepatitis_A(anaa, negative).
-anti_hepatitis_B(anaa, negative).
-anti_hepatitis_C(anaa, positive).
-alt(aca, high).
-ast(aca, high).
-alp(aca, normal).
-unconjugated_bilirubin(aca, high).
-albumin(aca, low).
 liver_biopsy(isi, cirrhosis).
 
-c19_9(sara, high_level).
-x_ray(sara, pancreatic_cancer).
-c13(peca, h_pylori).
 blood_test(una, pANCA).
 cbc(una, anemia).
-cBir1(tijana, positive).
-cbc(tijana, infection).
 
 
 
 
 cbc(mina, anemia).
-biopsy(mima, esophageal_cancer ).
-esophageal_manometry(masa, gerb).
-bilirubin(neca, high).
-alp(neca, high).
 barium_swallow(marti, hiatal_hernia).
 endoscopy(ljilja, stomach_cancer).
 cbc(ljilja, anemia).
@@ -128,46 +111,16 @@ cbc(ljilja, anemia).
 contains(S,[]).
 contains(S,[H|T]) :- member(H,S), contains(S,T).
 
-% OLD
 possible_diseases(Name,D) :- personal_symptoms(Name, L),  symptoms(D,L1), contains(L1,L),
                              personal_anamnesis(Name, A),  anamnesis(D,A1), contains(A1,A). 
 
-% NEW
-% possible_diseases(Name, listOfSymptoms, anamnesis, answer)
+additional_tests(Name,T,D) :-  possible_diseases(Name,D), test(D,T).
 
-%possible_diseases(Name, L, A, D) :- symptoms(D,L1), contains(L1,L),
-%									anamnesis(D,A1), contains(A1,A). 
-%old
-additional_tests(Name,T) :-  possible_diseases(Name,D), test(D,T).
-
-%new
-%additional_tests(Name, L, A, T) :-  possible_diseases(Name,L,A,D), test(D,T).
 
 medications(Name,M) :-  diagnosis(Name,D), medication(D,M).
 
-anti_hepatitis_C(dsa,null).
-anti_hepatitis_C(das,positive).
-anti_hepatitis_C(ww,positive).
-anti_hepatitis_C(qqq,null).
-anti_hepatitis_C(rrr,positive).
-anti_hepatitis_C(asdsada,positive).
- anti_hepatitis_A(qqq,positive).
- anti_hepatitis_B(qqq,positive).
- x_ray(Masa,null).
- x_ray(masa,null).
-barium_swallow(masa,null).
- x_ray(masa,null).
- x_ray(masa,null).
- x_ray(masa,null).
-anti_hepatitis_A(masa,null).
-anti_hepatitis_A(masa,positive).
-anti_hepatitis_A(masa,positive).
-anti_hepatitis_A(masa,positive).
-anti_hepatitis_A(masa,null).
-anti_hepatitis_A(masa,positive).
-anti_hepatitis_A(masa,positive).
-anti_hepatitis_A(masa,null).
-anti_hepatitis_A(masa,positive).
-anti_hepatitis_A(Masa,positive).
-anti_hepatitis_A(neko,positive).
-anti_hepatitis_A(masa,positive).
+
+
+anti_hepatitis_B(mima,negative).
+x_ray(sara_vukoje,esophageal_cancer).
+cbc(sada,anemia).

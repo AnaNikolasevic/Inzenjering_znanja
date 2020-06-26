@@ -90,9 +90,13 @@ public class Medication implements CaseComponent {
 	
 	}
 	
+
+
 	@Override
 	public String toString() {
-		return  medications;
+
+		return medications;
+
 	}
 
 	public String getDisease() {

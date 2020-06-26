@@ -15,4 +15,4 @@ medication(hepatitis_C, [daclatasvir, elbasvir, grazoprevir, glecaprevir, ledipa
 medication(cirrhosis, [furosemide, spironolactone, lactulose, tacrolimus, nadolol]).
 medication(drug_induced_hepatitis, [lactulose, tacrolimus, ritonavir, atazanavir, mycophenolate_mofetil]).
 medication(inherited_hepatitis, [ribavirin, peginterferon_alfa_2b, lamivudine, adefovir, ritonavir]).
-medication(autoimmune_hepatitis, [prednisone, azathioprine, liver_transplant]).
+medication(autoimmune_hepatitis, [prednisone, azathioprine, liver_transplant, ribavirin, tenofovir]).

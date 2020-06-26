@@ -11,7 +11,7 @@ diagnosis(X, gerb):-  x_ray(X, gerb); endoscopy(X, gerb); esophageal_manometry(X
 			esophageal_impedance_pH(X, gerb); bravo_wireless(X, gerb).  
 
 
-diagnosis(X,esophageal_cancer):- (barium_swallow(X, esophageal_cancer); x_ray(X, esophageal_cancer); mri(X, esophageal_cancer ); 
+diagnosis(X, esophageal_cancer):- (barium_swallow(X, esophageal_cancer); x_ray(X, esophageal_cancer); mri(X, esophageal_cancer ); 
 				ultrasound(X, esophageal_cancer); endoscopy(X, esophageal_cancer); ct(X, esophageal_cancer); 
 				biopsy(X, esophageal_cancer)), (cbc(X, anemia); her2(X, high)).
 
@@ -29,7 +29,6 @@ diagnosis(X, pancreatic_cancer):- (c19_9(X, high); cea(X, high)),
                                   mri(X, pancreatitic_cancer); ct(X, pancreatitic_cancer).
 
 diagnosis(X, ulcerative_colitis):-blood_test(X, pANCA), (cbc(X, anemia); cbc(X, infection)). 
-diagnosis(X, crohn_disease):- (blood_test(X, ASCA); cBir1(X, positive)), (cbc(X, anemia); cbc(X, infection)) .
 
 
 diagnosis(X, hepatitis_A) :- anti_hepatitis_A(X, positive).
@@ -46,4 +45,6 @@ diagnosis(X, autoimmune_hepatitis_type2) :- anti_lkm1(X, positive).
 
 diagnosis(X, cirrhosis) :- (alt(X, high), ast(X, high), (alp(X, normal); alp(X, high)), bilirubin(X, high), (albumin(X, low); albumin(X, normal)), cbc(X, platelets_low));
                            liver_biopsy(X, cirrhosis).
-                  
+diagnosis(X, crohn_disease) :- (blood_test(X, asca); cBir1(X, positive)),
+							 (cbc(X, anemia); cbc(X, infection)).
+

@@ -3,6 +3,7 @@ package cbr;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,7 +16,6 @@ import com.sun.net.httpserver.Authenticator.Result;
 
 import connector.CsvConnector;
 import connector.CsvConnectorResults;
-import jdk.jfr.internal.StringPool;
 import model.Examination2;
 import model.Results;
 import similarity.TableSimilarity;
@@ -99,12 +99,20 @@ public class CbrApplication implements StandardCBRApplication {
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(), query, simConfig);
 		eval = SelectCases.selectTopKRR(eval, 5);
 		System.out.println("Retrieved cases:");
+		list.clear();
 		for (RetrievalResult nse : eval) {
 			System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
 			String description = nse.get_case().getDescription().toString();
-			String[] tests= description.split("tests")[1].substring(1).split(",");
+			//String[] tests= description.split("tests")[1].substring(1).split(",");
+			System.out.println("OVDE CE BITI ISPISANI TESTOVI SA PROVENTOM");
+			String[] tests= description.split("=")[1].split(",");
 			for (String test : tests) {
-				list.add(test);
+				if (nse.getEval() > 0.5) {
+					DecimalFormat df = new DecimalFormat("##.##");
+					System.out.println();
+					list.add(test + "  ( For "  +description.split("=")[0]+ " disease. Similarity with this disease is " + df.format(nse.getEval()*100) + "% )");
+				//	System.out.println(test + "  ( For "  +description.split("=")[0]+ " disease with " + df.format(nse.getEval()*100) + "% )");
+				}
 			}
 		}
 	}
@@ -114,6 +122,7 @@ public class CbrApplication implements StandardCBRApplication {
 	}
 
 	public CBRCaseBase preCycle() throws ExecutionException {
+		
 		_caseBase.init(_connector);
 		java.util.Collection<CBRCase> cases = _caseBase.getCases();
 		for (CBRCase c: cases) {
@@ -139,6 +148,7 @@ public class CbrApplication implements StandardCBRApplication {
 			String [] anam= anamnesis.toArray(new String[0]);
 			examination.createBinSymp(symp);
 			examination.createBinAnam(anam);
+	
 
 			
 			query.setDescription( examination );
