@@ -1,4 +1,3 @@
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -6,16 +5,11 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.text.Collator;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -32,41 +26,26 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListModel;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 import com.ugos.jiprolog.engine.JIPEngine;
 import com.ugos.jiprolog.engine.JIPQuery;
 import com.ugos.jiprolog.engine.JIPSyntaxErrorException;
 import com.ugos.jiprolog.engine.JIPTerm;
 import com.ugos.jiprolog.engine.JIPVariable;
 
-import cbr.CbrApplication;
 import cbr.CbrApplicationMed;
 import cbr.CbrApplicationResults;
-import model.Examination2;
 import model.Medication;
 import model.Results;
 import sun.nio.cs.StandardCharsets;
-import ucm.gaia.jcolibri.cbraplications.StandardCBRApplication;
-import ucm.gaia.jcolibri.cbrcore.CBRQuery;
-
-import java.io.FileWriter;
 
 import javax.swing.JRadioButton;
-import javax.swing.JSeparator;
 
-import java.awt.SystemColor;
 import java.awt.Color;
-import java.awt.FlowLayout;
 
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.UIManager;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.TitledBorder;
+
 
 public class App {
 
@@ -220,7 +199,7 @@ public class App {
 		list_0.setListData((String[]) listOfSymptoms.toArray(new String[0]));
 		persSympt = new String[list_0.getModel().getSize()];
 		
-		
+		// citanje vec postojeceg pacijenta ////////////////////////////////////////////////////////////////////////
 		JButton btnLoad = new JButton("Load");
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -319,6 +298,7 @@ public class App {
 		btnSeeWholeMR.setBounds(470, 373, 130, 23);
 		panel_1.add(btnSeeWholeMR);
 
+		// additional tests RBR ///////////////////////////////////////////////////////////////////////////////////////////////
 		
 		JButton btnFindAdditionalTests = new JButton("Find tests");
 		btnFindAdditionalTests.setBounds(593, 468, 141, 29);
@@ -389,7 +369,7 @@ public class App {
 					writeInFile.add(write);
 					writeProlog(writeInFile, "rule_based/patients.pl");
 					
-					String term = "additional_tests(" + person + ", S)";
+					String term = "additional_tests(" + person + ", D,S)";
 					ArrayList<String> additional_tests = consultProlog(term);
 		            
 		    		additionalTestsPanel(additional_tests);
@@ -399,6 +379,9 @@ public class App {
 		});
 		btnFindAdditionalTests.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(btnFindAdditionalTests);	
+		
+		// additional tests CBR ///////////////////////////////////////////////////////////////////////////////////////////////
+
 		
 		JButton btnFindAdditionalTestsCBR = new JButton("Find tests CBR");
 		btnFindAdditionalTestsCBR.setBounds(743, 468, 141, 29);
@@ -451,9 +434,8 @@ public class App {
 		
 
 	}
-	
+
 	private void WholeMRPanel(String data[], String anam) {
-		// TODO Auto-generated method stub
 		
 		// ------------------- panel for whole medical record--------------------
 		panelWholeMR=new JPanel();
@@ -520,6 +502,7 @@ public class App {
 			
 	}
 	
+	// --------------------------------------------------------------------------------------------------------------------------------
 
 	private void additionalTestsPanel(ArrayList<String> additional_tests) {
 		// TODO Auto-generated method stub
@@ -536,8 +519,19 @@ public class App {
 		scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(250, 80, 631, 342);
 		
-		String additionalTestsString1 = additional_tests.toString().replace("[", "").replace("]", "");
-		String[] list= additionalTestsString1.split(",");
+		ArrayList<String> testForDisease = new ArrayList<String>();
+
+		for(int i=0; i<additional_tests.size(); i++){
+			String additionalTestsString1 = additional_tests.get(i).toString().replace("[", "").replace("]", "");
+			String[] lista = additionalTestsString1.split(",");
+			for (String string : lista) {
+				string = string + "   [ " + additional_tests.get(i+1) + " ]";
+				testForDisease.add(string);
+			}
+			i = i+1;
+		}
+		
+		String[] list= (String[]) testForDisease.toArray(new String[0]);
 		
 		list_2 = new JList();
 		list_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -577,6 +571,8 @@ public class App {
 			
 	}
 	
+	// --------------------------------------------------------------------------------------------------------------------------------
+	
 	private void panelForTestsResults(ArrayList<String> personalTests) {
 		// TODO Auto-generated method stub
 
@@ -596,6 +592,7 @@ public class App {
 		tableModel = new DefaultTableModel();
 		tableModel.addColumn("Test", list1);
 		tableModel.addColumn("Result");
+		table.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		table.setModel(tableModel);
@@ -608,9 +605,18 @@ public class App {
 		JButton btnNewButton1 = new JButton("Disease wiht RBR");
 		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(tableModel.getValueAt(tableModel.getRowCount()-1, 1)==null){
+					JOptionPane.showMessageDialog(panelResults, "Please enter every result and then click on white space in table."
+							+ " After this steps you can get disease.");
+				} else {
 				for (int i = 0; i < tableModel.getRowCount(); i++) {
 					String test = (String) tableModel.getValueAt(i, 0);
 					String result = (String) tableModel.getValueAt(i, 1);
+
+					
+					// removing disease in [] for that test
+					test = test.split(" ")[0].trim();
+					
 					String resultOfTest = test + "(" + person + "," + result + ").";
 					ArrayList<String> writeInFile = new ArrayList<String>();
 					writeInFile.add(resultOfTest);
@@ -623,6 +629,7 @@ public class App {
 	            ArrayList<String> medications = consultProlog(term);
 	            
 	            panelDiagnosis(diagnosis, medications);
+				}
 			}
 		});
 		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -677,6 +684,8 @@ public class App {
 		
 	}
 	
+	// --------------------------------------------------------------------------------------------------------------------------------
+
 	protected void panelDiagnosis(ArrayList<String> diagnosis, ArrayList<String> medications) {
 		// TODO Auto-generated method stub
 		
@@ -829,7 +838,9 @@ public class App {
 		panelDiagnosis.add(btnSaveCBR);
 
 	}
+	// --------------------------------------------------------------------------------------------------------------------------------
 
+	
 	private ArrayList<String> consultProlog(String term){
 		// New instance of prolog engine
         JIPEngine jip = new JIPEngine();
