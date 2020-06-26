@@ -75,6 +75,12 @@ autoimmune_hepatitis_type1; asma:positive
 autoimmune_hepatitis_type2; anti_lkm1:positive
 
 cirrhosis; alt:high, ast:high, alp:high, bilirubin:high, albumin:low, cbc:platelets_low
-#cirrhosis; alt:high, ast:high, alp:high, bilirubin:high, albumin:normal, cbc:platelets_low
-#cirrhosis; alt:high, ast:high, alp:normal, bilirubin:high, albumin:low, cbc:platelets_low
-#cirrhosis; alt:high, ast:high, alp:normal, bilirubin:high, albumin:normal, cbc:platelets_low
+cirrhosis;liver_biopsy:cirrhosis
+cirrhosis; alt:high, ast:high, alp:high, bilirubin:high, albumin:normal, cbc:platelets_low
+cirrhosis; alt:high, ast:high, alp:normal, bilirubin:high, albumin:low, cbc:platelets_low
+cirrhosis; alt:high, ast:high, alp:normal, bilirubin:high, albumin:normal, cbc:platelets_low
+cirrhosis;liver_biopsy:cirrhosis
+hepatitis_A;anti_hepatitis_A:positive
+gallstone;mri:gallstone
+hepatitis_A;
+hepatitis_A;

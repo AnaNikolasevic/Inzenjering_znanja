@@ -31,9 +31,7 @@ symptoms(cirrhosis, [fatigue, nausea, abdominal_discomfort, abdominal_swelling, 
 personal_symptoms(ana, [sharp_abdominal_pain, sharp_chest_pain, nausea, heartburn,upper_abdominal_pain]).
 personal_symptoms(anaa, [nausea, itching, joint_aches]).
 personal_symptoms(una, [lower_abdominal_pain, melena]).
-personal_symptoms(tijana, [joint_aches, stomach_bloating, heartburn]).
 
-personal_symptoms(mima, [weakness, loss_of_appetite, sharp_abdominal_pain]). %rak jednjaka
 personal_symptoms(marti, [sharp_chest_pain, nausea, vomiting, difficulty_in_swallowing]). %cir na zeludcu
 personal_symptoms(ljilja, [fatigue, vomiting, nausea, sharp_abdominal_pain]). %rak zeludca
 
@@ -48,3 +46,11 @@ personal_symptoms(sara,[discharge_in_stools]).
 personal_symptoms(stevan_matovic,[fatigue, sharp_abdominal_pain]).
 personal_symptoms(biljana_matovic,[fatigue, sharp_abdominal_pain]).
 personal_symptoms(mirko_mirkovic,[fatigue, sharp_abdominal_pain]).
+personal_symptoms(zorica,[jaundice]).
+personal_symptoms(tijana,[jaundice]).
+personal_symptoms(sara,[jaundice]).
+personal_symptoms(mima,[jaundice]).
+personal_symptoms(neko,[fatigue, sharp_abdominal_pain]).
+personal_symptoms(neko_nekic,[jaundice]).
+personal_symptoms(proba,[jaundice]).
+personal_symptoms(novi,[jaundice]).

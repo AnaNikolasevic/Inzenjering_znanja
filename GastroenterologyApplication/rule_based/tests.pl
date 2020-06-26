@@ -95,14 +95,11 @@ liver_biopsy(isi, cirrhosis).
 
 blood_test(una, pANCA).
 cbc(una, anemia).
-cBir1(tijana, positive).
-cbc(tijana, infection).
 
 
 
 
 cbc(mina, anemia).
-biopsy(mima, esophageal_cancer ).
 barium_swallow(marti, hiatal_hernia).
 endoscopy(ljilja, stomach_cancer).
 cbc(ljilja, anemia).
@@ -120,11 +117,10 @@ contains(S,[H|T]) :- member(H,S), contains(S,T).
 possible_diseases(Name,D) :- personal_symptoms(Name, L),  symptoms(D,L1), contains(L1,L),
                              personal_anamnesis(Name, A),  anamnesis(D,A1), contains(A1,A). 
 
-additional_tests(Name,T) :-  possible_diseases(Name,D), test(D,T).
+additional_tests(Name,T,D) :-  possible_diseases(Name,D), test(D,T).
 
 
 medications(Name,M) :-  diagnosis(Name,D), medication(D,M).
-
 
 x_ray(stevan_matovic,esophageal_cancer).
 cbc(stevan_matovic,anemia).
@@ -132,3 +128,11 @@ x_ray(biljana_matovic,esophageal_cancer).
 cbc(biljana_matovic,anemia).
 x_ray(mirko_mirkovic,esophageal_cancer).
 cbc(mirko_mirkovic,anemia).
+anti_hepatitis_B(mima,negative).
+anti_hepatitis_A(neko_nekic,positive).
+anti_hepatitis_A(proba,positive).
+anti_hepatitis_A(masa,positive).
+anti_hepatitis_A(masa,negative).
+anti_hepatitis_A(masa,negative).
+anti_hepatitis_A(novi,negative).
+anti_hepatitis_A(masa,negative).
