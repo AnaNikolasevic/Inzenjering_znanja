@@ -1,5 +1,5 @@
 #bolest; age; sex; symptoms; anamnesis; tests
-hiatal_hernia;50;F;harp_chest_pain,nausea,vomiting,difficulty_in_swallowing;heavy_lifting,physical_strain,persistent_coughing;barium_swallow
+hiatal_hernia;50;F;sharp_chest_pain,nausea,vomiting,difficulty_in_swallowing;heavy_lifting,physical_strain,persistent_coughing;barium_swallow
 gallstone;30;F;vomiting,back_pain,burning_abdominal_pain,sharp_chest_pain;pregnancy,diabetes,crohns_disease;bilirubin,mri
 gerb;45;M;sharp_abdominal_pain,heartburn,vomiting,difficulty_in_swallowing;overweight,pregnancy,hiatal_hernia;x_ray,esophageal_impedance_pH
 esophageal_cancer;57;F;weakness,loss_of_appetite,sharp_abdominal_pain;gerb,barretts_esophagus,overweight;biopsy,cbc
@@ -14,3 +14,6 @@ gastritis;45;F;nausea,vomiting_blood,burning_abdominal_pain;active_smoking,nsaid
 pancreatic_cancer;54;M;stomach_bloating,nausea,fatigue,diarrhea;bmi_over_35,family_history_of_pancreatic_cancer;x_ray,c19_9
 ulcerative_colitis;35;M;vomiting,burning_abdominal_pain,rectal_bleeding,lower_abdominal_pain;active_smoking,nsaid_abuse;blood_test,cbc
 crohn_disease;40;F;rectal_bleeding,pain_of_the_anus,joint_aches;family_history_of_crohn_disease;blood_test,cbc
+cirrhosis;51;M;abdominal_discomfort, abdominal_swelling, nausea, weakness;abusing_alchohol;liver_biopsy
+hepatitis_A;30;F;fatigue, nausea, sharp_abdominal_pain, vomiting;hepatitis_B;anti_hepatitis_A
+gallstone;30;F;back_pain, burning_abdominal_pain, sharp_chest_pain, vomiting;hepatitis_B;mri
