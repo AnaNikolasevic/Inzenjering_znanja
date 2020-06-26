@@ -78,9 +78,3 @@ cirrhosis; alt:high, ast:high, alp:high, bilirubin:high, albumin:low, cbc:platel
 #cirrhosis; alt:high, ast:high, alp:high, bilirubin:high, albumin:normal, cbc:platelets_low
 #cirrhosis; alt:high, ast:high, alp:normal, bilirubin:high, albumin:low, cbc:platelets_low
 #cirrhosis; alt:high, ast:high, alp:normal, bilirubin:high, albumin:normal, cbc:platelets_low
-
-cirrhosis; liver_biopsy:cirrhosishepatitis_A;23;23;abdominal_discomfort, nausea, vomiting;drug_abuse; anti_hepatitis_A  
-hepatitis_A;23;23;arm_swelling, cough;antibiotics_abuse, diet_high_in_salty_foods; anti_hepatitis_A  
-hepatitis_A;32;32;blood_in_stool, diarrhea;barretts_esophagus, delayed_stomach_emptying;anti_hepatitis_A  
-
-

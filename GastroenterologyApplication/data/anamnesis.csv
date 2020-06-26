@@ -14,7 +14,3 @@ gastritis;45;F;nausea,vomiting_blood,burning_abdominal_pain;active_smoking,nsaid
 pancreatic_cancer;54;M;stomach_bloating,nausea,fatigue,diarrhea;bmi_over_35,family_history_of_pancreatic_cancer;x_ray,c19_9
 ulcerative_colitis;35;M;vomiting,burning_abdominal_pain,rectal_bleeding,lower_abdominal_pain;active_smoking,nsaid_abuse;blood_test,cbc
 crohn_disease;40;F;rectal_bleeding,pain_of_the_anus,joint_aches;family_history_of_crohn_disease;blood_test,cbc
-hepatitis_A;23;23;abdominal_discomfort, nausea, vomiting;drug_abuse; anti_hepatitis_A  
-hepatitis_A;23;23;arm_swelling, cough;antibiotics_abuse, diet_high_in_salty_foods; anti_hepatitis_A  
-hepatitis_A;32;32;blood_in_stool, diarrhea;barretts_esophagus, delayed_stomach_emptying;anti_hepatitis_A  
-hepatitis_C;30;30;;; anti_hepatitis_C
