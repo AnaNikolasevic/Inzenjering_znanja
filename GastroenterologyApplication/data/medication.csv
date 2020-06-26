@@ -67,3 +67,4 @@ hepatitis_B;abusing_alchohol;entecavir,tenofovir,lamivudine,adefovir,telbivudine
 esophageal_cancer;abusing_alchohol,active_smoking;omeprazole,esomeprazole,ranitidine,lansoprazole,pantoprazole, mesalamine,infliximab,azathioprine,metronidazole,vitamin_b_12
 hepatitis_A;abusing_alchohol;ribavirin,peginterferon_alfa_2b,methadone,spironolactone,emtricitabine_tenofovir
 hepatitis_B;abusing_alchohol,abusing_alchohol;entecavir,tenofovir,lamivudine,adefovir,telbivudine
+cirrhosis;abusing_alchohol,autoimmune_hepatitis;furosemide,spironolactone,lactulose,tacrolimus,nadolol

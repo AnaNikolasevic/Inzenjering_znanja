@@ -86,3 +86,4 @@ hepatitis_B;anti_hepatitis_B:positive
 esophageal_cancer;cbc:anemia,biopsy:esophageal_cancer
 hepatitis_A;anti_hepatitis_A:positive
 hepatitis_B;anti_hepatitis_B:positive
+cirrhosis;liver_biopsy:cirrhosis

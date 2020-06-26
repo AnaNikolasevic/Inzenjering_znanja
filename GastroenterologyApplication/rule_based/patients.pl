@@ -4,7 +4,7 @@
 % Presence of non–type O blood antigens (nt0ba)
 
 %--------------
-
+anamnesis(autoimmune_hepatitis, [abusing_alchohol]).
 anamnesis(hepatitis_A, [drug_abuse, unprotected_sex, abusing_alchohol]).
 anamnesis(hepatitis_B, [drug_abuse, unprotected_sex, abusing_alchohol, hiv_positive]).
 anamnesis(hepatitis_C, [drug_abuse, abusing_alchohol, hiv_positive, hepatitis_C_risk_group]).
@@ -53,7 +53,5 @@ patient(X):- female(X).
 %younger_adult(X):- age(X,Y), Y>=20, Y<40.
 %older_adult(X):- age(X,Y), Y>=40, Y<60.
 %old(X):- age(X,Y), Y>=60.
-
-
 
 
