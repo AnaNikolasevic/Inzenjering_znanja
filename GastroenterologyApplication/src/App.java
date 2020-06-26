@@ -218,7 +218,7 @@ public class App {
 				                    JOptionPane.PLAIN_MESSAGE,
 				                    null,
 				                    patients,
-				                    patients[2]);
+				                    patients[0]);
 				if (!s.equals(null)) {
 					formattedTextField.setText(s);
 					ArrayList<String> listOfAges = consultProlog("age(" + s + ",X)");

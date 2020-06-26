@@ -20,3 +20,5 @@ gallstone;30;F;back_pain, burning_abdominal_pain, sharp_chest_pain, vomiting;hep
 
 hepatitis_B;45;F;jaundice;abusing_alchohol;anti_hepatitis_B
 esophageal_cancer;32;F;fatigue;abusing_alchohol,active_smoking;biopsy, cbc
+hepatitis_A;21;F;jaundice;abusing_alchohol;anti_hepatitis_A
+hepatitis_B;21;F;jaundice,jaundice;abusing_alchohol,abusing_alchohol;anti_hepatitis_B
