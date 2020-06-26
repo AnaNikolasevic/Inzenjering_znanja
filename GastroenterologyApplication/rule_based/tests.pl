@@ -88,9 +88,6 @@ test(autoimmune_hepatitis, [ana, asma, anti_lkm1]).
 cbc(ana,high_wbc).
 ct(ana, hiatal_hernia).
 
-anti_hepatitis_A(anaa, negative).
-anti_hepatitis_B(anaa, negative).
-anti_hepatitis_C(anaa, positive).
 liver_biopsy(isi, cirrhosis).
 
 blood_test(una, pANCA).
@@ -127,11 +124,4 @@ cbc(stevan_matovic,anemia).
 x_ray(biljana_matovic,esophageal_cancer).
 cbc(biljana_matovic,anemia).
 anti_hepatitis_B(mima,negative).
-anti_hepatitis_A(neko_nekic,positive).
-anti_hepatitis_A(proba,positive).
-anti_hepatitis_A(masa,positive).
 
-anti_hepatitis_A(maska,positive).
-anti_hepatitis_B(masks,positive).
-biopsy(mirka,esophageal_cancer).
-cbc(mirka,anemia).

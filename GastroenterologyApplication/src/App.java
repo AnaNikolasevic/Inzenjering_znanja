@@ -281,16 +281,6 @@ public class App {
 		panel_1.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JButton btnCompleteMr = new JButton("Complete MR");
-		btnCompleteMr.setBackground(new Color(250, 235, 215));
-		btnCompleteMr.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnCompleteMr.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnCompleteMr.setBounds(210, 373, 127, 23);
-		panel_1.add(btnCompleteMr);
-		
 		JButton btnSeeWholeMR = new JButton("See whole MR");
 		btnSeeWholeMR.setBackground(new Color(250, 235, 215));
 		btnSeeWholeMR.addActionListener(new ActionListener() {
@@ -380,7 +370,8 @@ public class App {
 					String term = "additional_tests(" + person + ", D,S)";
 					ArrayList<String> additional_tests = consultProlog(term);
 					ArrayList<String> testForDisease = new ArrayList<String>();
-					for(int i=0; i < additional_tests.size(); i++){
+
+					for(int i=0; i<additional_tests.size(); i++){
 						String additionalTestsString1 = additional_tests.get(i).toString().replace("[", "").replace("]", "");
 						String[] lista = additionalTestsString1.split(",");
 						for (String string : lista) {
@@ -389,7 +380,7 @@ public class App {
 						}
 						i = i+1;
 					}
-		            
+ 
 		    		additionalTestsPanel(testForDisease);
 					}
 			}
@@ -682,33 +673,34 @@ public class App {
 			public void actionPerformed(ActionEvent e) {
 				Results results = new Results();
 				Medication medication = new Medication();
-				
-			    resultsOfTests = new HashMap<String, String>();
-				for (int i = 0; i < tableModel.getRowCount(); i++) {
-					String test = (String) tableModel.getValueAt(i, 0);
-					String[] test1 = test.split("\\(");
-					String result = (String) tableModel.getValueAt(i, 1);
-					resultsOfTests.put(test1[0], result);
-				
+				if(tableModel.getValueAt(tableModel.getRowCount()-1, 1)==null){
+					JOptionPane.showMessageDialog(panelResults, "Please enter every result and then click on white space in table."
+							+ " After this steps you can get disease.");
+				} else {				
+				    resultsOfTests = new HashMap<String, String>();
+					for (int i = 0; i < tableModel.getRowCount(); i++) {
+						String test = (String) tableModel.getValueAt(i, 0);
+						String[] test1 = test.split("\\(");
+						String result = (String) tableModel.getValueAt(i, 1);
+						resultsOfTests.put(test1[0], result);
+					
+					}
+					results.setResultsOfTests(resultsOfTests);
+					System.out.println(" Rezultati testova ");
+					System.out.println(resultsOfTests);
+					System.out.println(" Rezultati testova - ovako se salju: ");
+					System.out.println(results);
+					//String term = "diagnosis(" + person + ", D)";
+		            ArrayList<String> diagnosis = CbrApplicationResults.main(results);
+		            
+					//term = "medications(" + person + ", M)";
+		            medication.setDisease(diagnosis.get(0));
+					medication.createBinAnam(persAnam);
+		            ArrayList<String> medications = CbrApplicationMed.main(medication);
+		            
+		            panelDiagnosis(diagnosis, medications);
 				}
-				results.setResultsOfTests(resultsOfTests);
-				System.out.println(" Rezultati testova ");
-				System.out.println(resultsOfTests);
-				System.out.println(" Rezultati testova - ovako se salju: ");
-				System.out.println(results);
-				//String term = "diagnosis(" + person + ", D)";
-	            ArrayList<String> diagnosis = CbrApplicationResults.main(results);
-	            
-	            if (diagnosis.isEmpty()) {
-	            	JOptionPane.showMessageDialog(panelResults, "There is no diagnosis for this test results.");
-	            	return;
-	            }
-				//term = "medications(" + person + ", M)";
-	            medication.setDisease(diagnosis.get(0));
-				medication.createBinAnam(persAnam);
-	            ArrayList<String> medications = CbrApplicationMed.main(medication);
-	            
-	            panelDiagnosis(diagnosis, medications);
+
 			}
 		});
 		btnNewButtonCBR.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -1142,5 +1134,5 @@ public class App {
  		return s;
  		
     }
-
+	
 }
