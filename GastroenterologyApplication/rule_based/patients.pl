@@ -35,7 +35,6 @@ personal_anamnesis(anaa, [hiv_positive]).
 personal_anamnesis(isi, [hepatitis_A]).
 personal_anamnesis(una, active_smoking).
 
-personal_anamnesis(mima, [gerb, active_smoking]).
 personal_anamnesis(marti, [overweight, active_smoking, persistent_coughing]).
 personal_anamnesis(ljilja, [family_history_of_stomach_cancer, chronic_gastritis, diet_high_in_salty_foods]).
 
@@ -50,16 +49,12 @@ personal_anamnesis(ljilja, [family_history_of_stomach_cancer, chronic_gastritis,
 
 female(ana).
 female(una).
-female(tijana).
-female(mima).
 
 patient(X):- male(X).
 patient(X):- female(X).
 
 age(ana, 33).
 age(una, 25).
-age(tijana, 60).
-age(mima, 53).
 
 %baby(X):- age(X,Y), Y<=2.
 %child(X):- age(X,Y), Y>2, Y<=12.
@@ -84,6 +79,15 @@ male(peca).
 personal_anamnesis(zivka,[abusing_alchohol]).
 age(zivka,53).
 female(zivka).
-personal_anamnesis(sara,[hepatitis_B]).
+personal_anamnesis(zorica,[abusing_alchohol]).
+age(zorica,54).
+female(zorica).
+personal_anamnesis(tijana,[abusing_alchohol]).
+age(tijana,60).
+female(tijana).
+personal_anamnesis(sara,[abusing_alchohol]).
 age(sara,30).
 female(sara).
+personal_anamnesis(mima,[abusing_alchohol]).
+age(mima,53).
+female(mima).
