@@ -17,3 +17,6 @@ crohn_disease;40;F;rectal_bleeding,pain_of_the_anus,joint_aches;family_history_o
 cirrhosis;51;M;abdominal_discomfort, abdominal_swelling, nausea, weakness;abusing_alchohol;liver_biopsy
 hepatitis_A;30;F;fatigue, nausea, sharp_abdominal_pain, vomiting;hepatitis_B;anti_hepatitis_A
 gallstone;30;F;back_pain, burning_abdominal_pain, sharp_chest_pain, vomiting;hepatitis_B;mri
+
+hepatitis_B;45;F;jaundice;abusing_alchohol;anti_hepatitis_B
+esophageal_cancer;32;F;fatigue;abusing_alchohol,active_smoking;biopsy, cbc

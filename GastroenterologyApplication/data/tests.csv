@@ -81,4 +81,6 @@ cirrhosis; alt:high, ast:high, alp:normal, bilirubin:high, albumin:low, cbc:plat
 cirrhosis; alt:high, ast:high, alp:normal, bilirubin:high, albumin:normal, cbc:platelets_low
 cirrhosis;liver_biopsy:cirrhosis
 hepatitis_A;anti_hepatitis_A:positive
-gallstone;mri:gallstone
+
+hepatitis_B;anti_hepatitis_B:positive
+esophageal_cancer;cbc:anemia,biopsy:esophageal_cancer
