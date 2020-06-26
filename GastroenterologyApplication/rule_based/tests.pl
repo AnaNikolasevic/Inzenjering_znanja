@@ -88,9 +88,6 @@ test(autoimmune_hepatitis, [ana, asma, anti_lkm1]).
 cbc(ana,high_wbc).
 ct(ana, hiatal_hernia).
 
-anti_hepatitis_A(anaa, negative).
-anti_hepatitis_B(anaa, negative).
-anti_hepatitis_C(anaa, positive).
 liver_biopsy(isi, cirrhosis).
 
 blood_test(una, pANCA).
@@ -125,3 +122,5 @@ medications(Name,M) :-  diagnosis(Name,D), medication(D,M).
 
 
 anti_hepatitis_B(mima,negative).
+x_ray(sara_vukoje,esophageal_cancer).
+cbc(sada,anemia).
