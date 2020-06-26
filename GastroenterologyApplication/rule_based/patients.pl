@@ -81,6 +81,15 @@ female(tijana).
 personal_anamnesis(sara,[abusing_alchohol]).
 age(sara,30).
 female(sara).
+personal_anamnesis(stevan_matovic,[gerb]).
+age(stevan_matovic,25).
+male(stevan_matovic).
+personal_anamnesis(biljana_matovic,[gerb]).
+age(biljana_matovic,45).
+female(biljana_matovic).
+personal_anamnesis(mirko_mirkovic,[gerb]).
+age(mirko_mirkovic,45).
+male(mirko_mirkovic).
 personal_anamnesis(mima,[abusing_alchohol]).
 age(mima,53).
 female(mima).
@@ -99,3 +108,4 @@ female(sada).
 personal_anamnesis(ss,[abusing_alchohol]).
 age(ss,20).
 female(ss).
+

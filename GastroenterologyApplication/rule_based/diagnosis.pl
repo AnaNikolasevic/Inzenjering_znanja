@@ -30,7 +30,6 @@ diagnosis(X, pancreatic_cancer):- (c19_9(X, high); cea(X, high)),
 
 diagnosis(X, ulcerative_colitis):-blood_test(X, pANCA), (cbc(X, anemia); cbc(X, infection)). 
 
-
 diagnosis(X, hepatitis_A) :- anti_hepatitis_A(X, positive).
 diagnosis(X, hepatitis_B) :- anti_hepatitis_B(X, positive).
 diagnosis(X, hepatitis_C) :- anti_hepatitis_C(X, positive).

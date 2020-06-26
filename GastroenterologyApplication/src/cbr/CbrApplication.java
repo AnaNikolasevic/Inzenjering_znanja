@@ -112,7 +112,7 @@ public class CbrApplication implements StandardCBRApplication {
 					System.out.println();
 					list.add(test + "  ( For "  +description.split("=")[0]+ " disease. Similarity with this disease is " + df.format(nse.getEval()*100) + "% )");
 				//	System.out.println(test + "  ( For "  +description.split("=")[0]+ " disease with " + df.format(nse.getEval()*100) + "% )");
-				}
+				} 
 			}
 		}
 	}

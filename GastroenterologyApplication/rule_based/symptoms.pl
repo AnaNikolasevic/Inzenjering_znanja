@@ -30,6 +30,10 @@ personal_symptoms(neca,[difficulty_in_swallowing]).
 personal_symptoms(masa,[diarrhea]).
 personal_symptoms(peca,[difficulty_in_swallowing]).
 personal_symptoms(zivka,[jaundice]).
+personal_symptoms(sara,[discharge_in_stools]).
+personal_symptoms(stevan_matovic,[fatigue, sharp_abdominal_pain]).
+personal_symptoms(biljana_matovic,[fatigue, sharp_abdominal_pain]).
+personal_symptoms(mirko_mirkovic,[fatigue, sharp_abdominal_pain]).
 personal_symptoms(zorica,[jaundice]).
 personal_symptoms(tijana,[jaundice]).
 personal_symptoms(sara,[jaundice]).
