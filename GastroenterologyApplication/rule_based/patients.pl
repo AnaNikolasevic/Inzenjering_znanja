@@ -11,17 +11,18 @@ anamnesis(hepatitis_C, [drug_abuse, abusing_alchohol, hiv_positive, hepatitis_C_
 anamnesis(drug_induced_hepatitis, [abusing_alchohol, aspirin_abuse, steroids_abuse, antibiotics_abuse, herbal_supplements_abuse, vitamin_supplements_abuse]). 
 anamnesis(inherited_hepatitis, [family_history_of_liver_disease]). 
 anamnesis(cirrhosis, [autoimmune_hepatitis, hepatitis_A, hepatitis_B, hepatitis_C, abusing_alchohol, inherited_hepatitis, drug_abuse]).
+anamnesis(gastritis, [genetic_predisposition_gastritis, active_smoking, nsaid_abuse, stress, abusing_alchohol]).
 anamnesis(pancreatic_cancer, [active_smoking, abusing_alchohol, nt0ba, bmi_over_35, family_history_of_pancreatic_cancer]).
 anamnesis(ulceraive_colitis, [active_smoking, nsaid_abuse]).
 anamnesis(crohn_disease, [active_smoking, nsaid_abuse, family_history_of_crohn_disease]).
 
 anamnesis(esophageal_cancer, [abusing_alchohol, gerb, barretts_esophagus, overweight, active_smoking]).
 anamnesis(hiatal_hernia, [overweight, pregnancy, active_smoking, heavy_lifting, physical_strain,  persistent_coughing, persistent_vomiting,  born_with_larger_hiatus, straining_during_bowel_movements]).
+anamnesis(gallstone, [overweight, high_blood_cholesterol, family_history_of_gallstones, pregnancy, diabetes,  crohns_disease, ibs, rapid_weight_loss]).
 anamnesis(gerb, [overweight, pregnancy, hiatal_hernia, delayed_stomach_emptying, active_smoking, abusing_alchohol]).
 anamnesis(stomach_cancer, [pernicious_anaemia, family_history_of_stomach_cancer, previous_stomach_surgery, h_pylori_infection,
 			 overweight, active_smoking, abusing_alchohol, long_term_stomach_inflammation, stomach_polyps, chronic_gastritis,
 			diet_high_in_salty_foods, diet_high_in_smoked_foods, diet_low_in_fruits, diet_low_in_vegetables ]).
-
 
 
 %-------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 % DIAGNOSIS
 %-----------
 
-diagnosis(X,  gallstone):- (cbc(X, high_wbc), bilirubin(X, high), alp(X, high), pancreatic_enzymes(X, high)); 
+diagnosis(X,  gallstone):- (cbc(X, high_wbc); bilirubin(X, high); alp(X, high); pancreatic_enzymes(X, high)), 
 			  	   (mri(X, gallstone); ct(X, gallstone); ercp(X, gallstone); ultrasound(X, gallstone)).
 
 diagnosis(X, hiatal_hernia):- barium_swallow(X, hiatal_hernia); x_ray(X, hiatal_hernia); 
