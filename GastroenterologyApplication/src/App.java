@@ -56,7 +56,7 @@ public class App {
 	JPanel panelResults = new JPanel();
 	JPanel panelDiagnosis = new JPanel();
 	JPanel panelWholeMR = new JPanel();
-	String person;
+	public String person;
 	public static final StandardCharsets UTF_8 = new StandardCharsets();
 	public static JList list_2; 
 	public static JList list_1;
@@ -289,11 +289,26 @@ public class App {
 		btnSeeWholeMR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				String data[] = readCSV();
-				System.out.println(data.length +" "+ data.toString());
-				String anam= readAnamnesis();
-				String personalInfo= readPersonalInfo();
-				WholeMRPanel(data, anam, personalInfo);				
+				person = formattedTextField.getText().toLowerCase().replace(" ", "_");
+				if (rdbtnF.isSelected()){
+					gender = "F";
+				} else if (rdbtnM.isSelected()){
+					gender = "M";
+				}
+				if(formattedTextFieldAge.getText().equals("") ||  person.equals("") || gender.equals("")) {
+					JOptionPane.showMessageDialog(frame, "Fields must be entered and patient must be examined in order to have medical record.");
+					return;
+				}
+				try {
+					String personalInfo= readPersonalInfo();
+					String data[] = readCSV();
+					String anam= readAnamnesis();
+					WholeMRPanel(data, anam, personalInfo);
+				}catch(IndexOutOfBoundsException e){
+					JOptionPane.showMessageDialog(frame, "Patient must be examined in order to have medical record.");
+					return;
+				}
+				
 			}
 		});
 		btnSeeWholeMR.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1055,16 +1070,13 @@ public class App {
     	
     	String name= (String)formattedTextField.getText();
 	    ArrayList<String> listOfAges = consultProlog("age(" + name + ",X)");
+	    ArrayList<String> listOfSex = consultProlog("male(" + name + ")");
 		personalInfo+=listOfAges.get(0)+";";
-		ArrayList<String> listOfSex = consultProlog("male(" + name + ")");
-		System.out.println(listOfSex.size());
 		if(listOfSex.size()!=0){
 			personalInfo+="M"+";";
-			
 		} else{
 			personalInfo+="F"+";";
-	
-		}
+		}			
 		
 		return personalInfo;
     }
