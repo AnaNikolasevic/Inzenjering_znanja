@@ -45,12 +45,12 @@ personal_symptoms(zivka,[jaundice]).
 personal_symptoms(sara,[discharge_in_stools]).
 personal_symptoms(stevan_matovic,[fatigue, sharp_abdominal_pain]).
 personal_symptoms(biljana_matovic,[fatigue, sharp_abdominal_pain]).
-personal_symptoms(mirko_mirkovic,[fatigue, sharp_abdominal_pain]).
 personal_symptoms(zorica,[jaundice]).
 personal_symptoms(tijana,[jaundice]).
 personal_symptoms(sara,[jaundice]).
 personal_symptoms(mima,[jaundice]).
-personal_symptoms(neko,[fatigue, sharp_abdominal_pain]).
-personal_symptoms(neko_nekic,[jaundice]).
-personal_symptoms(proba,[jaundice]).
-personal_symptoms(novi,[jaundice]).
+personal_symptoms(mirko,[jaundice]).
+
+personal_symptoms(maska,[jaundice]).
+personal_symptoms(masks,[jaundice]).
+personal_symptoms(mirka,[fatigue]).
