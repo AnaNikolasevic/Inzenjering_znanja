@@ -123,7 +123,5 @@ x_ray(stevan_matovic,esophageal_cancer).
 cbc(stevan_matovic,anemia).
 x_ray(biljana_matovic,esophageal_cancer).
 cbc(biljana_matovic,anemia).
-x_ray(mirko_mirkovic,esophageal_cancer).
-cbc(mirko_mirkovic,anemia).
 anti_hepatitis_B(mima,negative).
 

@@ -638,27 +638,29 @@ public class App {
 					JOptionPane.showMessageDialog(panelResults, "Please enter every result and then click on white space in table."
 							+ " After this steps you can get disease.");
 				} else {
-				for (int i = 0; i < tableModel.getRowCount(); i++) {
-					String test = (String) tableModel.getValueAt(i, 0);
-					String result = (String) tableModel.getValueAt(i, 1);
 
-					
-					// removing disease in [] for that test
-					test = test.split(" ")[0].trim();
-					
-					String resultOfTest = test + "(" + person + "," + result + ").";
-					ArrayList<String> writeInFile = new ArrayList<String>();
-					writeInFile.add(resultOfTest);
-					writeProlog(writeInFile, "rule_based/tests.pl");
-				}
-				String term = "diagnosis(" + person + ", D)";
-	            ArrayList<String> diagnosis = consultProlog(term);
-	            
-				term = "medications(" + person + ", M)";
-	            ArrayList<String> medications = consultProlog(term);
-	            
-	            panelDiagnosis(diagnosis, medications);
-				}
+					for (int i = 0; i < tableModel.getRowCount(); i++) {
+						String test = (String) tableModel.getValueAt(i, 0);
+						String result = (String) tableModel.getValueAt(i, 1);					
+						// removing disease in [] for that test
+						test = test.split(" ")[0].trim();
+						//dodato zbog upisa novih slucajeva
+						String[] test1 = test.split("\\(");
+						resultsOfTests.put(test1[0], result);
+						String resultOfTest = test + "(" + person + "," + result + ").";
+						ArrayList<String> writeInFile = new ArrayList<String>();
+						writeInFile.add(resultOfTest);
+						writeProlog(writeInFile, "rule_based/tests.pl");
+					}
+	
+					String term = "diagnosis(" + person + ", D)";
+		            ArrayList<String> diagnosis = consultProlog(term);
+		            
+					term = "medications(" + person + ", M)";
+		            ArrayList<String> medications = consultProlog(term);
+		            
+		            panelDiagnosis(diagnosis, medications);
+					}
 			}
 		});
 		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -818,30 +820,50 @@ public class App {
 				 
 				String mr_csv= formattedTextField.getText()+";"+formattedTextFieldAge.getText()+";"+gender+";"+diagnosis.get(0);
 				
-				System.out.println(Arrays.toString(persSympt));
-				String symptoms = Arrays.toString(persSympt);
-				String symptoms1 = symptoms.toString().replace("[", "").replace("]", "");
-				String[] symptomsWithNull= symptoms1.split("null");
-				String[] sympt = symptomsWithNull[0].split(",");
-				for(int i=0; i<sympt.length-1; i++) {
-					System.out.println(sympt[i]);
-					if(i!=0) { anamnesis_csv+=",";}
-					anamnesis_csv+=sympt[i];
+				//System.out.println("OVDEE JE ONO STO MI TRABAAAAAAAAAAAAAAAAAAA");
+			///	System.out.println(Arrays.toString(persSympt));
+				//System.out.println(personalSymptoms.toString());
+				String symptoms;
+				if (personalSymptoms.isEmpty()) {
+					symptoms = Arrays.toString(persSympt);
+					String symptoms1 = symptoms.toString().replace("[", "").replace("]", "");
+					String[] symptomsWithNull= symptoms1.split("null");
+					String[] sympt = symptomsWithNull[0].split(",");
+					for(int i=0; i<sympt.length-1; i++) {
+						System.out.println(sympt[i]);
+						if(i!=0) { anamnesis_csv+=",";}
+						anamnesis_csv+=sympt[i];
+					}
+					anamnesis_csv+=";";
+					System.out.println(Arrays.toString(persAnam));
+					String anamnesis = Arrays.toString(persAnam);
+					String anamnesis1 = anamnesis.toString().replace("[", "").replace("]", "");
+					String[] anamnWithNull= anamnesis1.split("null");
+					String[] anamn = anamnWithNull[0].split(",");
+					for(int i=0; i<anamn.length-1; i++) {
+						if(i!=0) { anamnesis_csv+=","; medication_csv+=",";}
+						anamnesis_csv+=anamn[i];
+						medication_csv+=anamn[i];
+					}
+					anamnesis_csv+=";"+choosenTests;
+					medication_csv+=";";
+				}else {
+					//symptoms = personalSymptoms.toString();
+					for (int i=0; i<personalSymptoms.size(); i++) {
+						if(i!=0) { anamnesis_csv+=",";}
+						anamnesis_csv+=personalSymptoms.get(i);
+					}
+					anamnesis_csv+=";";
+					for (int i=0; i<personalAnamnesis.size(); i++) {
+						if(i!=0) { anamnesis_csv+=","; medication_csv+=",";}
+						anamnesis_csv+=personalAnamnesis.get(i);
+						medication_csv+=personalAnamnesis.get(i);
+					}
+					anamnesis_csv+=";"+choosenTests;
+					medication_csv+=";";
 				}
-				anamnesis_csv+=";";
-	            
-				System.out.println(Arrays.toString(persAnam));
-				String anamnesis = Arrays.toString(persAnam);
-				String anamnesis1 = anamnesis.toString().replace("[", "").replace("]", "");
-				String[] anamnWithNull= anamnesis1.split("null");
-				String[] anamn = anamnWithNull[0].split(",");
-				for(int i=0; i<anamn.length-1; i++) {
-					if(i!=0) { anamnesis_csv+=","; medication_csv+=",";}
-					anamnesis_csv+=anamn[i];
-					medication_csv+=anamn[i];
-				}
-				anamnesis_csv+=";"+choosenTests;
-				medication_csv+=";";
+				
+			
 				
 				long size3= list.getModel().getSize();
 				for(int i=0; i<size3; i++) {
