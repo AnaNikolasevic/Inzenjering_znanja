@@ -122,6 +122,17 @@ additional_tests(Name,T,D) :-  possible_diseases(Name,D), test(D,T).
 
 medications(Name,M) :-  diagnosis(Name,D), medication(D,M).
 
-
-
+x_ray(stevan_matovic,esophageal_cancer).
+cbc(stevan_matovic,anemia).
+x_ray(biljana_matovic,esophageal_cancer).
+cbc(biljana_matovic,anemia).
+x_ray(mirko_mirkovic,esophageal_cancer).
+cbc(mirko_mirkovic,anemia).
 anti_hepatitis_B(mima,negative).
+anti_hepatitis_A(neko_nekic,positive).
+anti_hepatitis_A(proba,positive).
+anti_hepatitis_A(masa,positive).
+anti_hepatitis_A(masa,negative).
+anti_hepatitis_A(masa,negative).
+anti_hepatitis_A(novi,negative).
+anti_hepatitis_A(masa,negative).

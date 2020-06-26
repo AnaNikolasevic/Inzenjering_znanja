@@ -82,3 +82,5 @@ cirrhosis; alt:high, ast:high, alp:normal, bilirubin:high, albumin:normal, cbc:p
 cirrhosis;liver_biopsy:cirrhosis
 hepatitis_A;anti_hepatitis_A:positive
 gallstone;mri:gallstone
+hepatitis_A;
+hepatitis_A;
