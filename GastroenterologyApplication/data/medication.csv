@@ -65,3 +65,5 @@ hepatitis_A;hepatitis_B;peginterferon_alfa_2b, emtricitabine_tenofovir, ribaviri
 gallstone;hepatitis_B;glycopyrrolate, rocuronium, sevoflurane
 hepatitis_B;abusing_alchohol;entecavir,tenofovir,lamivudine,adefovir,telbivudine
 esophageal_cancer;abusing_alchohol,active_smoking;omeprazole,esomeprazole,ranitidine,lansoprazole,pantoprazole, mesalamine,infliximab,azathioprine,metronidazole,vitamin_b_12
+hepatitis_A;abusing_alchohol;ribavirin,peginterferon_alfa_2b,methadone,spironolactone,emtricitabine_tenofovir
+hepatitis_B;abusing_alchohol,abusing_alchohol;entecavir,tenofovir,lamivudine,adefovir,telbivudine

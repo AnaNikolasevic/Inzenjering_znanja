@@ -14,5 +14,8 @@ medication(hepatitis_B, [entecavir, tenofovir, lamivudine, adefovir, telbivudine
 medication(hepatitis_C, [daclatasvir, elbasvir, grazoprevir, glecaprevir, ledipasvir]).
 medication(cirrhosis, [furosemide, spironolactone, lactulose, tacrolimus, nadolol]).
 medication(drug_induced_hepatitis, [lactulose, tacrolimus, ritonavir, atazanavir, mycophenolate_mofetil]).
-medication(inherited_hepatitis, [ribavirin, peginterferon_alfa_2b, lamivudine, adefovir, ritonavir]).
-medication(autoimmune_hepatitis, [prednisone, azathioprine, liver_transplant, ribavirin, tenofovir]).
+medication(hemochromatosis, [ribavirin, peginterferon_alfa_2b, lamivudine, adefovir, ritonavir]).
+medication(alpha_1_antitrypsin_deficiency, [ribavirin, peginterferon_alfa_2b, lamivudine, adefovir, ritonavir]).
+medication(wilson_disease, [ribavirin, peginterferon_alfa_2b, lamivudine, adefovir, ritonavir]).
+medication(autoimmune_hepatitis_type1, [prednisone, azathioprine, liver_transplant, ribavirin, tenofovir]).
+medication(autoimmune_hepatitis_type2, [prednisone, azathioprine, liver_transplant, ribavirin, tenofovir]).
