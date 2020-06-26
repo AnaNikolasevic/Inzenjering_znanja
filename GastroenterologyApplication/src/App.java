@@ -262,7 +262,7 @@ public class App {
 			}
 		});
 		btnLoad.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLoad.setBounds(340, 373, 127, 23);
+		btnLoad.setBounds(269, 373, 119, 23);
 		panel_1.add(btnLoad);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -309,7 +309,7 @@ public class App {
 			}
 		});
 		btnSeeWholeMR.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnSeeWholeMR.setBounds(470, 373, 130, 23);
+		btnSeeWholeMR.setBounds(398, 373, 127, 23);
 		panel_1.add(btnSeeWholeMR);
 
 		// additional tests RBR ///////////////////////////////////////////////////////////////////////////////////////////////
