@@ -292,7 +292,8 @@ public class App {
 				String data[] = readCSV();
 				System.out.println(data.length +" "+ data.toString());
 				String anam= readAnamnesis();
-				WholeMRPanel(data, anam);				
+				String personalInfo= readPersonalInfo();
+				WholeMRPanel(data, anam, personalInfo);				
 			}
 		});
 		btnSeeWholeMR.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -436,7 +437,7 @@ public class App {
 
 	}
 
-	private void WholeMRPanel(String data[], String anam) {
+	private void WholeMRPanel(String data[], String anam, String personalInfo) {
 		
 		// ------------------- panel for whole medical record--------------------
 		panelWholeMR=new JPanel();
@@ -447,19 +448,17 @@ public class App {
 		lblNewLabel_1.setBounds(116, 80, 135, 36);
 		panelWholeMR.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Name: " + data[0].split(";")[0]);
+		JLabel lblNewLabel_2 = new JLabel("Name: " + formattedTextField.getText());
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_2.setBounds(116, 150, 100, 30);
 		panelWholeMR.add(lblNewLabel_2);
-		
-		
-		
-		JLabel lblNewLabel_3 = new JLabel("Age: "+ data[0].split(";")[1]);
+			
+		JLabel lblNewLabel_3 = new JLabel("Age: "+  personalInfo.split(";")[0]);
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_3.setBounds(116, 190, 100, 30);
 		panelWholeMR.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("Gender: "+ data[0].split(";")[2]);
+		JLabel lblNewLabel_4 = new JLabel("Gender: "+  personalInfo.split(";")[1]);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_4.setBounds(116, 230, 100, 30);
 		panelWholeMR.add(lblNewLabel_4);
@@ -1048,6 +1047,26 @@ public class App {
  		
  		return s;
  		
+    }
+    
+    public String readPersonalInfo() {
+    	
+    	String personalInfo= new String();
+    	
+    	String name= (String)formattedTextField.getText();
+	    ArrayList<String> listOfAges = consultProlog("age(" + name + ",X)");
+		personalInfo+=listOfAges.get(0)+";";
+		ArrayList<String> listOfSex = consultProlog("male(" + name + ")");
+		System.out.println(listOfSex.size());
+		if(listOfSex.size()!=0){
+			personalInfo+="M"+";";
+			
+		} else{
+			personalInfo+="F"+";";
+	
+		}
+		
+		return personalInfo;
     }
 
 }
