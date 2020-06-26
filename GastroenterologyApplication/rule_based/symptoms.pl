@@ -31,9 +31,7 @@ symptoms(cirrhosis, [fatigue, nausea, abdominal_discomfort, abdominal_swelling, 
 personal_symptoms(ana, [sharp_abdominal_pain, sharp_chest_pain, nausea, heartburn,upper_abdominal_pain]).
 personal_symptoms(anaa, [nausea, itching, joint_aches]).
 personal_symptoms(una, [lower_abdominal_pain, melena]).
-personal_symptoms(tijana, [joint_aches, stomach_bloating, heartburn]).
 
-personal_symptoms(mima, [weakness, loss_of_appetite, sharp_abdominal_pain]). %rak jednjaka
 personal_symptoms(marti, [sharp_chest_pain, nausea, vomiting, difficulty_in_swallowing]). %cir na zeludcu
 personal_symptoms(ljilja, [fatigue, vomiting, nausea, sharp_abdominal_pain]). %rak zeludca
 
@@ -44,4 +42,7 @@ personal_symptoms(neca,[difficulty_in_swallowing]).
 personal_symptoms(masa,[diarrhea]).
 personal_symptoms(peca,[difficulty_in_swallowing]).
 personal_symptoms(zivka,[jaundice]).
-personal_symptoms(sara,[discharge_in_stools]).
+personal_symptoms(zorica,[jaundice]).
+personal_symptoms(tijana,[jaundice]).
+personal_symptoms(sara,[jaundice]).
+personal_symptoms(mima,[jaundice]).

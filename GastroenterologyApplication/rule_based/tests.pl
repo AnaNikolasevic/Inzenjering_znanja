@@ -95,14 +95,11 @@ liver_biopsy(isi, cirrhosis).
 
 blood_test(una, pANCA).
 cbc(una, anemia).
-cBir1(tijana, positive).
-cbc(tijana, infection).
 
 
 
 
 cbc(mina, anemia).
-biopsy(mima, esophageal_cancer ).
 barium_swallow(marti, hiatal_hernia).
 endoscopy(ljilja, stomach_cancer).
 cbc(ljilja, anemia).
@@ -120,9 +117,11 @@ contains(S,[H|T]) :- member(H,S), contains(S,T).
 possible_diseases(Name,D) :- personal_symptoms(Name, L),  symptoms(D,L1), contains(L1,L),
                              personal_anamnesis(Name, A),  anamnesis(D,A1), contains(A1,A). 
 
-additional_tests(Name,T) :-  possible_diseases(Name,D), test(D,T).
+additional_tests(Name,T,D) :-  possible_diseases(Name,D), test(D,T).
 
 
 medications(Name,M) :-  diagnosis(Name,D), medication(D,M).
 
 
+
+anti_hepatitis_B(mima,negative).
