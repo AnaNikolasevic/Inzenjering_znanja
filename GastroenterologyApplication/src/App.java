@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -288,7 +289,10 @@ public class App {
 		btnSeeWholeMR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				WholeMRPanel();
+				String data[] = readCSV();
+				System.out.println(data.length +" "+ data.toString());
+				String anam= readAnamnesis();
+				WholeMRPanel(data, anam);				
 			}
 		});
 		btnSeeWholeMR.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -431,11 +435,8 @@ public class App {
 		
 
 	}
-	
-	// --------------------------------------------------------------------------------------------------------------------------------
-	
-	private void WholeMRPanel() {
-		// TODO Auto-generated method stub
+
+	private void WholeMRPanel(String data[], String anam) {
 		
 		// ------------------- panel for whole medical record--------------------
 		panelWholeMR=new JPanel();
@@ -446,25 +447,38 @@ public class App {
 		lblNewLabel_1.setBounds(116, 80, 135, 36);
 		panelWholeMR.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Name:");
+		JLabel lblNewLabel_2 = new JLabel("Name: " + data[0].split(";")[0]);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_2.setBounds(116, 150, 100, 30);
 		panelWholeMR.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Age:");
+		
+		
+		JLabel lblNewLabel_3 = new JLabel("Age: "+ data[0].split(";")[1]);
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_3.setBounds(116, 190, 100, 30);
 		panelWholeMR.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("Gender:");
+		JLabel lblNewLabel_4 = new JLabel("Gender: "+ data[0].split(";")[2]);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_4.setBounds(116, 230, 100, 30);
 		panelWholeMR.add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("Previous deseases:");
+		String diseases= new String();
+		for(int i=0; i<data.length; i++ ) {	
+			if(i!=0) {diseases+=", ";}
+			diseases+=data[i].split(";")[3];		
+		}
+		
+		JLabel lblNewLabel_5 = new JLabel("Previous diseases: " + diseases);
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_5.setBounds(116, 270, 100, 30);
+		lblNewLabel_5.setBounds(116, 270, 300, 30);
 		panelWholeMR.add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_6 = new JLabel("Anamnesis: " + anam);
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_6.setBounds(116, 310, 300, 30);
+		panelWholeMR.add(lblNewLabel_6);
 		
 		panel.setVisible(false);
 		panelWholeMR.setVisible(true);
@@ -756,7 +770,7 @@ public class App {
 				String medication_csv= diagnosis.get(0)+";";
 				String tests_csv= diagnosis.get(0)+";";
 				 
-				String mr_csv= formattedTextField.getText()+"/"+formattedTextFieldAge+"/"+gender+"/"+diagnosis.get(0)+';';
+				String mr_csv= formattedTextField.getText()+";"+formattedTextFieldAge.getText()+";"+gender+";"+diagnosis.get(0);
 				
 				System.out.println(Arrays.toString(persSympt));
 				String symptoms = Arrays.toString(persSympt);
@@ -798,7 +812,8 @@ public class App {
 				
 				System.out.println(anamnesis_csv);
 				System.out.println(medication_csv);
-				System.out.println(tests_csv);				
+				System.out.println(tests_csv);	
+				System.out.println(mr_csv);	
 				
 				ArrayList<String> writeInFile = new ArrayList<String>();
 				writeInFile.add(anamnesis_csv);
@@ -814,7 +829,7 @@ public class App {
 				
 				ArrayList<String> writeInFile3 = new ArrayList<String>();
 				writeInFile3.add(mr_csv);
-				writeProlog(writeInFile3, "data/tests.csv");
+				writeProlog(writeInFile3, "data/mr.csv");
 				
 			}
 		});
@@ -971,4 +986,68 @@ public class App {
 		inputFile.delete();
 		boolean successful = tempFile.renameTo(inputFile);
 	}
+	
+    
+    public String[] readCSV() {
+    	
+    	String csvFile = "data/mr.csv";
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplitBy = ";";
+        String[] data = new String[20];
+        int l=0; int j=0;
+	    try {
+	
+	    	br = new BufferedReader(new FileReader(csvFile));
+	        while ((line = br.readLine()) != null) {
+	
+	            // use comma as separator
+	            String[] name = line.split(cvsSplitBy);
+	            String[] examination1 = line.split(" ");
+
+	            if(name[0].equals(formattedTextField.getText())) {
+	            		 data[j]=examination1[0];
+	            		 j++; l=j;	            	 
+	            }
+	
+	        }
+	
+	    } catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (br != null) {
+	            try {
+	                br.close();
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	    
+		
+	    String data1[]= new String [l];
+	    for(int i=0; i<l; i++) {
+	    	data1[i]=data[i];
+	    }
+		
+		return data1;
+    }
+    
+    public String readAnamnesis() {
+    	
+    	String name= (String)formattedTextField.getText();
+ 		ArrayList<String> listOfPersonalAnamnesis = consultProlog("personal_anamnesis(" + name + ",X)");
+ 		Object[] list = ((String[]) listOfPersonalAnamnesis.toArray(new String[0]));
+ 		
+ 		String s= new String();
+ 		for (Object value : list) {
+ 			s+=value+"\n";
+ 	    }
+ 		
+ 		return s;
+ 		
+    }
+
 }

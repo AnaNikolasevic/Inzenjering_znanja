@@ -60,3 +60,6 @@ cirrhosis;hepatitis_C;furosemide
 cirrhosis;;lactulose
 cirrhosis;;tacrolimus
 cirrhosis;;nadolol
+cirrhosis;abusing_alchohol;spironolactone, lactulose, tacrolimus, nadolol, furosemide
+hepatitis_A;hepatitis_B;peginterferon_alfa_2b, emtricitabine_tenofovir, ribavirin, methadone
+gallstone;hepatitis_B;glycopyrrolate, rocuronium, sevoflurane
