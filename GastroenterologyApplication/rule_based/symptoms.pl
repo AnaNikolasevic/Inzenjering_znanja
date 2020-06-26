@@ -29,3 +29,6 @@ symptoms(cirrhosis, [fatigue, nausea, abdominal_discomfort, abdominal_swelling, 
 %--------------------
 
 
+personal_symptoms(masa_matovic,[cough, sharp_chest_pain, vomiting]).
+personal_symptoms(zoran_nikolasevic,[jaundice, joint_aches, nausea]).
+personal_symptoms(milana_galin,[itching, jaundice, nausea]).

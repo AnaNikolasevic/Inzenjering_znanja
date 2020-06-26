@@ -18,7 +18,11 @@ cirrhosis;51;M;abdominal_discomfort, abdominal_swelling, nausea, weakness;abusin
 hepatitis_A;30;F;fatigue, nausea, sharp_abdominal_pain, vomiting;hepatitis_B;anti_hepatitis_A
 gallstone;30;F;back_pain, burning_abdominal_pain, sharp_chest_pain, vomiting;hepatitis_B;mri
 
-hepatitis_B;45;F;jaundice;abusing_alchohol;anti_hepatitis_B
-esophageal_cancer;32;F;fatigue;abusing_alchohol,active_smoking;biopsy, cbc
-hepatitis_A;21;F;jaundice;abusing_alchohol;anti_hepatitis_A
-hepatitis_B;21;F;jaundice,jaundice;abusing_alchohol,abusing_alchohol;anti_hepatitis_B
+
+gastritis;23;F;diarrhea,sharp_abdominal_pain,upper_abdominal_pain;active_smoking,stress;urinalysis, endoscopy, cbc
+gerb;50;F;cough,sharp_chest_pain,vomiting;active_smoking,overweight;endoscopy
+wilson_disease;54;M;jaundice,joint_aches,nausea;family_history_of_liver_disease;ceruloplasmin, copper_tests
+
+alpha_1_antitrypsin_deficiency;23;F;itching,jaundice,nausea;family_history_of_liver_disease;alpha_1_antirypsin, ceruloplasmin, copper_tests
+gastritis;23;F;diarrhea, sharp_abdominal_pain, upper_abdominal_pain;active_smoking, stress;endoscopy, cbc
+

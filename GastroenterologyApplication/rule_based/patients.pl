@@ -56,5 +56,18 @@ patient(X):- female(X).
 %old(X):- age(X,Y), Y>=60.
 
 
+personal_anamnesis(masa_matovic,[active_smoking, overweight]).
+age(masa_matovic,50).
+female(masa_matovic).
+personal_anamnesis(zoran_nikolasevic,[family_history_of_liver_disease]).
+age(zoran_nikolasevic,54).
+male(zoran_nikolasevic).
+personal_anamnesis(sara_fojkar,[active_smoking, stress]).
+age(sara_fojkar,23).
+female(sara_fojkar).
+
+personal_anamnesis(milana_galin,[family_history_of_liver_disease]).
+age(milana_galin,23).
+female(milana_galin).
 
 

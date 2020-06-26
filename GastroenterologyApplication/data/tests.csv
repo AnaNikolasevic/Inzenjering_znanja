@@ -86,3 +86,10 @@ hepatitis_B;anti_hepatitis_B:positive
 esophageal_cancer;cbc:anemia,biopsy:esophageal_cancer
 hepatitis_A;anti_hepatitis_A:positive
 hepatitis_B;anti_hepatitis_B:positive
+gastritis;urinalysis:8-ohdg,cbc:anemia,endoscopy:inflamation
+gerb;endoscopy:gerb
+wilson_disease;ceruloplasmin:positive,copper_tests:positive
+
+alpha_1_antitrypsin_deficiency;ceruloplasmin:negative,copper_tests:negative,alpha_1_antirypsin:low
+gastritis;cbc:anemia,endoscopy:inflamation
+

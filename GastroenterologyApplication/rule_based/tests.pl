@@ -120,3 +120,10 @@ additional_tests(Name,T,D) :-  possible_diseases(Name,D), test(D,T).
 medications(Name,M) :-  diagnosis(Name,D), medication(D,M).
 
 
+endoscopy(masa_matovic,gerb).
+ceruloplasmin(zoran_nikolasevic,positive).
+copper_tests(zoran_nikolasevic,positive).
+
+alpha_1_antirypsin(milana_galin,low).
+ceruloplasmin(milana_galin,negative).
+copper_tests(milana_galin,negative).

@@ -153,7 +153,7 @@ public class App {
 		lblSex.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		JLabel lblNameAndSurname = new JLabel("Name and surname: ");
-		lblNameAndSurname.setBounds(10, 58, 149, 20);
+		lblNameAndSurname.setBounds(10, 58, 182, 20);
 		panel_1.add(lblNameAndSurname);
 		lblNameAndSurname.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
@@ -266,7 +266,7 @@ public class App {
 		panel_1.add(btnLoad);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(269, 89, 256, 260);
+		scrollPane_1.setBounds(269, 89, 274, 260);
 		panel_1.add(scrollPane_1);
 		
 		list_1 = new JList();
@@ -309,7 +309,7 @@ public class App {
 			}
 		});
 		btnSeeWholeMR.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnSeeWholeMR.setBounds(398, 373, 127, 23);
+		btnSeeWholeMR.setBounds(403, 373, 140, 23);
 		panel_1.add(btnSeeWholeMR);
 
 		// additional tests RBR ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -434,6 +434,15 @@ public class App {
 					    	JOptionPane.showMessageDialog(frame, "Enter the number in the age field.");
 					    	return;
 					}
+					
+					try {
+						System.out.println("zibrisano");
+						changeProlog(person, "rule_based/patients.pl");
+						changeProlog(person, "rule_based/symptoms.pl");
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 
 					int i=0;
 					for (Object selected : list_0.getSelectedValuesList()) {
@@ -445,7 +454,26 @@ public class App {
 						persAnam[j]=selected.toString();
 						j++;
 					}
+					ArrayList<String> anam = new ArrayList<String>(Arrays.asList(persAnam));
+					String write = "personal_anamnesis(" + person + "," + anam + ").";
+					ArrayList<String>  writeInFile = new ArrayList<String>();
+					writeInFile.clear();
+					writeInFile.add(write);
+					writeProlog(writeInFile, "rule_based/patients.pl");
+		
+					write = "age(" + person + "," + formattedTextFieldAge.getText() + ").";
+					writeInFile.clear();
+					writeInFile.add(write);
+					writeProlog(writeInFile, "rule_based/patients.pl");
 					
+					if(rdbtnF.isSelected()){
+						write = "female(" + person + ").";
+					} else {
+						write = "male(" + person + ").";
+					}
+					writeInFile.clear();
+					writeInFile.add(write);
+					writeProlog(writeInFile, "rule_based/patients.pl");
 					ArrayList<String> additional_tests = new ArrayList<String>();
 					additional_tests.clear();
 					additional_tests.addAll(cbr.CbrApplication.main(personalAnamnesis, personalSymptoms, formattedTextFieldAge.getText(), gender));
@@ -669,7 +697,12 @@ public class App {
 	
 					String term = "diagnosis(" + person + ", D)";
 		            ArrayList<String> diagnosis = consultProlog(term);
-		            
+		            if (diagnosis.isEmpty()) {
+		        		JOptionPane.showMessageDialog(frame, "There is no disease for this test results.");
+						return;
+				
+		            }
+
 					term = "medications(" + person + ", M)";
 		            ArrayList<String> medications = consultProlog(term);
 		            
@@ -706,7 +739,12 @@ public class App {
 					System.out.println(results);
 					//String term = "diagnosis(" + person + ", D)";
 		            ArrayList<String> diagnosis = CbrApplicationResults.main(results);
-		            
+		            if (diagnosis.isEmpty()) {
+		        		JOptionPane.showMessageDialog(frame, "There is no disease for this test results.");
+						return;
+				
+		            }
+
 					//term = "medications(" + person + ", M)";
 		            medication.setDisease(diagnosis.get(0));
 					medication.createBinAnam(persAnam);
@@ -824,7 +862,7 @@ public class App {
 		btnBack.setBounds(673, 468, 141, 29);
 		panelDiagnosis.add(btnBack);
 		
-		JButton btnSaveCBR = new JButton("Save CBR");
+		JButton btnSaveCBR = new JButton("Save ");
 		btnSaveCBR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -1027,7 +1065,7 @@ public class App {
 	                	returnList.add(var.toString(jip));
 	                } else if(solution.toString(jip).contains("age")) {
 	                	System.out.println("Age: " + var.toString(jip));
-	                	returnList.add(var.toString(jip).replace("_", " "));
+	                	returnList.add(var.toString(jip));
 	                }
                 }
             }
