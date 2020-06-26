@@ -405,6 +405,11 @@ public class App {
 				
 				person = formattedTextField.getText().toLowerCase().replace(" ", "_");
 		    	String age = formattedTextFieldAge.getText();
+		    	if (rdbtnF.isSelected()){
+					gender = "F";
+				} else if (rdbtnM.isSelected()){
+					gender = "M";
+				}
 				
 				if ( age.equals("") ||  person.equals("") || gender.equals("")) {
 					JOptionPane.showMessageDialog(frame, "You must enter patient information.");
