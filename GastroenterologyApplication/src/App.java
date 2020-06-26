@@ -1,6 +1,7 @@
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -20,8 +21,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -145,19 +149,19 @@ public class App {
 		panel.setBorder(new LineBorder(new Color(255, 235, 205), 1, true));
 		panel.setBackground(new Color(255, 250, 250));
 		
-		panel.setBounds(-25, 0, 992, 529);
+		panel.setBounds(0, 0, 992, 529);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
 		JLabel lblSymptoms = new JLabel("Symptoms");
-		lblSymptoms.setBounds(709, 23, 77, 29);
+		lblSymptoms.setBounds(709, 12, 77, 29);
 		lblSymptoms.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(lblSymptoms);
 		java.util.Collections.sort(listOfSymptoms, Collator.getInstance());
 		java.util.Collections.sort(listOfAnamnesis, Collator.getInstance());
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(63, 11, 614, 432);
+		panel_1.setBounds(63, 12, 614, 432);
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_1.setBackground(new Color(253, 245, 230));
 		panel.add(panel_1);
@@ -209,7 +213,7 @@ public class App {
 		panel_1.add(lblNewLabel_2);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(709, 65, 256, 378);
+		scrollPane.setBounds(709, 55, 256, 389);
 		panel.add(scrollPane);
 		
 		//setting list of symptoms
@@ -222,6 +226,7 @@ public class App {
 		
 		
 		JButton btnLoad = new JButton("Load");
+		btnLoad.setBackground(new Color(250, 235, 215));
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				listOfPatients = consultProlog("age(X, _)");
@@ -297,6 +302,7 @@ public class App {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		JButton btnCompleteMr = new JButton("Complete MR");
+		btnCompleteMr.setBackground(new Color(250, 235, 215));
 		btnCompleteMr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -306,6 +312,7 @@ public class App {
 		panel_1.add(btnCompleteMr);
 		
 		JButton btnSeeWholeMR = new JButton("See whole MR");
+		btnSeeWholeMR.setBackground(new Color(250, 235, 215));
 		btnSeeWholeMR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -318,7 +325,7 @@ public class App {
 
 		
 		JButton btnFindAdditionalTests = new JButton("Find tests");
-		btnFindAdditionalTests.setBounds(593, 468, 141, 29);
+		btnFindAdditionalTests.setBounds(673, 468, 141, 29);
 		btnFindAdditionalTests.setBackground(new Color(250, 235, 215));
 		btnFindAdditionalTests.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -398,7 +405,7 @@ public class App {
 		panel.add(btnFindAdditionalTests);	
 		
 		JButton btnFindAdditionalTestsCBR = new JButton("Find tests CBR");
-		btnFindAdditionalTestsCBR.setBounds(743, 468, 141, 29);
+		btnFindAdditionalTestsCBR.setBounds(824, 468, 141, 29);
 		btnFindAdditionalTestsCBR.setBackground(new Color(250, 235, 215));
 		btnFindAdditionalTestsCBR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -487,12 +494,26 @@ public class App {
 		frame.getContentPane().add(panelWholeMR);
 		panelWholeMR.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Back");
+		
+		Icon icon = new ImageIcon("images/back.png");
+		JButton btnBack = new JButton(icon);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.setVisible(true);
+				panelWholeMR.setVisible(false);
+			}
+
+
+		});
+		btnBack.setBackground(new Color(250, 235, 215));
+		btnBack.setBounds(20, 20, 30, 25);
+		panelWholeMR.add(btnBack);
+		
+		/*JButton btnNewButton = new JButton("Back");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				panel.setVisible(true);
-				panelWholeMR.setVisible(false);
+				
 			}
 
 
@@ -500,8 +521,8 @@ public class App {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewButton.setBackground(new Color(250, 235, 215));
 		btnNewButton.setBounds(743, 468, 141, 29);
-		panelWholeMR.add(btnNewButton);
-			
+	
+			*/
 	}
 	
 
@@ -546,8 +567,8 @@ public class App {
 				for (Object selected : list_2.getSelectedValuesList()) {
 					String line = selected.toString();
 					String[] values = line.trim().split(" ");
-					personalTests.add(values[0]);
-					//personalTests.add(selected.toString());
+					if (!personalTests.contains(values[0]))
+						personalTests.add(values[0]);
 				}
 				panelForTestsResults(personalTests);				
 			}
@@ -555,9 +576,25 @@ public class App {
 
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton.setBounds(824, 468, 141, 29);
 		btnNewButton.setBackground(new Color(250, 235, 215));
-		btnNewButton.setBounds(743, 468, 141, 29);
+
 		panelAdditionalTests.add(btnNewButton);
+		
+		
+		Icon icon = new ImageIcon("images/back.png");
+		JButton btnBack = new JButton(icon);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.setVisible(true);
+				panelAdditionalTests.setVisible(false);
+			}
+
+
+		});
+		btnBack.setBackground(new Color(250, 235, 215));
+		btnBack.setBounds(20, 20, 30, 25);
+		panelAdditionalTests.add(btnBack);
 			
 	}
 	
@@ -589,7 +626,7 @@ public class App {
 		
 		
 		
-		JButton btnNewButton1 = new JButton("Disease wiht RBR");
+		JButton btnNewButton1 = new JButton("Disease RBR");
 		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < tableModel.getRowCount(); i++) {
@@ -610,11 +647,11 @@ public class App {
 			}
 		});
 		btnNewButton1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton1.setBounds(673, 468, 141, 29);
 		btnNewButton1.setBackground(new Color(250, 235, 215));
-		btnNewButton1.setBounds(583, 468, 160, 29);
 		panelResults.add(btnNewButton1);
-
-		JButton btnNewButtonCBR = new JButton("Disease with CBR");
+		
+		JButton btnNewButtonCBR = new JButton("Disease CBR");
 		btnNewButtonCBR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Results results = new Results();
@@ -645,8 +682,8 @@ public class App {
 			}
 		});
 		btnNewButtonCBR.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButtonCBR.setBounds(824, 468, 141, 29);
 		btnNewButtonCBR.setBackground(new Color(250, 235, 215));
-		btnNewButtonCBR.setBounds(743, 468, 160, 29);
 		panelResults.add(btnNewButtonCBR);
 		
 		//testovi za pisanje u fajl
@@ -658,6 +695,19 @@ public class App {
  			String c1[]= c[i].split("\\(");
  			choosenTests+=c1[0];
  		}
+		Icon icon = new ImageIcon("images/back.png");
+		JButton btnBack = new JButton(icon);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelResults.setVisible(false);
+				panelAdditionalTests.setVisible(true);
+			}
+
+
+		});
+		btnBack.setBackground(new Color(250, 235, 215));
+		btnBack.setBounds(20, 20, 30, 25);
+		panelResults.add(btnBack);
 		
 	}
 	
@@ -733,7 +783,7 @@ public class App {
 		});
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnBack.setBackground(new Color(250, 235, 215));
-		btnBack.setBounds(743, 458, 141, 29);
+		btnBack.setBounds(673, 468, 141, 29);
 		panelDiagnosis.add(btnBack);
 		
 		JButton btnSaveCBR = new JButton("Save CBR");
@@ -808,8 +858,25 @@ public class App {
 		});
 		btnSaveCBR.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSaveCBR.setBackground(new Color(250, 235, 215));
-		btnSaveCBR.setBounds(743, 398, 141, 29);
+		btnSaveCBR.setBounds(824, 468, 141, 29);
 		panelDiagnosis.add(btnSaveCBR);
+		
+		Icon icon = new ImageIcon("images/back.png");
+		JButton btnBack1 = new JButton(icon);
+		btnBack1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelDiagnosis.setVisible(false);
+				panelResults.setVisible(true);
+			}
+
+
+		});
+		btnBack1.setBackground(new Color(250, 235, 215));
+		btnBack1.setBounds(20, 20, 30, 25);
+		panelDiagnosis.add(btnBack1);
+		
+		
+		
 
 	}
 

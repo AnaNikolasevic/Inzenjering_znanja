@@ -87,3 +87,12 @@ female(zivka).
 personal_anamnesis(sara,[hepatitis_B]).
 age(sara,30).
 female(sara).
+personal_anamnesis(stevan_matovic,[gerb]).
+age(stevan_matovic,25).
+male(stevan_matovic).
+personal_anamnesis(biljana_matovic,[gerb]).
+age(biljana_matovic,45).
+female(biljana_matovic).
+personal_anamnesis(mirko_mirkovic,[gerb]).
+age(mirko_mirkovic,45).
+male(mirko_mirkovic).

@@ -126,3 +126,9 @@ additional_tests(Name,T) :-  possible_diseases(Name,D), test(D,T).
 medications(Name,M) :-  diagnosis(Name,D), medication(D,M).
 
 
+x_ray(stevan_matovic,esophageal_cancer).
+cbc(stevan_matovic,anemia).
+x_ray(biljana_matovic,esophageal_cancer).
+cbc(biljana_matovic,anemia).
+x_ray(mirko_mirkovic,esophageal_cancer).
+cbc(mirko_mirkovic,anemia).
